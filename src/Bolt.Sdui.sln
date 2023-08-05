@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Serializers", "Bolt.Sdui.Serializers\Bolt.Sdui.Serializers.csproj", "{8D254E26-4759-42C1-B64D-17D7FDA723B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Core", "Bolt.Sdui.Core\Bolt.Sdui.Core.csproj", "{404F30AE-F294-4823-8DEA-04EDE315DF6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE73B924-F518-48C3-8694-76958B56FEDB}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D4E83B51-4B7E-423F-8661-05C196D85ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Serializers.Tests", "Bolt.Sdui.Serializers.Tests\Bolt.Sdui.Serializers.Tests.csproj", "{FC3DF5F5-A06C-4FD3-905D-790F509D04CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Elements", "Bolt.Sdui.Elements\Bolt.Sdui.Elements.csproj", "{13927C6B-03E1-4CF2-9472-41089CDE5BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.TestHelpers", "Bolt.Sdui.TestHelpers\Bolt.Sdui.TestHelpers.csproj", "{8363599D-89F7-476F-8FDB-218DCE716CBB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D254E26-4759-42C1-B64D-17D7FDA723B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D254E26-4759-42C1-B64D-17D7FDA723B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D254E26-4759-42C1-B64D-17D7FDA723B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D254E26-4759-42C1-B64D-17D7FDA723B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{404F30AE-F294-4823-8DEA-04EDE315DF6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{404F30AE-F294-4823-8DEA-04EDE315DF6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{404F30AE-F294-4823-8DEA-04EDE315DF6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{404F30AE-F294-4823-8DEA-04EDE315DF6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3DF5F5-A06C-4FD3-905D-790F509D04CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3DF5F5-A06C-4FD3-905D-790F509D04CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3DF5F5-A06C-4FD3-905D-790F509D04CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3DF5F5-A06C-4FD3-905D-790F509D04CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13927C6B-03E1-4CF2-9472-41089CDE5BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13927C6B-03E1-4CF2-9472-41089CDE5BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13927C6B-03E1-4CF2-9472-41089CDE5BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13927C6B-03E1-4CF2-9472-41089CDE5BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC3DF5F5-A06C-4FD3-905D-790F509D04CE} = {D4E83B51-4B7E-423F-8661-05C196D85ACE}
+		{8363599D-89F7-476F-8FDB-218DCE716CBB} = {D4E83B51-4B7E-423F-8661-05C196D85ACE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E2CBC43-2680-410C-8B9E-C96D9E9D9BCC}
+	EndGlobalSection
+EndGlobal
