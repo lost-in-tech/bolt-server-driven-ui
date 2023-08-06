@@ -15,8 +15,8 @@
           "type": "Stack",
           "elements": [
             {
-              "type": "InjectSection",
-              "name": "section-1"
+              "type": "Placeholder",
+              "sectionName": "section-1"
             }
           ]
         },
