@@ -1,8 +1,10 @@
 ﻿using Bolt.Sdui.Core;
+using Bolt.Sdui.Serializers.Json;
 using Bolt.Sdui.Serializers.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
+using System.Text.Json;
 
 namespace Bolt.Sdui.Serializers;
 
@@ -12,38 +14,66 @@ public static class IocSetup
     { 
         typeof(IElement), 
         typeof(IMetaData), 
-        typeof(IUIAction) 
+        typeof(IUiAction) 
     };
 
     public static IServiceCollection AddSerializers(
         this IServiceCollection services, 
         SetupSerializersOption? option = null)
     {
-        option = option ?? new SetupSerializersOption();
+        option = BuildOption(option);
 
-        option = option with 
-        { 
-            TypesToScan = option.TypesToScan
-                                .Concat(DefaultTypesToScan)
-                                .ToArray() 
-        };
+        var typeRegistry = BuildTypeRegistry(option);
 
-        services.TryAddSingleton<ITypeRegistry>(sc =>
-        {
-            var instance = new TypeRegistry();
-            
-            foreach (var assembly in option.AssembliesToScan)
-            {
-                instance.Register(assembly, option.TypesToScan);
-            }
+        services.TryAddSingleton(typeRegistry);
 
-            return instance;
-        });
-
-        services.TryAddSingleton<XmlDeserializer>();
-        services.TryAddSingleton<ISduiXmlSerializer, SduiXmlSerializer>();
+        AddXmlSerializer(services);
+        AddJsonSerializer(services, typeRegistry);
 
         return services;
+    }
+
+    private static void AddJsonSerializer(IServiceCollection services, ITypeRegistry typeRegistry)
+    {
+        var jsonOptions = new JsonSerializerOptions();
+        jsonOptions.ApplyUDLStandard(typeRegistry);
+        DefaultJsonSerializerOption.SetDefault(jsonOptions);
+
+        services.TryAddSingleton<ISduiJsonSerializer, SduiJsonSerializer>();
+        services.TryAddSingleton<IUdlJsonOptionsProvider, UdlJsonOptionsProvider>();
+    }
+
+    private static void AddXmlSerializer(IServiceCollection services)
+    {
+        services.TryAddSingleton<XmlDeserializer>();
+        services.TryAddSingleton<XmlSerializer>();
+        services.TryAddSingleton<ISduiXmlSerializer, SduiXmlSerializer>();
+    }
+
+    private static SetupSerializersOption BuildOption(SetupSerializersOption? option)
+    {
+        option = option ?? new SetupSerializersOption();
+
+        option = option with
+        {
+            TypesToScan = option.TypesToScan
+                                .Concat(DefaultTypesToScan)
+                                .ToArray()
+        };
+
+        return option;
+    }
+
+    private static ITypeRegistry BuildTypeRegistry(SetupSerializersOption option)
+    {
+        var typeRegistry = new TypeRegistry();
+
+        foreach (var assembly in option.AssembliesToScan)
+        {
+            typeRegistry.Register(assembly, option.TypesToScan);
+        }
+
+        return typeRegistry;
     }
 }
 

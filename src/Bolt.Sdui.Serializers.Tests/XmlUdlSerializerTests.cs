@@ -1,27 +1,16 @@
 using Bolt.Sdui.Core;
-using Bolt.Sdui.Elements;
-using Bolt.Sdui.Serializers.Xml;
+using Bolt.Sdui.Serializers.Tests.Fixtures;
+using Bolt.Sdui.TestHelpers.Extensions;
 
 namespace Bolt.Sdui.Serializers.Tests;
 
-public partial class XmlUdlSerializerTests
+public partial class XmlUdlSerializerTests : TestWithIocFixture
 {
     private readonly ISduiXmlSerializer _sut;
 
-    public XmlUdlSerializerTests()
-    {
-        var types = new[] { typeof(IElement), typeof(IMetaData), typeof(IUIAction) };
-
-        var assemblies = new[] { this.GetType().Assembly, typeof(Stack).Assembly };
-
-        var typeRegistry = new TypeRegistry();
-
-        foreach (var assembly in assemblies)
-        {
-            typeRegistry.Register(assembly, types);
-        }
-
-        _sut = new SduiXmlSerializer(new XmlDeserializer(typeRegistry), new XmlSerializer());
+    public XmlUdlSerializerTests(IocFixture fixture) : base(fixture)
+    {        
+        _sut = GetRequiredService<ISduiXmlSerializer>();
     }
 }
 
