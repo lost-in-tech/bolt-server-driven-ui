@@ -1,0 +1,41 @@
+﻿{
+  "statusCode": "ok",
+  "layout": {
+    "wide": {
+      "type": "Stack",
+      "direction": {
+        "xs": "vertical",
+        "sm": "vertical",
+        "md": "vertical",
+        "lg": "horizontal",
+        "xl": "vertical"
+      },
+      "elements": [
+        {
+          "type": "Stack",
+          "elements": [
+            {
+              "type": "InjectSection",
+              "name": "section-1"
+            }
+          ]
+        },
+        {
+          "type": "Stack"
+        },
+        {
+          "type": "Stack"
+        }
+      ]
+    }
+  },
+  "sections": [
+    {
+      "name": "section-1",
+      "element": {
+        "type": "TestTextElement",
+        "value": "hello world"
+      }
+    }
+  ]
+}

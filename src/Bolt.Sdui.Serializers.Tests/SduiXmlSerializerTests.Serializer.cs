@@ -3,7 +3,7 @@ using Shouldly;
 
 namespace Bolt.Sdui.Serializers.Tests;
 
-public partial class XmlUdlSerializerTests
+public partial class SduiXmlSerializerTests
 {
     [Fact]
     public void Serialize_should_work()

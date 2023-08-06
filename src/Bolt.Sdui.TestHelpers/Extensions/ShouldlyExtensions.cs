@@ -4,9 +4,15 @@ using Shouldly;
 namespace Bolt.Sdui.TestHelpers.Extensions;
 public static class ShouldlyExtensions
 {
-    public static void ShouldMatchApprovedWithDefaultOptions<T>(this T got, string msg = null, string discriminator = null)
+    public static void ShouldMatchApprovedWithDefaultOptions<T>(this T got, string? msg = null, string? discriminator = null)
     {
-        got.SerializeToPrettyJson().ShouldMatchApproved(c =>
+        got.SerializeToPrettyJson().ShouldMatchApprovedWithDefaultOptions(msg, discriminator);
+    }
+
+
+    public static void ShouldMatchApprovedWithDefaultOptions(this string got, string? msg = null, string? discriminator = null)
+    {
+        got.ShouldMatchApproved(c =>
         {
             c.UseCallerLocation();
             c.WithStringCompareOptions(StringCompareShould.IgnoreLineEndings);

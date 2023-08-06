@@ -4,11 +4,11 @@ using Bolt.Sdui.TestHelpers.Extensions;
 
 namespace Bolt.Sdui.Serializers.Tests;
 
-public partial class XmlUdlSerializerTests : TestWithIocFixture
+public partial class SduiXmlSerializerTests : TestWithIocFixture
 {
     private readonly ISduiXmlSerializer _sut;
 
-    public XmlUdlSerializerTests(IocFixture fixture) : base(fixture)
+    public SduiXmlSerializerTests(IocFixture fixture) : base(fixture)
     {        
         _sut = GetRequiredService<ISduiXmlSerializer>();
     }

@@ -28,15 +28,15 @@ public static class IocSetup
         services.TryAddSingleton(typeRegistry);
 
         AddXmlSerializer(services);
-        AddJsonSerializer(services, typeRegistry);
+        AddJsonSerializer(services, typeRegistry, option);
 
         return services;
     }
 
-    private static void AddJsonSerializer(IServiceCollection services, ITypeRegistry typeRegistry)
+    private static void AddJsonSerializer(IServiceCollection services, ITypeRegistry typeRegistry, SetupSerializersOption option)
     {
         var jsonOptions = new JsonSerializerOptions();
-        jsonOptions.ApplyUDLStandard(typeRegistry);
+        jsonOptions.ApplyUDLStandard(typeRegistry, option.Indented);
         DefaultJsonSerializerOption.SetDefault(jsonOptions);
 
         services.TryAddSingleton<ISduiJsonSerializer, SduiJsonSerializer>();
@@ -81,4 +81,5 @@ public record SetupSerializersOption
 {
     public Type[] TypesToScan { get; init; } = Array.Empty<Type>();
     public Assembly[] AssembliesToScan { get; init; } = Array.Empty<Assembly>();
+    public bool Indented { get; init; }
 }

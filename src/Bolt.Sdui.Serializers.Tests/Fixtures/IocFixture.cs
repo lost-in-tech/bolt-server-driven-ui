@@ -25,7 +25,8 @@ namespace Bolt.Sdui.Serializers.Tests.Fixtures
         {
             services.AddSerializers(new SetupSerializersOption
             {
-                AssembliesToScan = new[] { this.GetType().Assembly, typeof(Stack).Assembly}
+                AssembliesToScan = new[] { this.GetType().Assembly, typeof(Stack).Assembly},
+                Indented = true,
             });
         }
 
