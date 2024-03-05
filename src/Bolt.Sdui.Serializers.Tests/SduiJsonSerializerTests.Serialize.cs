@@ -1,11 +1,11 @@
-﻿using Bolt.Sdui.Core;
-using Bolt.Sdui.Elements;
-using Bolt.Sdui.Serializers.Tests.Fixtures;
-using Bolt.Sdui.TestHelpers.Extensions;
+﻿using Ensemble.Core.TestHelpers.Extensions;
 using Shouldly;
 using System.Net;
+using Bolt.Sdui.Core;
+using Ensemble.Core.Elements;
+using Ensemble.Core.Serializers.Tests.Fixtures;
 
-namespace Bolt.Sdui.Serializers.Tests;
+namespace Ensemble.Core.Serializers.Tests;
 public partial class SduiJsonSerializerTests : TestWithIocFixture
 {
     [Fact]
@@ -29,7 +29,7 @@ public partial class SduiJsonSerializerTests : TestWithIocFixture
                         {
                             Elements = new IElement[]
                             {
-                                new Placeholder{ SectionName = "section-1"}
+                                new Placeholder{ Name = "section-1", SectionNames = new []{ "section-1" }}
                             }
                         },
                         new Stack

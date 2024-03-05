@@ -1,12 +1,12 @@
-﻿using Bolt.Sdui.Core;
-using Bolt.Sdui.Serializers.Json;
-using Bolt.Sdui.Serializers.Xml;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 using System.Text.Json;
+using Bolt.Sdui.Core;
+using Ensemble.Core.Serializers.Json;
+using Ensemble.Core.Serializers.Xml;
 
-namespace Bolt.Sdui.Serializers;
+namespace Ensemble.Core.Serializers;
 
 public static class IocSetup
 {

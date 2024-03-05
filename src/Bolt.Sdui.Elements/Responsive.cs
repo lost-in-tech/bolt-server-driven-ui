@@ -1,4 +1,4 @@
-﻿namespace Bolt.Sdui.Elements;
+﻿namespace Ensemble.Core.Elements;
 
 public class Responsive<T>
 {

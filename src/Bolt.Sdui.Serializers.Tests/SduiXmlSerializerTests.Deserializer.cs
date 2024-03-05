@@ -1,9 +1,8 @@
-using Bolt.Sdui.Core;
-using Bolt.Sdui.Elements;
 using Shouldly;
 using System.Text;
+using Ensemble.Core.Elements;
 
-namespace Bolt.Sdui.Serializers.Tests;
+namespace Ensemble.Core.Serializers.Tests;
 
 public partial class SduiXmlSerializerTests
 {

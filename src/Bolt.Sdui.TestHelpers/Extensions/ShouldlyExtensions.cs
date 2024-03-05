@@ -1,7 +1,7 @@
 ﻿using Bolt.Common.Extensions;
 using Shouldly;
 
-namespace Bolt.Sdui.TestHelpers.Extensions;
+namespace Ensemble.Core.TestHelpers.Extensions;
 public static class ShouldlyExtensions
 {
     public static void ShouldMatchApprovedWithDefaultOptions<T>(this T got, string? msg = null, string? discriminator = null)

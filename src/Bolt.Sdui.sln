@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Serializers", "Bolt.Sdui.Serializers\Bolt.Sdui.Serializers.csproj", "{8D254E26-4759-42C1-B64D-17D7FDA723B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Core", "Bolt.Sdui.Core\Bolt.Sdui.Core.csproj", "{404F30AE-F294-4823-8DEA-04EDE315DF6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble.Core.Elements", "Ensemble.Core.Elements\Ensemble.Core.Elements.csproj", "{404F30AE-F294-4823-8DEA-04EDE315DF6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE73B924-F518-48C3-8694-76958B56FEDB}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,6 +19,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.Elements", "Bolt.Sdui.Elements\Bolt.Sdui.Elements.csproj", "{13927C6B-03E1-4CF2-9472-41089CDE5BEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Sdui.TestHelpers", "Bolt.Sdui.TestHelpers\Bolt.Sdui.TestHelpers.csproj", "{8363599D-89F7-476F-8FDB-218DCE716CBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble.Core", "Ensemble.Core\Ensemble.Core.csproj", "{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble", "Ensemble\Ensemble.csproj", "{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble.Extensions.Web", "Ensemble.Extensions.Web\Ensemble.Extensions.Web.csproj", "{92915D53-3020-47D9-B082-0F7FB39F494F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +52,18 @@ Global
 		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8363599D-89F7-476F-8FDB-218DCE716CBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92915D53-3020-47D9-B082-0F7FB39F494F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92915D53-3020-47D9-B082-0F7FB39F494F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92915D53-3020-47D9-B082-0F7FB39F494F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92915D53-3020-47D9-B082-0F7FB39F494F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

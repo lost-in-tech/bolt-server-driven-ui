@@ -1,8 +1,8 @@
 using Bolt.Sdui.Core;
-using Bolt.Sdui.Serializers.Tests.Fixtures;
-using Bolt.Sdui.TestHelpers.Extensions;
+using Ensemble.Core.Serializers.Tests.Fixtures;
+using Ensemble.Core.TestHelpers.Extensions;
 
-namespace Bolt.Sdui.Serializers.Tests;
+namespace Ensemble.Core.Serializers.Tests;
 
 public partial class SduiXmlSerializerTests : TestWithIocFixture
 {

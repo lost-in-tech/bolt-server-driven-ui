@@ -1,4 +1,4 @@
-﻿namespace Bolt.Sdui.Serializers;
+﻿namespace Ensemble.Core.Serializers;
 internal static class TypeHelper
 {
     public static bool IsSimpleType(Type type)

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Bolt.Sdui.Serializers;
+namespace Ensemble.Core.Serializers;
 
 internal interface ITypeRegistry
 {

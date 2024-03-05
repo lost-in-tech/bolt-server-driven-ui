@@ -1,4 +1,4 @@
-﻿namespace Bolt.Sdui.Serializers;
+﻿namespace Ensemble.Core.Serializers;
 
 public interface ISduiJsonSerializer
 {

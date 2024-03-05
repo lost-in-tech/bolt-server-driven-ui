@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Ensemble.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Ensemble.Core.Elements\Ensemble.Core.Elements.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta01" />
+    </ItemGroup>
+
+</Project>

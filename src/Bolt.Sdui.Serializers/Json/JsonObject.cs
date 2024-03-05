@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Bolt.Sdui.Serializers.Json;
+namespace Ensemble.Core.Serializers.Json;
 
 internal sealed class JsonObject
 {

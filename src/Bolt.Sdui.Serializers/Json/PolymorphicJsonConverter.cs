@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Bolt.Sdui.Serializers.Json;
+namespace Ensemble.Core.Serializers.Json;
 
 internal class PolymorphicJsonConverter<T> : JsonConverter<T>
 {

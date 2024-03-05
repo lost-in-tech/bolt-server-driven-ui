@@ -1,8 +1,8 @@
-﻿using Bolt.Sdui.Core;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Xml;
+using Bolt.Sdui.Core;
 
-namespace Bolt.Sdui.Serializers.Xml;
+namespace Ensemble.Core.Serializers.Xml;
 
 internal sealed class XmlDeserializer
 {

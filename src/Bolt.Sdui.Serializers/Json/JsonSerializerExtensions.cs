@@ -2,7 +2,7 @@
 using System.Text.Json.Serialization;
 using Bolt.Sdui.Core;
 
-namespace Bolt.Sdui.Serializers.Json;
+namespace Ensemble.Core.Serializers.Json;
 
 internal static class JsonSerializerExtensions
 {

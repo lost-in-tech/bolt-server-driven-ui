@@ -1,6 +1,6 @@
 ﻿using Bolt.Sdui.Core;
 
-namespace Bolt.Sdui.Serializers;
+namespace Ensemble.Core.Serializers;
 public interface ISduiXmlSerializer
 {
     public IElement? Deserialize(Stream source);

@@ -1,6 +1,6 @@
-﻿using Bolt.Sdui.Serializers.Tests.Fixtures;
+﻿using Ensemble.Core.Serializers.Tests.Fixtures;
 
-namespace Bolt.Sdui.Serializers.Tests;
+namespace Ensemble.Core.Serializers.Tests;
 public partial class SduiJsonSerializerTests : TestWithIocFixture
 {
     private readonly ISduiJsonSerializer _sut;

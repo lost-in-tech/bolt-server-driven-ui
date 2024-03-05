@@ -1,10 +1,10 @@
 ﻿using System;
-using Bolt.Sdui.Elements;
+using Ensemble.Core.Elements;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Bolt.Sdui.Serializers.Tests.Fixtures
+namespace Ensemble.Core.Serializers.Tests.Fixtures
 {
     public class IocFixture
     {

@@ -1,6 +1,6 @@
 ﻿using Bolt.Sdui.Core;
 
-namespace Bolt.Sdui.Serializers.Xml;
+namespace Ensemble.Core.Serializers.Xml;
 
 internal sealed class SduiXmlSerializer : ISduiXmlSerializer
 {

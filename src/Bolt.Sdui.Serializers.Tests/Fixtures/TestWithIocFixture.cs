@@ -4,7 +4,7 @@ using NSubstitute;
 using NSubstitute.ClearExtensions;
 using Xunit;
 
-namespace Bolt.Sdui.Serializers.Tests.Fixtures
+namespace Ensemble.Core.Serializers.Tests.Fixtures
 {
     [Trait("Category", "Fast")]
     [Collection(nameof(IocFixtureCollection))]

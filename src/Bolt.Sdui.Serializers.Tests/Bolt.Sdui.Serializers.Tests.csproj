@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bolt.Sdui.Core\Bolt.Sdui.Core.csproj" />
+    <ProjectReference Include="..\Ensemble.Core.Elements\Ensemble.Core.Elements.csproj" />
     <ProjectReference Include="..\Bolt.Sdui.Elements\Bolt.Sdui.Elements.csproj" />
     <ProjectReference Include="..\Bolt.Sdui.Serializers\Bolt.Sdui.Serializers.csproj" />
     <ProjectReference Include="..\Bolt.Sdui.TestHelpers\Bolt.Sdui.TestHelpers.csproj" />

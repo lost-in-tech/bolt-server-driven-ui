@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NSubstitute.ClearExtensions;
 using NSubstitute;
-using Bolt.Sdui.TestHelpers.Extensions;
+using Ensemble.Core.TestHelpers.Extensions;
 
-namespace Bolt.Sdui.TestHelpers.Extensions;
+namespace Ensemble.Core.TestHelpers.Extensions;
 public static class ServiceScopeExtensions
 {
     public static T GetRequiredService<T>(this IServiceScope scope) where T : class

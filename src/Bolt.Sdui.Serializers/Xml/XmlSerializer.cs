@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Xml;
 
-namespace Bolt.Sdui.Serializers.Xml;
+namespace Ensemble.Core.Serializers.Xml;
 
 internal sealed class XmlSerializer
 {

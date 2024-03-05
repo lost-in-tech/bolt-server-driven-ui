@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Bolt.Sdui.Serializers.Json;
+namespace Ensemble.Core.Serializers.Json;
 internal sealed class SduiJsonSerializer : ISduiJsonSerializer
 {
     public T? Deserialize<T>(string source)

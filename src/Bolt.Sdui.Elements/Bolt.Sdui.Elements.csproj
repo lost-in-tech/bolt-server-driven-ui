@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bolt.Sdui.Core\Bolt.Sdui.Core.csproj" />
+    <ProjectReference Include="..\Ensemble.Core.Elements\Ensemble.Core.Elements.csproj" />
   </ItemGroup>
 
 </Project>
