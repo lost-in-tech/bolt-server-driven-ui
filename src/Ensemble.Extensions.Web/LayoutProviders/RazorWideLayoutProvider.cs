@@ -48,7 +48,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
         return new LayoutResponse
         {
             Element = rsp.Value,
-            Name = RequestScreenSize.Wide.ToString(),
+            Name = RequestScreenSize.Wide.ToString().ToLowerInvariant(),
             VersionId = settings.Version ?? Guid.NewGuid().ToString()
         };
     }

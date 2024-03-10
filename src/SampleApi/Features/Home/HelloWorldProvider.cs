@@ -3,15 +3,17 @@ using Bolt.MaySucceed;
 using Bolt.Sdui.Core;
 using Ensemble;
 using Ensemble.Core;
+using Microsoft.FeatureManagement;
 using SampleApi.Elements;
 
 namespace SampleApi.Features.Home;
 
 [AutoBind]
-internal sealed class HelloWorldProvider : SectionElementProvider<HomePageRequest>
+internal sealed class HelloWorldProvider : ScreenSectionProvider<HomePageRequest>
 {
-    protected override string Name => "hello-world";
-    protected override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override string ForSection => "hello-world";
+
+    public override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
         return new Paragraph
         {
@@ -21,34 +23,14 @@ internal sealed class HelloWorldProvider : SectionElementProvider<HomePageReques
 }
 
 [AutoBind]
-internal sealed class HelloJupiterProvider : SectionElementProvider<HomePageRequest>
+internal sealed class HelloJupiterProvider : ScreenSectionProvider<HomePageRequest>
 {
-    protected override string Name => "hello-jupiter";
-    protected override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override string ForSection =>  "hello-jupiter";
+    public override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
         return new Paragraph
         {
             Text = "Hello Jupiter"
         };
     }
-}
-
-[AutoBind]
-internal sealed class MetaData : MetaDataProvider<HomePageRequest>
-{
-    protected override async Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
-    {
-        return new IMetaData[]
-        {
-            new RequestContextMetaData
-            {
-                RequestId = context.RequestData().Id
-            }
-        };
-    }
-}
-
-public record RequestContextMetaData : IMetaData
-{
-    public string RequestId { get; init; }
 }

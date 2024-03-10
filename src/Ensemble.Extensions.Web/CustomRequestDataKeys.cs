@@ -11,4 +11,5 @@ public class CustomRequestDataKeys
     public string? LayoutVersionId { get; init; }
     public string? SectionNames { get; init; }
     public string? ScreenSize { get; init; }
+    public string? Tenant { get; init; }
 }

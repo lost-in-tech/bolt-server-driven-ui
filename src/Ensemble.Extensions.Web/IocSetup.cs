@@ -4,6 +4,7 @@ using Bolt.Sdui.Core;
 using Ensemble.Core;
 using Ensemble.Extensions.Web.LayoutProviders;
 using Ensemble.Extensions.Web.RazorParser;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -12,15 +13,23 @@ namespace Ensemble.Extensions.Web;
 public record EnsembleOptions
 {
     public (Assembly Assembly, Type[] Types)[] TypesToScan { get; init; } = Array.Empty<(Assembly, Type[])>();
+    public bool EnableFeatureFlag { get; init; } = false;
+    public string FeatureFlagSectionName { get; init; } = "Ensemble:FeatureFlags";
 }
 
 public static class IocSetup
 {
-    public static IServiceCollection AddEnsemble(this IServiceCollection source, EnsembleOptions? options = null)
+    public static IServiceCollection AddEnsemble(this IServiceCollection source, IConfiguration configuration, EnsembleOptions? options = null)
     {
         options ??= new EnsembleOptions();
 
-        Ensemble.IocSetup.AddEnsemble(source);
+        if (options.EnableFeatureFlag)
+        {
+            source.Configure<SectionsFeatureFlagSettings>(settings => configuration.GetSection(options.FeatureFlagSectionName).Bind(settings));
+            source.TryAddTransient<ISectionFeatureFlag, SectionFeatureFlag>();
+        }
+
+        source.AddEnsemble();
         
         source.AddHttpContextAccessor();
         source.AddRazorPages();
@@ -29,6 +38,7 @@ public static class IocSetup
         source.TryAddSingleton<IRequestKeyNamesProvider,RequestKeyNamesProvider>();
         source.TryAddScoped<IRazorXmlViewParser,RazorXmlViewParser>();
         source.TryAddScoped<RazorViewRenderer>();
+        source.TryAddSingleton<IHttpRequestWrapper, HttpRequestWrapper>();
         
         source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorWideLayoutProvider<>)));
         source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorCompactLayoutProvider<>)));
@@ -47,7 +57,7 @@ public static class IocSetup
         });
         
         source.TryAddTransient<IScreenViewResultComposer, ScreenViewResultComposer>();
-
+        
         return source;
     }
 }

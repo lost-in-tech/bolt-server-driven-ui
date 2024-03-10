@@ -3,3 +3,8 @@
 public interface IMetaData
 {
 }
+
+public abstract class MetaData : IMetaData
+{
+    
+}

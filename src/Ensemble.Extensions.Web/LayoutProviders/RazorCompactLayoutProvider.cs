@@ -48,7 +48,7 @@ internal class RazorCompactLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         return new LayoutResponse
         {
             Element = rsp.Value,
-            Name = RequestScreenSize.Compact.ToString(),
+            Name = RequestScreenSize.Compact.ToString().ToLowerInvariant(),
             VersionId = settings.Version ?? Guid.NewGuid().ToString()
         };
     }

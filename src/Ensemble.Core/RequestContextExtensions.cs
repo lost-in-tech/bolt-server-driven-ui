@@ -9,12 +9,13 @@ public static class RequestContextExtensions
         context.Set(GetKey<T>(), value);
 
     public static RequestData RequestData(this IRequestContextReader reader) =>
-        reader.Get<RequestData>(new RequestData
+        reader.Get(new RequestData
         {
             App = string.Empty,
             Id = string.Empty,
             RootApp = string.Empty,
-            RootId = string.Empty
+            RootId = string.Empty,
+            Tenant = string.Empty
         }); 
     
     private static string GetKey<T>()

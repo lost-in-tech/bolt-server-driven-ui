@@ -1,4 +1,6 @@
-﻿namespace Ensemble.Core;
+﻿using System.Reflection.Emit;
+
+namespace Ensemble.Core;
 
 public record RequestData
 {
@@ -10,6 +12,8 @@ public record RequestData
     public Device? Device { get; init; }
     public string? UserAgent { get; init; }
     public RequestScreenSize? ScreenSize { get; init; }
+    
+    public required string Tenant { get; init; } = string.Empty;
 
     public string[] SectionNames { get; init; } = Array.Empty<string>();
     
@@ -23,6 +27,9 @@ public record RequestData
 
     public bool IsSectionRequested(string sectionName) => SectionNames.Any(section =>
         string.Equals(section, sectionName, StringComparison.OrdinalIgnoreCase));
+    
+    public string? UserId { get; init; }
+    public bool IsAuthenticated { get; init; }
 }
 
 

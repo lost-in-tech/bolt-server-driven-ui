@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Ensemble.Extensions.Web;
 
-public class ScreenViewResult(MaySucceed<Screen> viewModel) : ActionResult
+public class ScreenViewResult(MaySucceed<Ensemble.Core.Screen> viewModel) : ActionResult
 {
     public override async Task ExecuteResultAsync(ActionContext context)
     {

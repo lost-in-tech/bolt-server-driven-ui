@@ -2,6 +2,7 @@ using System.Collections;
 using Bolt.IocScanner;
 using Bolt.Sdui.Core;
 using Ensemble.Extensions.Web;
+using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddFeatureManagement();
 
 var currentAssembly = typeof(SampleApi.Elements.Stack).Assembly;
-builder.Services.AddEnsemble(new EnsembleOptions
+builder.Services.AddEnsemble( builder.Configuration, new EnsembleOptions
 {
+    EnableFeatureFlag = true,
     TypesToScan = new []
     {
         (currentAssembly, new []
