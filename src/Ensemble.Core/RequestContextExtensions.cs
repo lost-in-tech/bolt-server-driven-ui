@@ -12,9 +12,8 @@ public static class RequestContextExtensions
         reader.Get(new RequestData
         {
             App = string.Empty,
-            Id = string.Empty,
+            CorrelationId = string.Empty,
             RootApp = string.Empty,
-            RootId = string.Empty,
             Tenant = string.Empty
         }); 
     

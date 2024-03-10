@@ -13,7 +13,7 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta01" />
+        <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta03" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     </ItemGroup>
 

@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta01" />
+      <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta03" />
     </ItemGroup>
 
 </Project>

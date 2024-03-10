@@ -15,6 +15,8 @@ public record EnsembleOptions
     public (Assembly Assembly, Type[] Types)[] TypesToScan { get; init; } = Array.Empty<(Assembly, Type[])>();
     public bool EnableFeatureFlag { get; init; } = false;
     public string FeatureFlagSectionName { get; init; } = "Ensemble:FeatureFlags";
+    public string RazorLayoutSettingsSectionName { get; init; } = "Ensemble:RazorLayoutSettings";
+    public string AppInfoSettingsSectionName { get; init; } = "Ensemble:App";
 }
 
 public static class IocSetup
@@ -28,6 +30,14 @@ public static class IocSetup
             source.Configure<SectionsFeatureFlagSettings>(settings => configuration.GetSection(options.FeatureFlagSectionName).Bind(settings));
             source.TryAddTransient<ISectionFeatureFlag, SectionFeatureFlag>();
         }
+
+        source.Configure<RazorLayoutProviderSettings>(settings =>
+            configuration.GetSection(options.RazorLayoutSettingsSectionName).Bind(settings));
+        
+        source.Configure<AppInfoSettings>(settings =>
+            configuration.GetSection(options.AppInfoSettingsSectionName).Bind(settings));
+        
+        source.TryAddSingleton<IAppInfoProvider, AppInfoProvider>();
 
         source.AddEnsemble();
         

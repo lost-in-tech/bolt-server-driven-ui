@@ -19,9 +19,8 @@ internal sealed class RequestDataProvider (
         return new RequestData
         {
             App = app,
-            Id = id,
+            CorrelationId = id,
             RootApp = EmptyAlternative(requestWrapper.Header(keys.RootApp), app),
-            RootId = EmptyAlternative(requestWrapper.Header(keys.RootId), id), 
             Device = ReadHeaderAsEnum<Device>(keys.Device), 
             Platform = ReadHeaderAsEnum<Platform>(keys.Platform),
             UserAgent = requestWrapper.Header(DefaultRequestDataKeys.UserAgent),

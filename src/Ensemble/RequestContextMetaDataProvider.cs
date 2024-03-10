@@ -13,8 +13,7 @@ internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataP
         {
             new RequestContextMetaData
             {
-                Id = requestData.Id,
-                RootId = requestData.RootId,
+                CorrelationId = requestData.CorrelationId,
                 Tenant = requestData.Tenant,
                 App = requestData.App,
                 RootApp = requestData.RootApp
@@ -25,8 +24,7 @@ internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataP
 
 public record RequestContextMetaData : IMetaData
 {
-    public required string Id { get; init; }
-    public required string RootId { get; init; }
+    public required string CorrelationId { get; init; }
     public required string App { get; init; }
     public required string RootApp { get; init; }
     public required string Tenant { get; init; }
