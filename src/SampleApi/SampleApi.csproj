@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Bolt.Polymorphic.Serializer\Bolt.Polymorphic.Serializer\Bolt.Polymorphic.Serializer.csproj" />
       <ProjectReference Include="..\Ensemble.Extensions.Web\Ensemble.Extensions.Web.csproj" />
     </ItemGroup>
 
