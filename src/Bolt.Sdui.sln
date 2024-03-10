@@ -26,6 +26,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble", "Ensemble\Ensemb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ensemble.Extensions.Web", "Ensemble.Extensions.Web\Ensemble.Extensions.Web.csproj", "{92915D53-3020-47D9-B082-0F7FB39F494F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "SampleApi\SampleApi.csproj", "{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.Polymorphic.Serializer", "..\..\Bolt.Polymorphic.Serializer\Bolt.Polymorphic.Serializer\Bolt.Polymorphic.Serializer.csproj", "{274EB517-272D-489A-8746-54979B4A7E2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{92915D53-3020-47D9-B082-0F7FB39F494F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92915D53-3020-47D9-B082-0F7FB39F494F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92915D53-3020-47D9-B082-0F7FB39F494F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{274EB517-272D-489A-8746-54979B4A7E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{274EB517-272D-489A-8746-54979B4A7E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{274EB517-272D-489A-8746-54979B4A7E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{274EB517-272D-489A-8746-54979B4A7E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

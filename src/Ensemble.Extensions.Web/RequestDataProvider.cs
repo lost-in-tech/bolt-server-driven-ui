@@ -2,7 +2,7 @@
 using Ensemble.Core;
 using Microsoft.AspNetCore.Http;
 
-namespace Ensemble.Web;
+namespace Ensemble.Extensions.Web;
 
 internal sealed class RequestDataProvider (
     IHttpContextAccessor httpContextAccessor,
@@ -12,12 +12,15 @@ internal sealed class RequestDataProvider (
     {
         var keys = requestKeyNamesProvider.Get();
 
+        var app = ReadHeaderValue(keys.App);
+        var id = EmptyAlternative(ReadHeaderValue(keys.Id), Guid.NewGuid().ToString());
+        
         return new RequestData
         {
-            App = ReadHeaderValue(keys.App),
-            Id = ReadHeaderValue(keys.Id),
-            RootApp = ReadHeaderValue(keys.RootApp),
-            RootId = ReadHeaderValue(keys.RootId), 
+            App = app,
+            Id = id,
+            RootApp = EmptyAlternative(ReadHeaderValue(keys.RootApp), app),
+            RootId = EmptyAlternative(ReadHeaderValue(keys.RootId), id), 
             Device = ReadHeaderAsEnum<Device>(keys.Device), 
             Platform = ReadHeaderAsEnum<Platform>(keys.Platform),
             UserAgent = ReadHeaderValue(DefaultRequestDataKeys.UserAgent),
@@ -26,11 +29,19 @@ internal sealed class RequestDataProvider (
         };
     }
 
+    private string EmptyAlternative(string value, string alt)
+        => string.IsNullOrWhiteSpace(value) ? alt : value; 
+
+    private const string Separator = ",";
     private string[] ReadQueryAsArray(string? key)
     {
-        return httpContextAccessor
-                .HttpContext
-                .Request.Query[key].ToArray();
+        if (string.IsNullOrWhiteSpace(key)) return Array.Empty<string>();
+
+        var query = httpContextAccessor.HttpContext?.Request.Query[key];
+
+        if (!query.HasValue || query.Value.Count == 0) return Array.Empty<string>();
+        
+        return query.Value.ToString().Split(Separator);
     }
 
     private TEnum? ReadHeaderAsEnum<TEnum>(string key) where TEnum : struct
@@ -44,11 +55,14 @@ internal sealed class RequestDataProvider (
     
     private string ReadHeaderValue(string key)
     {
-        return httpContextAccessor
-                .HttpContext
+        var context = httpContextAccessor.HttpContext;
+
+        if (context == null) return string.Empty;
+        
+        return context
                 .Request
                 .Headers.TryGetValue(key, out var value) 
-            ? value 
+            ? value.ToString() 
             : string.Empty;
     }
 }

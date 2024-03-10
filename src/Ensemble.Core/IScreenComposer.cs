@@ -12,7 +12,7 @@ public record Screen
 {
     public required Dictionary<string, ScreenLayout> Layouts { get; init; }
     public required IEnumerable<ScreenSection> Sections { get; init; }
-    public required IMetaData[] MetaData { get; init; }
+    public required IEnumerable<IMetaData> MetaData { get; init; }
 }
 
 public record ScreenLayout

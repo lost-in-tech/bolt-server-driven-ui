@@ -9,14 +9,27 @@ public record RequestData
     public Platform? Platform { get; init; }
     public Device? Device { get; init; }
     public string? UserAgent { get; init; }
- 
-    public string[]? SectionNames { get; init; }
+    public RequestScreenSize? ScreenSize { get; init; }
+
+    public string[] SectionNames { get; init; } = Array.Empty<string>();
     
     /// <summary>
     /// Layout version client has in cache. Layout content will return only if LayoutVersion is empty or doesn't match
     /// with current version server has 
     /// </summary>
     public string? LayoutVersionId { get; init; }
+
+    public bool IsSectionOnlyRequest() => SectionNames.Length > 0;
+
+    public bool IsSectionRequested(string sectionName) => SectionNames.Any(section =>
+        string.Equals(section, sectionName, StringComparison.OrdinalIgnoreCase));
+}
+
+
+public enum RequestScreenSize
+{
+    Wide,
+    Compact
 }
 
 public enum Platform

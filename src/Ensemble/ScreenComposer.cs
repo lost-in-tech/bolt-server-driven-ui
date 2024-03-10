@@ -1,7 +1,8 @@
 ﻿using Bolt.MaySucceed;
 using Bolt.Sdui.Core;
+using Ensemble.Core;
 
-namespace Ensemble.Core.Impl;
+namespace Ensemble;
 
 internal sealed class ScreenComposer<TRequest>(
         IRequestContext context,
@@ -107,44 +108,63 @@ internal sealed class ScreenComposer<TRequest>(
     {
         var sections = new List<ScreenSection>();
         var metaData = new List<IMetaData>();
+
+        var tasks = new List<Task<MaySucceed<ScreenSectionResponseDto>>>();
+        
         foreach (var elementsProvider in screenSectionsProviders)
         {
             if (elementsProvider.IsApplicable(context, request))
             {
-                var elementRsp = await elementsProvider.Get(context, request, ct);
-
-                if (elementRsp.IsFailed) return elementRsp.Failure;
-                
-                sections.AddRange(elementRsp.Value.Sections);
-                metaData.AddRange(elementRsp.Value.MetaData);
+                tasks.Add(elementsProvider.Get(context, request, ct));
             }
+        }
+
+        await Task.WhenAll(tasks);
+
+        foreach (var task in tasks)
+        {
+            var providerRsp = task.Result;
+            
+            if (providerRsp.IsFailed) return providerRsp.Failure;
+                
+            sections.AddRange(providerRsp.Value.Sections);
+            metaData.AddRange(providerRsp.Value.MetaData);
         }
 
         return new ScreenSectionResponseDto
         {
-            Sections = sections.ToArray(),
-            MetaData = metaData.ToArray(),
+            Sections = sections,
+            MetaData = metaData,
         };
     }
 
     private async Task<MaySucceed<Dictionary<string, ScreenLayout>>> GetLayouts(TRequest request, CancellationToken ct)
     {
         var layouts = new Dictionary<string,ScreenLayout>();
+
+        var tasks = new List<Task<MaySucceed<LayoutResponse>>>();
         
         foreach (var layoutProvider in layoutProviders)
         {
             if (layoutProvider.IsApplicable(context, request))
             {
-                var layoutRsp = await layoutProvider.Get(context, request, ct);
-
-                if (layoutRsp.IsFailed) return layoutRsp.Failure;
-
-                layouts[layoutRsp.Value.Name] = new ScreenLayout
-                {
-                    Element = layoutRsp.Value.Element,
-                    VersionId = layoutRsp.Value.VersionId
-                };
+                tasks.Add(layoutProvider.Get(context, request, ct));
             }
+        }
+
+        await Task.WhenAll(tasks);
+
+        foreach (var task in tasks)
+        {
+            var layoutRsp = task.Result;
+            
+            if (layoutRsp.IsFailed) return layoutRsp.Failure;
+            
+            layouts[layoutRsp.Value.Name] = new ScreenLayout
+            {
+                Element = layoutRsp.Value.Element,
+                VersionId = layoutRsp.Value.VersionId
+            };
         }
 
         return layouts;

@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.ComTypes;
 using Bolt.MaySucceed;
 using Bolt.Sdui.Core;
 
@@ -27,6 +26,6 @@ public abstract class ScreenSectionsProvider<TRequest> : IScreenSectionsProvider
 
 public record ScreenSectionResponseDto
 {
-    public required ScreenSection[] Sections { get; init; }
-    public required IMetaData[] MetaData { get; init; }
+    public required IEnumerable<ScreenSection> Sections { get; init; }
+    public required IEnumerable<IMetaData> MetaData { get; init; }
 }

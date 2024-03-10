@@ -1,4 +1,4 @@
-namespace Ensemble.Web;
+namespace Ensemble.Extensions.Web;
 
 public class CustomRequestDataKeys
 {
@@ -10,4 +10,5 @@ public class CustomRequestDataKeys
     public string? Platform { get; init; }
     public string? LayoutVersionId { get; init; }
     public string? SectionNames { get; init; }
+    public string? ScreenSize { get; init; }
 }

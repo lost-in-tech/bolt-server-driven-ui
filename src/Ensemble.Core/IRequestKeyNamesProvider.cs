@@ -15,4 +15,5 @@ public record RequestKeyNames
     public required string Platform { get; init; }
     public required string LayoutVersionId { get; init; }
     public required string SectionNames { get; init; }
+    public required string ScreenSize { get; init; }
 }

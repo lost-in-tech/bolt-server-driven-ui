@@ -29,7 +29,7 @@ public partial class SduiJsonSerializerTests : TestWithIocFixture
                         {
                             Elements = new IElement[]
                             {
-                                new Placeholder{ Name = "section-1", SectionNames = new []{ "section-1" }}
+                                new Placeholder{ Name = "section-1", Sections = new []{ "section-1" }}
                             }
                         },
                         new Stack

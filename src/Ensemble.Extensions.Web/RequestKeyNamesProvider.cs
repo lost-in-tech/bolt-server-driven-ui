@@ -1,9 +1,9 @@
 ﻿using Ensemble.Core;
 using Microsoft.Extensions.Options;
 
-namespace Ensemble.Web;
+namespace Ensemble.Extensions.Web;
 
-public class RequestKeyNamesProvider : IRequestKeyNamesProvider
+internal sealed class RequestKeyNamesProvider : IRequestKeyNamesProvider
 {
     private readonly IOptions<CustomRequestDataKeys> _options;
     private readonly Lazy<RequestKeyNames> _keyNames;
@@ -26,6 +26,7 @@ public class RequestKeyNamesProvider : IRequestKeyNamesProvider
             RootApp = _options.Value.RootApp ?? DefaultRequestDataKeys.RootApp,
             SectionNames = _options.Value.SectionNames ?? DefaultRequestDataKeys.SectionNames,
             LayoutVersionId = _options.Value.LayoutVersionId ?? DefaultRequestDataKeys.LayoutVersionId,
+            ScreenSize = _options.Value.ScreenSize ?? DefaultRequestDataKeys.ScreenSize,
         };
     }
     

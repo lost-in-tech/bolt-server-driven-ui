@@ -2,5 +2,5 @@
 public class Placeholder : Element
 {
     public required string Name { get; init; }
-    public string[]? SectionNames { get; init; }
+    public string[]? Sections { get; init; }
 }

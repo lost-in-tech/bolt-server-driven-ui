@@ -11,4 +11,5 @@ public static class DefaultRequestDataKeys
     public const string UserAgent = "User-Agent";
     public const string LayoutVersionId = "x-req-layout-version-id";
     public const string SectionNames = "sections";
+    public const string ScreenSize = "x-req-screen";
 }
