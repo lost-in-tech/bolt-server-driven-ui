@@ -4,17 +4,19 @@ using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace Bolt.ServerDrivenUI;
 
-public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<TRequest>
+public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
     string[] IScreenSectionProvider<TRequest>.ForSections => new[]{ ForSection };
     
-    bool IScreenSectionProvider<TRequest>.IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
+    public virtual bool IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => true;
     
     async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
-        var rsp = await Get(context, request, ct);
+        var rsp = context.RequestData().IsSectionOnlyRequest() 
+            ? await GetLazy(context, request, ct)
+            : await Get(context, request, ct);
 
         if (rsp.IsFailed) return rsp.Failure;
 
@@ -31,22 +33,13 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
         };
     }
     
-    public abstract string ForSection { get; }
+    protected abstract string ForSection { get; }
     
-    public abstract Task<MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
+    protected abstract Task<MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
+        CancellationToken ct);
+    
+    protected abstract Task<MaySucceed<IElement>> GetLazy(IRequestContextReader context, TRequest request,
         CancellationToken ct);
 
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
-
-}
-
-public static class Element
-{
-    private static EmptyElement _none = new EmptyElement();
-    public static EmptyElement None => _none;
-
-    public static Task<MaySucceed<IElement>> ToMaySucceedTask(this IElement element) =>
-        Task.FromResult(MaySucceed<IElement>.Ok(element));
-    public static MaySucceed<IElement> ToMaySucceed(this IElement element) =>
-        MaySucceed<IElement>.Ok(element);
 }
