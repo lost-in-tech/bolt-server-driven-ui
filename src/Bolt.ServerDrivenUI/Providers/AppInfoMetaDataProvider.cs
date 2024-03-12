@@ -1,8 +1,8 @@
 ﻿using Bolt.MaySucceed;
-using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace Bolt.ServerDrivenUI;
+namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class AppInfoMetaDataProvider<TRequest>(IAppInfoProvider appInfoProvider) : ScreenMetaDataProvider<TRequest>
 {
@@ -10,11 +10,11 @@ internal sealed class AppInfoMetaDataProvider<TRequest>(IAppInfoProvider appInfo
     {
         var appInfo = appInfoProvider.Get();
 
-        return ToResponseTask(new AppInfoMetaData
+        return new AppInfoMetaData
         {
             Version = appInfo.Version,
             AppName = appInfo.Name
-        });
+        }.ToMaySucceedTask();
     }
 }
 

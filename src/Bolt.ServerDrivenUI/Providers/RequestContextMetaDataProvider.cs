@@ -1,8 +1,8 @@
 ﻿using Bolt.MaySucceed;
-using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace Bolt.ServerDrivenUI;
+namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataProvider<TRequest>
 {
@@ -10,13 +10,13 @@ internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataP
     {
         var requestData = context.RequestData();
 
-        return ToResponseTask(new RequestContextMetaData
+        return new RequestContextMetaData
         {
             CorrelationId = requestData.CorrelationId,
             Tenant = requestData.Tenant,
             App = requestData.App,
             RootApp = requestData.RootApp
-        });
+        }.ToMaySucceedTask();
     }
 }
 

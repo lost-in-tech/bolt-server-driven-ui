@@ -1,8 +1,8 @@
 ﻿using Bolt.MaySucceed;
-using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace Bolt.ServerDrivenUI;
+namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         IEnumerable<IScreenSectionProvider<TRequest>> sectionProviders,

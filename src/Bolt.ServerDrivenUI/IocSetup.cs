@@ -1,4 +1,5 @@
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Providers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

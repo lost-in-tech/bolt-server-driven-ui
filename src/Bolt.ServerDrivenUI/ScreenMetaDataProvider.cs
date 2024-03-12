@@ -29,13 +29,12 @@ public abstract class ScreenMetaDataProvider<TRequest> : IScreenSectionProvider<
         CancellationToken ct);
 
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
+}
 
-    protected MaySucceed<IEnumerable<IMetaData>> ToResponse(IMetaData metaData) => MaySucceed<IEnumerable<IMetaData>>.Ok(new[] { metaData });
-    protected MaySucceed<IEnumerable<IMetaData>> ToResponse(IEnumerable<IMetaData> metaData) => MaySucceed<IEnumerable<IMetaData>>.Ok(metaData);
-    
-    protected Task<MaySucceed<IEnumerable<IMetaData>>> ToResponseTask(IMetaData metaData) => Task.FromResult(ToResponse(metaData));
-    protected Task<MaySucceed<IEnumerable<IMetaData>>> ToResponseTask(IEnumerable<IMetaData> metaData) => Task.FromResult(ToResponse(metaData));
-    
-    protected Task<MaySucceed<IEnumerable<IMetaData>>> NoneAsTask() => ToResponseTask(Enumerable.Empty<IMetaData>());
-    protected MaySucceed<IEnumerable<IMetaData>> None() => MaySucceed<IEnumerable<IMetaData>>.Ok(Enumerable.Empty<IMetaData>());
+public static class MetaData
+{
+    public static MaySucceed<IEnumerable<IMetaData>> ToMaySucceed(this IMetaData metaData) => new(new[] { metaData });
+    public static MaySucceed<IEnumerable<IMetaData>> ToMaySucceed(this IEnumerable<IMetaData> metaData) => new(metaData);
+    public static Task<MaySucceed<IEnumerable<IMetaData>>> ToMaySucceedTask(this IMetaData metaData) => Task.FromResult(ToMaySucceed(metaData));
+    public static Task<MaySucceed<IEnumerable<IMetaData>>> ToMaySucceedTask(this IEnumerable<IMetaData> metaData) => Task.FromResult(ToMaySucceed(metaData));
 }

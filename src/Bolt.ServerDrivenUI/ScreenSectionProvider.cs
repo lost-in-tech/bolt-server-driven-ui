@@ -35,13 +35,16 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
         CancellationToken ct);
 
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
-    
-    protected Task<MaySucceed<IElement>> ToResponseTask(IElement element) =>
-        Task.FromResult(ToResponse(element));
-    protected MaySucceed<IElement> ToResponse(IElement element) =>
-        MaySucceed<IElement>.Ok(element);
 
-    private static readonly IElement EmptyElement = new EmptyElement();
-    protected Task<MaySucceed<IElement>> NoneAsTask() => ToResponseTask(EmptyElement);
-    protected MaySucceed<IElement> None() => ToResponse(EmptyElement);
+}
+
+public static class Element
+{
+    private static EmptyElement _none = new EmptyElement();
+    public static EmptyElement None => _none;
+
+    public static Task<MaySucceed<IElement>> ToMaySucceedTask(this IElement element) =>
+        Task.FromResult(MaySucceed<IElement>.Ok(element));
+    public static MaySucceed<IElement> ToMaySucceed(this IElement element) =>
+        MaySucceed<IElement>.Ok(element);
 }

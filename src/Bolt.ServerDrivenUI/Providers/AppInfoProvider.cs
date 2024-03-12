@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI;
+namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class AppInfoProvider : IAppInfoProvider
 {
