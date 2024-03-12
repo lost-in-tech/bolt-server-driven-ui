@@ -12,10 +12,10 @@ public static class IocSetup
         source.TryAddScoped<IRequestContext, RequestContext>();
         source.TryAddScoped<IRequestContextReader>(x => x.GetRequiredService<IRequestContext>());
         source.TryAddSingleton<ISectionFeatureFlag, NullSectionFeatureFlag>();
-        source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionsProvider<>), typeof(DefaultScreenSectionsProvider<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenBuildingBlocksProvider<>), typeof(DefaultScreenBuildingBlocksProvider<>)));
         source.TryAddSingleton<IAppInfoProvider,AppInfoProvider>();
-        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenMetaDataProvider<>), typeof(AppInfoMetaDataProvider<>)));
-        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenMetaDataProvider<>), typeof(RequestContextMetaDataProvider<>)));
+        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(AppInfoMetaDataProvider<>)));
+        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(RequestContextMetaDataProvider<>)));
         
         return source;
     }

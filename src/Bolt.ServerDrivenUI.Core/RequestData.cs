@@ -26,6 +26,22 @@ public record RequestData
 
     public bool IsSectionRequested(string sectionName) => SectionNames.Any(section =>
         string.Equals(section, sectionName, StringComparison.OrdinalIgnoreCase));
+
+    public bool IsSectionRequested(string[] sectionNames)
+    {
+        foreach (var requestedSectionName in SectionNames)
+        {
+            foreach (var sectionName in sectionNames)
+            {
+                if (sectionName.Equals(requestedSectionName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
     
     public string? UserId { get; init; }
     public bool IsAuthenticated { get; init; }

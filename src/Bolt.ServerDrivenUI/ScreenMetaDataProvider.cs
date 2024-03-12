@@ -4,16 +4,26 @@ using Bolt.ServerDrivenUI.Core;
 
 namespace Bolt.ServerDrivenUI;
 
-public interface IScreenMetaDataProvider<in TRequest>
+public abstract class ScreenMetaDataProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
-    string? ForSection { get; }
-    Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, TRequest request, CancellationToken ct);
-    bool IsApplicable(IRequestContextReader context, TRequest request);
-}
+    string[] IScreenSectionProvider<TRequest>.ForSections => string.IsNullOrWhiteSpace(ForSection) ? Array.Empty<string>() : new[]{ ForSection };
 
-public abstract class ScreenMetaDataProvider<TRequest> : IScreenMetaDataProvider<TRequest>
-{
-    public virtual string? ForSection => null;
+    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
+        TRequest request,
+        CancellationToken ct)
+    {
+        var rsp = await Get(context, request, ct);
+
+        if (rsp.IsFailed) return rsp.Failure;
+
+        return new ScreenSectionResponse
+        {
+            Elements = Enumerable.Empty<ScreenSection>(),
+            MetaData = rsp.Value
+        };
+    }
+
+    protected virtual string ForSection => string.Empty;
 
     public abstract Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, TRequest request,
         CancellationToken ct);
@@ -26,8 +36,6 @@ public abstract class ScreenMetaDataProvider<TRequest> : IScreenMetaDataProvider
     protected Task<MaySucceed<IEnumerable<IMetaData>>> ToResponseTask(IMetaData metaData) => Task.FromResult(ToResponse(metaData));
     protected Task<MaySucceed<IEnumerable<IMetaData>>> ToResponseTask(IEnumerable<IMetaData> metaData) => Task.FromResult(ToResponse(metaData));
     
-    
-
     protected Task<MaySucceed<IEnumerable<IMetaData>>> NoneAsTask() => ToResponseTask(Enumerable.Empty<IMetaData>());
     protected MaySucceed<IEnumerable<IMetaData>> None() => MaySucceed<IEnumerable<IMetaData>>.Ok(Enumerable.Empty<IMetaData>());
 }

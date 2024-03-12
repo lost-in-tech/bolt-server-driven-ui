@@ -9,7 +9,7 @@ internal sealed class ScreenComposer<TRequest>(
         IRequestDataProvider requestDataProvider,
         IEnumerable<IRequestContextDataLoader<TRequest>> requestContextDataLoaders,
         IEnumerable<IScreenSectionsFilter<TRequest>> filters,
-        IEnumerable<IScreenSectionsProvider<TRequest>> screenSectionsProviders,
+        IEnumerable<IScreenBuildingBlocksProvider<TRequest>> screenSectionsProviders,
         IEnumerable<ILayoutProvider<TRequest>> layoutProviders,
         IEnumerable<IResponseFilterDataLoader<TRequest>> processDataLoaders)
     : IScreenComposer<TRequest>
@@ -104,12 +104,12 @@ internal sealed class ScreenComposer<TRequest>(
         return result;
     }
 
-    private async Task<MaySucceed<ScreenSectionResponseDto>> GetSections(TRequest request, CancellationToken ct)
+    private async Task<MaySucceed<ScreenBuildingBlocksResponseDto>> GetSections(TRequest request, CancellationToken ct)
     {
         var sections = new List<ScreenSection>();
         var metaData = new List<IMetaData>();
 
-        var tasks = new List<Task<MaySucceed<ScreenSectionResponseDto>>>();
+        var tasks = new List<Task<MaySucceed<ScreenBuildingBlocksResponseDto>>>();
         
         foreach (var elementsProvider in screenSectionsProviders)
         {
@@ -131,7 +131,7 @@ internal sealed class ScreenComposer<TRequest>(
             metaData.AddRange(providerRsp.Value.MetaData);
         }
 
-        return new ScreenSectionResponseDto
+        return new ScreenBuildingBlocksResponseDto
         {
             Sections = sections,
             MetaData = metaData,
@@ -170,7 +170,7 @@ internal sealed class ScreenComposer<TRequest>(
         return layouts;
     }
 
-    private async Task<MaySucceed<ScreenSectionResponseDto>> ApplyResponseFilter(TRequest request, ScreenSectionResponseDto response,
+    private async Task<MaySucceed<ScreenBuildingBlocksResponseDto>> ApplyResponseFilter(TRequest request, ScreenBuildingBlocksResponseDto response,
         CancellationToken ct)
     {
         var lowPriorityFilters = filters.OrderByDescending(x => x.Priority);

@@ -3,9 +3,9 @@ using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace Bolt.ServerDrivenUI.Core;
 
-public interface IScreenSectionsProvider<in TRequest>
+public interface IScreenBuildingBlocksProvider<in TRequest>
 {
-    Task<MaySucceed<ScreenSectionResponseDto>> Get(
+    Task<MaySucceed<ScreenBuildingBlocksResponseDto>> Get(
         IRequestContextReader context, 
         TRequest request, 
         CancellationToken ct);
@@ -13,18 +13,17 @@ public interface IScreenSectionsProvider<in TRequest>
     bool IsApplicable(IRequestContextReader context, TRequest request);
 }
 
-public abstract class ScreenSectionsProvider<TRequest> : IScreenSectionsProvider<TRequest>
+public abstract class ScreenBuildingBlocksProvider<TRequest> : IScreenBuildingBlocksProvider<TRequest>
 {
-    public abstract Task<MaySucceed<ScreenSectionResponseDto>> Get(
+    public abstract Task<MaySucceed<ScreenBuildingBlocksResponseDto>> Get(
         IRequestContextReader context, 
         TRequest request,
         CancellationToken ct);
-
-    public abstract string Name { get; }
+    
     public bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }
 
-public record ScreenSectionResponseDto
+public record ScreenBuildingBlocksResponseDto
 {
     public required IEnumerable<ScreenSection> Sections { get; init; }
     public required IEnumerable<IMetaData> MetaData { get; init; }
