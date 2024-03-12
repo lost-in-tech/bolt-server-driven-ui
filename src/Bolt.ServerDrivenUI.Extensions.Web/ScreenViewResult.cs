@@ -1,0 +1,28 @@
+﻿using System.Text;
+using Bolt.MaySucceed;
+using Bolt.Polymorphic.Serializer.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Bolt.ServerDrivenUI.Extensions.Web;
+
+public class ScreenViewResult(MaySucceed<Bolt.ServerDrivenUI.Core.Screen> viewModel) : ActionResult
+{
+    public override async Task ExecuteResultAsync(ActionContext context)
+    {
+        var serializer = context.HttpContext.RequestServices.GetRequiredService<IJsonSerializer>();
+        var response = context.HttpContext.Response;
+        
+        response.ContentType = "application/json";
+        
+        if(viewModel.IsSucceed)
+        {
+            await response.WriteAsync(serializer.Serialize(viewModel.Value), Encoding.UTF8);
+            return;
+        }
+
+        response.StatusCode = viewModel.Failure.StatusCode;
+        await response.WriteAsync(serializer.Serialize(viewModel.Failure), Encoding.UTF8);
+    }
+}

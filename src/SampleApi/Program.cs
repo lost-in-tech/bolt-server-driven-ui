@@ -1,7 +1,7 @@
 using System.Collections;
 using Bolt.IocScanner;
-using Bolt.Sdui.Core;
-using Ensemble.Extensions.Web;
+using Bolt.ServerDrivenUI.Core.Elements;
+using Bolt.ServerDrivenUI.Extensions.Web;
 using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);

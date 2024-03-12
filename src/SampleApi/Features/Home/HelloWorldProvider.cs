@@ -1,8 +1,8 @@
 ﻿using Bolt.IocScanner.Attributes;
 using Bolt.MaySucceed;
-using Bolt.Sdui.Core;
-using Ensemble;
-using Ensemble.Core;
+using Bolt.ServerDrivenUI;
+using Bolt.ServerDrivenUI.Core.Elements;
+using Bolt.ServerDrivenUI.Core;
 using Microsoft.FeatureManagement;
 using SampleApi.Elements;
 

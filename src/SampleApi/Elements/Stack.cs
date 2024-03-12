@@ -1,4 +1,4 @@
-﻿using Bolt.Sdui.Core;
+﻿using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace SampleApi.Elements;
 

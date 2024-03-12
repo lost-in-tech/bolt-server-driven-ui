@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Ensemble.Extensions.Web\Ensemble.Extensions.Web.csproj" />
+      <ProjectReference Include="..\Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj" />
     </ItemGroup>
 
 </Project>

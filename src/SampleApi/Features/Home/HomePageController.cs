@@ -1,4 +1,4 @@
-﻿using Ensemble.Extensions.Web;
+﻿using Bolt.ServerDrivenUI.Extensions.Web;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SampleApi.Features.Home;
