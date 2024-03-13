@@ -9,6 +9,7 @@ public static class IocSetup
 {
     public static IServiceCollection AddEnsemble(this IServiceCollection source)
     {
+        source.TryAddSingleton<ErrorSafe>();
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenComposer<>), typeof(ScreenComposer<>)));
         source.TryAddScoped<IRequestContext, RequestContext>();
         source.TryAddScoped<IRequestContextReader>(x => x.GetRequiredService<IRequestContext>());

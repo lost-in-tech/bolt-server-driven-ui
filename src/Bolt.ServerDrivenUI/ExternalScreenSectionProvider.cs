@@ -18,3 +18,4 @@ public abstract class ExternalScreenSectionProvider<TRequest> : IScreenSectionPr
         throw new NotImplementedException();
     }
 }
+

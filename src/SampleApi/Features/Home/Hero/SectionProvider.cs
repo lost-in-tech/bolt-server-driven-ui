@@ -8,6 +8,7 @@ using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 namespace SampleApi.Features.Home.Hero;
 
 [AutoBind]
+[MainProvider]
 internal sealed class SectionProvider(IRazorXmlViewParser parser) : ScreenSectionProvider<HomePageRequest>
 {
     public override string ForSection => "hero";

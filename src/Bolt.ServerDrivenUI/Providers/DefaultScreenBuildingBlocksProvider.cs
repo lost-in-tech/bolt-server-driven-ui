@@ -1,12 +1,14 @@
 ﻿using Bolt.MaySucceed;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
+using Microsoft.Extensions.Logging;
 
 namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         IEnumerable<IScreenSectionProvider<TRequest>> sectionProviders,
-        ISectionFeatureFlag sectionFeatureFlag)
+        ISectionFeatureFlag sectionFeatureFlag,
+        ILogger<DefaultScreenBuildingBlocksProvider<TRequest>> logger)
     : IScreenBuildingBlocksProvider<TRequest>
 {
     public async Task<MaySucceed<ScreenBuildingBlocksResponseDto>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
@@ -73,15 +75,43 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         if (await IsDisabled(provider.ForSections)) 
             return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>(), Enumerable.Empty<string>());
 
-        var rsp = await provider.Get(context, request, ct);
+        try
+        {
+            var rsp = await provider.Get(context, request, ct);
 
-        if (rsp.IsFailed) return rsp.Failure;
+            if (rsp.IsSucceed)
+            {
+                return (
+                    Sections: rsp.Value.Elements.Where(x => x.Element is not EmptyElement),
+                    MetaData: rsp.Value.MetaData,
+                    LazySectionNames: provider.IsLazy(context, request, ct) ? provider.ForSections : Enumerable.Empty<string>()
+                );
+            }
 
-        return (
-            Sections: rsp.Value.Elements.Where(x => x.Element is not EmptyElement),
-            MetaData: rsp.Value.MetaData,
-            LazySectionNames: provider.IsLazy(context, request, ct) ? provider.ForSections : Enumerable.Empty<string>()
-        );
+            var providerTypeData = TypeHelper.Get(provider.GetType());
+            
+            logger.LogError("{provider} failed with {failure}", providerTypeData.Name, rsp.Failure);
+
+            if (providerTypeData.HasMainAttribute)
+            {
+                return rsp.Failure;
+            }
+        }
+        catch (Exception e)
+        {
+            var providerTypeData = TypeHelper.Get(provider.GetType());
+            
+            logger.LogError(e, "{provider} failed with exception {errorMessage}", provider.GetType().FullName, e.Message);
+            
+            if (providerTypeData.HasMainAttribute)
+            {
+                return HttpFailure.InternalServerError();
+            }
+        }
+
+        return (Sections: Enumerable.Empty<ScreenSection>(),
+            MetaData: Enumerable.Empty<IMetaData>(),
+            LazySectionNames: Enumerable.Empty<string>());
     }
 
     private async Task<bool> IsDisabled(string[] sectionNames)
