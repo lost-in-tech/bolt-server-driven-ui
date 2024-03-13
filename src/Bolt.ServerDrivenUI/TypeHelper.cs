@@ -15,7 +15,7 @@ internal static class TypeHelper
             return new TypeData
             {
                 Name = tp.FullName ?? tp.Name,
-                HasMainAttribute = customAttributes.Any(ct => ct is MainProviderAttribute)
+                HasMainAttribute = customAttributes.Any(ct => ct is MustSucceedAttribute)
             };
         });
     }
