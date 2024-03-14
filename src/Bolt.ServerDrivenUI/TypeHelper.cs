@@ -15,7 +15,7 @@ internal static class TypeHelper
             return new TypeData
             {
                 Name = tp.FullName ?? tp.Name,
-                HasMainAttribute = customAttributes.Any(ct => ct is MustSucceedAttribute)
+                HasMustSceeedAttribute = customAttributes.Any(ct => ct is MustSucceedAttribute)
             };
         });
     }
@@ -24,5 +24,5 @@ internal static class TypeHelper
 internal record TypeData
 {
     public required string Name { get; init; }
-    public bool HasMainAttribute { get; init; }
+    public bool HasMustSceeedAttribute { get; init; }
 }

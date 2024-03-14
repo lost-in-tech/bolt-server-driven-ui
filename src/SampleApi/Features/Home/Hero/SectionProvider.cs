@@ -15,8 +15,6 @@ internal sealed class SectionProvider(IRazorXmlViewParser parser) : ScreenSectio
 
     public override Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
-        var rsp = parser.Read<SectionProvider>(new ());
-
-        return rsp;
+        return parser.Read<SectionProvider>(new ());
     }
 }

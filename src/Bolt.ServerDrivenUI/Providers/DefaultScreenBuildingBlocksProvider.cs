@@ -92,7 +92,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             
             logger.LogError("{provider} failed with {failure}", providerTypeData.Name, rsp.Failure);
 
-            if (providerTypeData.HasMainAttribute)
+            if (providerTypeData.HasMustSceeedAttribute)
             {
                 return rsp.Failure;
             }
@@ -103,7 +103,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             
             logger.LogError(e, "{provider} failed with exception {errorMessage}", provider.GetType().FullName, e.Message);
             
-            if (providerTypeData.HasMainAttribute)
+            if (providerTypeData.HasMustSceeedAttribute)
             {
                 return HttpFailure.InternalServerError();
             }

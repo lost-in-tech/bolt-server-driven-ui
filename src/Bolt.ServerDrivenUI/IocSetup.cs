@@ -1,3 +1,4 @@
+using Bolt.ServerDrivenUI.Composer;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Providers;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,13 @@ public static class IocSetup
 {
     public static IServiceCollection AddEnsemble(this IServiceCollection source)
     {
-        source.TryAddSingleton<ErrorSafe>();
+        source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionsFilterTask<>), typeof(ScreenSectionsFilterTask<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadResponseFilterDataTask<>), typeof(LoadResponseFilterDataTask<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadScreenBuildingBlocksTask<>), typeof(LoadScreenBuildingBlocksTask<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadLayoutsTask<>), typeof(LoadLayoutsTask<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadRequestContextDataTask<>), typeof(LoadRequestContextDataTask<>)));
+        source.TryAdd(ServiceDescriptor.Transient(typeof(IRequestValidationTask<>), typeof(RequestValidationTask<>)));
+        
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenComposer<>), typeof(ScreenComposer<>)));
         source.TryAddScoped<IRequestContext, RequestContext>();
         source.TryAddScoped<IRequestContextReader>(x => x.GetRequiredService<IRequestContext>());
