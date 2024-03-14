@@ -1,5 +1,5 @@
 ﻿using Bolt.ServerDrivenUI.Core;
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 using Microsoft.Extensions.Logging;
 
 namespace Bolt.ServerDrivenUI.Composer;

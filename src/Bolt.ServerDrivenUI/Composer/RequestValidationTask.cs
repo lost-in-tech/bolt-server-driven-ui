@@ -1,18 +1,18 @@
 ﻿using Bolt.ServerDrivenUI.Core;
 using Microsoft.Extensions.Logging;
+using Bolt.Endeavor;
 
 namespace Bolt.ServerDrivenUI.Composer;
 
 internal interface IRequestValidationTask<in TRequest>
 {
-    Task<MaySucceed.MaySucceed> Execute(IRequestContextReader context, TRequest request, CancellationToken ct);
+    Task<MaySucceed> Execute(IRequestContextReader context, TRequest request, CancellationToken ct);
 }
 
-internal sealed class RequestValidationTask<TRequest>(IEnumerable<IRequestValidator<TRequest>> validators,
-        ILogger<RequestValidationTask<TRequest>> logger)
+internal sealed class RequestValidationTask<TRequest>(IEnumerable<IRequestValidator<TRequest>> validators)
     : IRequestValidationTask<TRequest>
 {
-    public async Task<MaySucceed.MaySucceed> Execute(IRequestContextReader context, TRequest request, CancellationToken ct)
+    public async Task<MaySucceed> Execute(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
         foreach (var requestValidator in validators)
         {
@@ -24,6 +24,6 @@ internal sealed class RequestValidationTask<TRequest>(IEnumerable<IRequestValida
             }
         }
 
-        return MaySucceed.MaySucceed.Ok();
+        return MaySucceed.Ok();
     }
 }

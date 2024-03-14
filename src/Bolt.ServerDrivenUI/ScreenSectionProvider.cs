@@ -1,4 +1,4 @@
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 
@@ -10,7 +10,7 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
     
     bool IScreenSectionProvider<TRequest>.IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
     
-    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
+    async Task<Bolt.Endeavor.MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
@@ -33,7 +33,7 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
     
     public abstract string ForSection { get; }
     
-    public abstract Task<MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
+    public abstract Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
         CancellationToken ct);
 
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;

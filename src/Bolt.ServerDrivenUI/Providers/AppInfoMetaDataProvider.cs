@@ -1,12 +1,11 @@
-﻿using Bolt.MaySucceed;
-using Bolt.ServerDrivenUI.Core;
+﻿using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace Bolt.ServerDrivenUI.Providers;
 
 internal sealed class AppInfoMetaDataProvider<TRequest>(IAppInfoProvider appInfoProvider) : ScreenMetaDataProvider<TRequest>
 {
-    public override Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
+    public override Task<Bolt.Endeavor.MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
         var appInfo = appInfoProvider.Get();
 

@@ -1,9 +1,8 @@
 ﻿using Bolt.IocScanner.Attributes;
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
-using Microsoft.FeatureManagement;
 using SampleApi.Elements;
 
 namespace SampleApi.Features.Home;
@@ -13,7 +12,7 @@ internal sealed class HelloWorldProvider : ScreenSectionProvider<HomePageRequest
 {
     public override string ForSection => "hello-world";
 
-    public override Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
         return new Paragraph
         {

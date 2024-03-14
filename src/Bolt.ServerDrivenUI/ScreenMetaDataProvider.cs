@@ -1,4 +1,4 @@
-﻿using Bolt.MaySucceed;
+﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
 
@@ -10,7 +10,7 @@ public abstract class ScreenMetaDataProvider<TRequest> : IScreenSectionProvider<
 
     bool IScreenSectionProvider<TRequest>.IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
     
-    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
+    async Task<Bolt.Endeavor.MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {

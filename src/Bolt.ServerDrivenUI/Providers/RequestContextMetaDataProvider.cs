@@ -1,4 +1,4 @@
-﻿using Bolt.MaySucceed;
+﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 

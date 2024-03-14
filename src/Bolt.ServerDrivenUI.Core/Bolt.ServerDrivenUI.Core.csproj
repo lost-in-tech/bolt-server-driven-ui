@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta04" />
+      <PackageReference Include="Bolt.Endeavor" Version="0.0.1-beta07" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
-﻿using Bolt.MaySucceed;
-using Bolt.ServerDrivenUI.Core;
+﻿using Bolt.ServerDrivenUI.Core;
 
 namespace Bolt.ServerDrivenUI.Extensions.Web;
 
@@ -7,7 +6,7 @@ internal sealed class RequestDataProvider (
     IHttpRequestWrapper requestWrapper,
     IRequestKeyNamesProvider requestKeyNamesProvider): IRequestDataProvider
 {
-    public MaySucceed<RequestData> Get()
+    public Bolt.Endeavor.MaySucceed<RequestData> Get()
     {
         var keys = requestKeyNamesProvider.Get();
 

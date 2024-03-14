@@ -1,4 +1,4 @@
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 using Bolt.Polymorphic.Serializer.Xml;
 using Bolt.ServerDrivenUI.Core.Elements;
 
@@ -51,7 +51,7 @@ internal sealed class RazorXmlViewParser(RazorViewRenderer viewRenderer, IXmlSer
     }
 
     private const string DefaultViewName = "Index";
-    public Task<MaySucceed<IElement>> Read<T>(RazorViewParseRequest<T> parseRequest)
+    public Task<Bolt.Endeavor.MaySucceed<IElement>> Read<T>(RazorViewParseRequest<T> parseRequest)
     {
         var viewPath = TypeViewLocations.Get<T>(parseRequest.RootFolder, parseRequest.ViewFolder);
 

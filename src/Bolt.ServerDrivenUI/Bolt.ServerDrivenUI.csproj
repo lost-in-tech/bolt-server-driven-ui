@@ -12,7 +12,6 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Bolt.MaySucceed" Version="0.0.1-beta04" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     </ItemGroup>

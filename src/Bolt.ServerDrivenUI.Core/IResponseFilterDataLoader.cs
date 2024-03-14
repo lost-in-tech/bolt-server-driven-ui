@@ -1,8 +1,9 @@
-﻿namespace Bolt.ServerDrivenUI.Core;
+﻿using Bolt.Endeavor;
+namespace Bolt.ServerDrivenUI.Core;
 
 public interface IResponseFilterDataLoader<in TRequest>
 {
-    Task<Bolt.MaySucceed.MaySucceed<ResponseFilterData>> Load(IRequestContext context, TRequest request, CancellationToken ct);
+    Task<MaySucceed<ResponseFilterData>> Load(IRequestContext context, TRequest request, CancellationToken ct);
     bool IsApplicable(IRequestContextReader context, TRequest request);
 }
 

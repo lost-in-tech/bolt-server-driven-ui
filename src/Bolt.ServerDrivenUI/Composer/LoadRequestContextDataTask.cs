@@ -1,17 +1,18 @@
 using Bolt.ServerDrivenUI.Core;
+using Bolt.Endeavor;
 
 namespace Bolt.ServerDrivenUI.Composer;
 
 
 internal interface ILoadRequestContextDataTask<in TRequest>
 {
-    Task<MaySucceed.MaySucceed> Execute(IRequestContext context, TRequest request, CancellationToken ct);
+    Task<Bolt.Endeavor.MaySucceed> Execute(IRequestContext context, TRequest request, CancellationToken ct);
 }
 
 internal sealed class LoadRequestContextDataTask<TRequest>(IRequestDataProvider requestDataProvider,
     IEnumerable<IRequestContextDataLoader<TRequest>> requestContextDataLoaders) : ILoadRequestContextDataTask<TRequest>
 {
-    public async Task<MaySucceed.MaySucceed> Execute(IRequestContext context, TRequest request, CancellationToken ct)
+    public async Task<Bolt.Endeavor.MaySucceed> Execute(IRequestContext context, TRequest request, CancellationToken ct)
     {
         var requestData = requestDataProvider.Get();
 
@@ -21,7 +22,7 @@ internal sealed class LoadRequestContextDataTask<TRequest>(IRequestDataProvider 
         
         await LoadContext(context, request, ct);
 
-        return MaySucceed.MaySucceed.Ok();
+        return Bolt.Endeavor.MaySucceed.Ok();
     }
     
 

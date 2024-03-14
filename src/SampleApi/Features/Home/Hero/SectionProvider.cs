@@ -1,5 +1,4 @@
 ﻿using Bolt.IocScanner.Attributes;
-using Bolt.MaySucceed;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
@@ -13,7 +12,7 @@ internal sealed class SectionProvider(IRazorXmlViewParser parser) : ScreenSectio
 {
     public override string ForSection => "hero";
 
-    public override Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
         return parser.Read<SectionProvider>(new ());
     }

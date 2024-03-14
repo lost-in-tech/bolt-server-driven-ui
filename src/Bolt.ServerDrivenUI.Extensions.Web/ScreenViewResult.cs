@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 using Bolt.Polymorphic.Serializer.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

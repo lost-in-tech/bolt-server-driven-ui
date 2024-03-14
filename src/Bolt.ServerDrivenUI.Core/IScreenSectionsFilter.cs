@@ -1,4 +1,4 @@
-using Bolt.MaySucceed;
+using Bolt.Endeavor;
 
 namespace Bolt.ServerDrivenUI.Core;
 

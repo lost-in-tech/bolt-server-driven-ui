@@ -1,4 +1,4 @@
-﻿using Bolt.MaySucceed;
+﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Microsoft.Extensions.Options;
@@ -31,7 +31,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
         return Response.Value;
     }
     
-    private async Task<MaySucceed<LayoutResponse>> ReadLayout(IRequestContextReader context, TRequest request, CancellationToken ct)
+    private async Task<Bolt.Endeavor.MaySucceed<LayoutResponse>> ReadLayout(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
         var settings = options.Value ?? new RazorLayoutProviderSettings();
         

@@ -1,11 +1,11 @@
-﻿using Bolt.MaySucceed;
+﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace Bolt.ServerDrivenUI.Core;
 
 public interface IScreenComposer<in TRequest>
 {
-    Task<MaySucceed<Screen>> Compose(TRequest request, CancellationToken ct);
+    Task<Bolt.Endeavor.MaySucceed<Screen>> Compose(TRequest request, CancellationToken ct);
 }
 
 public record Screen
