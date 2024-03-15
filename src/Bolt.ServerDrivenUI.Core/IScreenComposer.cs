@@ -24,5 +24,6 @@ public record ScreenLayout
 public record ScreenSection
 {
     public required string Name { get; init; }
+    public bool? IsLazy { get; init; }
     public required IElement Element { get; init; }
 }

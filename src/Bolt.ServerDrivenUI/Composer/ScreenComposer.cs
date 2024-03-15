@@ -14,6 +14,9 @@ internal sealed class ScreenComposer<TRequest>(
         ILoadResponseFilterDataTask<TRequest> responseFilterDataLoaderTask)
     : IScreenComposer<TRequest>
 {
+    private static readonly MaySucceed<Dictionary<string, ScreenLayout>> EmptyLayout =
+        MaySucceed<Dictionary<string, ScreenLayout>>.Ok(new Dictionary<string, ScreenLayout>());
+    
     public async Task<MaySucceed<Screen>> Compose(TRequest request, CancellationToken ct)
     {
         var contextLoadTaskRsp = await loadRequestContextDataTask.Execute(context, request, ct);
@@ -30,9 +33,13 @@ internal sealed class ScreenComposer<TRequest>(
 
         if (validationRsp.IsFailed) return validationRsp.Failure;
 
+        var requestMode = context.RequestData().Mode;
+        
         var loadSectionsTask = loadScreenBuildingBlocksTask.Execute(context, request, ct);
         var loadResponseFilterDataTask = responseFilterDataLoaderTask.Execute(context, request, ct);
-        var layoutRspTask = loadLayoutsTask.Execute(context, request, ct);
+        var layoutRspTask = requestMode == RequestMode.Default 
+            ? loadLayoutsTask.Execute(context, request, ct)
+            : Task.FromResult(EmptyLayout);
 
         await Task.WhenAll(loadResponseFilterDataTask, loadSectionsTask, layoutRspTask);
         

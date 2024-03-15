@@ -4,6 +4,7 @@ namespace Bolt.ServerDrivenUI.Core;
 
 public record RequestData
 {
+    public RequestMode Mode { get; init; } = RequestMode.Default;
     public required string RootApp { get; init; }
     public required string CorrelationId { get; init; }
     public required string App { get; init; }
@@ -62,6 +63,13 @@ public enum Platform
     Mac,
     Android,
     Ios,
+}
+
+public enum RequestMode
+{
+    Default = 0,
+    Sections = 10,
+    LazySections = 20
 }
 
 public enum Device

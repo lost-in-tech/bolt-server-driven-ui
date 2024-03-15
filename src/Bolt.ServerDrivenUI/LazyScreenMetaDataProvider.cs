@@ -8,13 +8,16 @@ public abstract class LazyScreenMetaDataProvider<TRequest> : IScreenSectionProvi
 {
     string[] IScreenSectionProvider<TRequest>.ForSections => string.IsNullOrWhiteSpace(ForSection) ? Array.Empty<string>() : new[]{ ForSection };
     
-    public virtual bool IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => true;
+    public virtual bool IsLazy(IRequestContextReader context, TRequest request) => true;
     
     async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
-        var rsp = context.RequestData().IsSectionOnlyRequest() 
+        var isLazyRequest = context.RequestData().Mode == RequestMode.LazySections
+                            && IsLazy(context, request); 
+        
+        var rsp = isLazyRequest
             ? await GetLazy(context, request, ct)
             : await Get(context, request, ct);
 

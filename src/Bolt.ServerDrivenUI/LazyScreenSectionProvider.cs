@@ -8,13 +8,17 @@ public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvid
 {
     string[] IScreenSectionProvider<TRequest>.ForSections => new[]{ ForSection };
     
-    public virtual bool IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => true;
+    public virtual bool IsLazy(IRequestContextReader context, TRequest request) => true;
     
     async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
-        var rsp = context.RequestData().IsSectionOnlyRequest() 
+        var isLazy = IsLazy(context, request);
+        var isLazyRequest = context.RequestData().Mode == RequestMode.LazySections
+                            && isLazy; 
+        
+        var rsp = isLazyRequest
             ? await GetLazy(context, request, ct)
             : await Get(context, request, ct);
 
@@ -26,6 +30,7 @@ public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvid
                 new ScreenSection
                 {
                     Element = rsp.Value,
+                    IsLazy = isLazy ? true : null,
                     Name = ForSection
                 }
             },

@@ -53,6 +53,5 @@ internal class RazorCompactLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         };
     }
 
-    public bool IsApplicable(IRequestContextReader context, TRequest request)
-        => context.RequestData().IsSectionOnlyRequest() == false;
+    public bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }

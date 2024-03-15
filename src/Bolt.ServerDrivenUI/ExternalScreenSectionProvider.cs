@@ -26,9 +26,8 @@ internal sealed class ExternalScreenSectionsRequestHeadersProvider
 
         result[keyNames.App] = app.Name;
         result[keyNames.RootApp] = requestData.RootApp;
-        result[keyNames.Id] = requestData.CorrelationId;
+        result[keyNames.CorrelationId] = requestData.CorrelationId;
         result[keyNames.Tenant] = requestData.Tenant;
-        result[keyNames.RootId] = requestData.CorrelationId;
 
         if (requestData.Device.HasValue)
         {

@@ -33,11 +33,11 @@ internal sealed class LoadScreenBuildingBlocksTask<TRequest>(IEnumerable<IScreen
             var providerRsp = task.Result;
             
             if (providerRsp.IsFailed) return providerRsp.Failure;
-                
+
             sections.AddRange(providerRsp.Value.Sections);
             metaData.AddRange(providerRsp.Value.MetaData);
         }
-
+        
         return new ScreenBuildingBlocksResponseDto
         {
             Sections = sections,

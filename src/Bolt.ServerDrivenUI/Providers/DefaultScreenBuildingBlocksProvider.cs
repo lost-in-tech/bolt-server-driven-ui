@@ -13,7 +13,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
 {
     public async Task<MaySucceed<ScreenBuildingBlocksResponseDto>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
-        var tasks = new List<Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData, IEnumerable<string> LazySectionNames)>>>();
+        var tasks = new List<Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>>>();
         var requestData = context.RequestData();
         var isSectionOnlyRequest = requestData.IsSectionOnlyRequest();
         
@@ -44,11 +44,17 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
 
             if (rsp.IsFailed) return rsp.Failure;
 
-            sections.AddRange(rsp.Value.Sections);
+            foreach (var section in rsp.Value.Sections)
+            {
+                sections.Add(section);
+                
+                if (section.IsLazy.HasValue && section.IsLazy.Value && isSectionOnlyRequest == false)
+                {
+                    lazySectionNames.Add(section.Name);
+                }
+            }
 
             metaData.AddRange(rsp.Value.MetaData);
-            
-            lazySectionNames.AddRange(rsp.Value.LazySectionNames);
         }
 
         if (lazySectionNames.Count > 0)
@@ -66,14 +72,14 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         };
     }
     
-    private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData, IEnumerable<string> LazySectionNames)>> Execute(
+    private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>> Execute(
         IScreenSectionProvider<TRequest> provider,
         IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
         if (await IsDisabled(provider.ForSections)) 
-            return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>(), Enumerable.Empty<string>());
+            return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
 
         try
         {
@@ -83,8 +89,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             {
                 return (
                     Sections: rsp.Value.Elements.Where(x => x.Element is not EmptyElement),
-                    MetaData: rsp.Value.MetaData,
-                    LazySectionNames: provider.IsLazy(context, request, ct) ? provider.ForSections : Enumerable.Empty<string>()
+                    MetaData: rsp.Value.MetaData
                 );
             }
 
@@ -110,8 +115,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         }
 
         return (Sections: Enumerable.Empty<ScreenSection>(),
-            MetaData: Enumerable.Empty<IMetaData>(),
-            LazySectionNames: Enumerable.Empty<string>());
+            MetaData: Enumerable.Empty<IMetaData>());
     }
 
     private async Task<bool> IsDisabled(string[] sectionNames)

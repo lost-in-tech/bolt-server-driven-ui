@@ -56,12 +56,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
     public bool IsApplicable(IRequestContextReader context, TRequest request)
     {
         var requestData = context.RequestData();
-        
-        if (requestData.ScreenSize is not RequestScreenSize.Compact)
-        {
-            return requestData.IsSectionOnlyRequest() == false;
-        }
 
-        return false;
+        return requestData.ScreenSize is not RequestScreenSize.Compact;
     }
 }

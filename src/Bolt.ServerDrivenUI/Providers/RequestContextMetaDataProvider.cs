@@ -15,7 +15,8 @@ internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataP
             CorrelationId = requestData.CorrelationId,
             Tenant = requestData.Tenant,
             App = requestData.App,
-            RootApp = requestData.RootApp
+            RootApp = requestData.RootApp,
+            Mode = requestData.Mode
         }.ToMaySucceedTask();
     }
 }
@@ -26,4 +27,5 @@ public record RequestContextMetaData : IMetaData
     public required string App { get; init; }
     public required string RootApp { get; init; }
     public required string Tenant { get; init; }
+    public RequestMode Mode { get; init; }
 }

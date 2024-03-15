@@ -7,8 +7,6 @@ namespace Bolt.ServerDrivenUI;
 public abstract class ScreenMetaDataProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
     string[] IScreenSectionProvider<TRequest>.ForSections => string.IsNullOrWhiteSpace(ForSection) ? Array.Empty<string>() : new[]{ ForSection };
-
-    bool IScreenSectionProvider<TRequest>.IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
     
     async Task<Bolt.Endeavor.MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,

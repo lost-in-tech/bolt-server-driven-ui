@@ -18,11 +18,11 @@ internal sealed class RequestKeyNamesProvider : IRequestKeyNamesProvider
     {
         return new RequestKeyNames
         {
+            Mode = _options.Value.Mode ?? DefaultRequestDataKeys.Mode,
             App = _options.Value.App ?? DefaultRequestDataKeys.App,
             Device = _options.Value.Device ?? DefaultRequestDataKeys.Device,
             Platform = _options.Value.Platform ?? DefaultRequestDataKeys.Platform,
-            Id = _options.Value.Id ?? DefaultRequestDataKeys.Id,
-            RootId = _options.Value.RootId ?? DefaultRequestDataKeys.RootId,
+            CorrelationId = _options.Value.CorrelationId ?? DefaultRequestDataKeys.CorrelationId,
             RootApp = _options.Value.RootApp ?? DefaultRequestDataKeys.RootApp,
             SectionNames = _options.Value.SectionNames ?? DefaultRequestDataKeys.SectionNames,
             LayoutVersionId = _options.Value.LayoutVersionId ?? DefaultRequestDataKeys.LayoutVersionId,

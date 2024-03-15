@@ -7,10 +7,10 @@ public interface IRequestKeyNamesProvider
 
 public record RequestKeyNames
 {
+    public required string Mode { get; init; }
     public required string App { get; init; }
-    public required string Id { get; init; }
+    public required string CorrelationId { get; init; }
     public required string RootApp { get; init; }
-    public required string RootId { get; init; }
     public required string Device { get; init; }
     public required string Platform { get; init; }
     public required string LayoutVersionId { get; init; }

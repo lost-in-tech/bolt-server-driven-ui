@@ -8,8 +8,6 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
 {
     string[] IScreenSectionProvider<TRequest>.ForSections => new[]{ ForSection };
     
-    bool IScreenSectionProvider<TRequest>.IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
-    
     async Task<Bolt.Endeavor.MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
