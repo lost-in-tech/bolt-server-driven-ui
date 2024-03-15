@@ -4,20 +4,20 @@ using Bolt.ServerDrivenUI.Core.Elements;
 
 namespace Bolt.ServerDrivenUI.Providers;
 
-internal sealed class RequestContextMetaDataProvider<TRequest> : ScreenMetaDataProvider<TRequest>
+internal sealed class RequestScreenContextDataProvider : IScreenContextDataProvider
 {
-    public override Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
+    public IEnumerable<(string Key, object? Value)> Get(IRequestContextReader context)
     {
         var requestData = context.RequestData();
 
-        return new RequestContextMetaData
+        yield return ("Request", new
         {
-            CorrelationId = requestData.CorrelationId,
+            Cid = requestData.CorrelationId,
             Tenant = requestData.Tenant,
             App = requestData.App,
             RootApp = requestData.RootApp,
             Mode = requestData.Mode
-        }.ToMaySucceedTask();
+        });
     }
 }
 

@@ -15,8 +15,6 @@ internal sealed class AppInfoProvider(IOptions<AppInfoSettings> options) : IAppI
     public AppInfo Get() => _instance.Value;
 }
 
-
-
 public record AppInfoSettings
 {
     public string? Name { get; init; }

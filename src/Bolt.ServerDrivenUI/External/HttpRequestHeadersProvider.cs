@@ -1,15 +1,10 @@
-﻿using Bolt.ServerDrivenUI.Core;
-using Bolt.Endeavor;
+﻿using Bolt.Endeavor;
+using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI;
+namespace Bolt.ServerDrivenUI.External;
 
-public interface IExternalScreenSectionsRequestHeadersProvider
-{
-    Dictionary<string, string> Get(IRequestContextReader context);
-}
-
-internal sealed class ExternalScreenSectionsRequestHeadersProvider
-    (IAppInfoProvider appInfoProvider, IRequestKeyNamesProvider requestKeyNamesProvider) : IExternalScreenSectionsRequestHeadersProvider
+internal sealed class HttpRequestHeadersProvider
+    (IAppInfoProvider appInfoProvider, IRequestKeyNamesProvider requestKeyNamesProvider) : IHttpRequestHeadersProvider
 {
     public Dictionary<string, string> Get(IRequestContextReader context)
     {
@@ -43,7 +38,7 @@ internal sealed class ExternalScreenSectionsRequestHeadersProvider
     }
 }
 
-public abstract class ExternalScreenSectionProvider<TRequest> : IScreenSectionProvider<TRequest>
+public abstract class HttpRequestHeadersProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
     public abstract string[] ForSections { get; }
     

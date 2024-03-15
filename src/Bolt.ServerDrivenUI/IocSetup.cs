@@ -10,6 +10,7 @@ public static class IocSetup
 {
     public static IServiceCollection AddEnsemble(this IServiceCollection source)
     {
+        source.TryAddTransient<LoadScreenContextDataProviderTask>();
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionsFilterTask<>), typeof(ScreenSectionsFilterTask<>)));
         source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadResponseFilterDataTask<>), typeof(LoadResponseFilterDataTask<>)));
         source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadScreenBuildingBlocksTask<>), typeof(LoadScreenBuildingBlocksTask<>)));
@@ -23,8 +24,9 @@ public static class IocSetup
         source.TryAddSingleton<ISectionFeatureFlag, NullSectionFeatureFlag>();
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenBuildingBlocksProvider<>), typeof(DefaultScreenBuildingBlocksProvider<>)));
         source.TryAddSingleton<IAppInfoProvider,AppInfoProvider>();
-        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(AppInfoMetaDataProvider<>)));
-        source.TryAddEnumerable(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(RequestContextMetaDataProvider<>)));
+        
+        source.TryAddEnumerable(ServiceDescriptor.Transient<IScreenContextDataProvider,AppInfoScreenContextDataProvider>());
+        source.TryAddEnumerable(ServiceDescriptor.Transient<IScreenContextDataProvider,RequestScreenContextDataProvider>());
         
         return source;
     }

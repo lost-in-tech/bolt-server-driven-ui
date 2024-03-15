@@ -10,9 +10,10 @@ public interface IScreenComposer<in TRequest>
 
 public record Screen
 {
-    public required Dictionary<string, ScreenLayout> Layouts { get; init; }
+    public required Dictionary<string, ScreenLayout>? Layouts { get; init; }
     public required IEnumerable<ScreenSection> Sections { get; init; }
-    public required IEnumerable<IMetaData> MetaData { get; init; }
+    public required Dictionary<string, object>? ContextData { get; init; }
+    public required IEnumerable<IMetaData>? MetaData { get; init; }
 }
 
 public record ScreenLayout

@@ -1,6 +1,5 @@
 ﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
-using Microsoft.Extensions.Logging;
 
 namespace Bolt.ServerDrivenUI.Composer;
 
@@ -11,7 +10,8 @@ internal sealed class ScreenComposer<TRequest>(
         ILoadLayoutsTask<TRequest> loadLayoutsTask,
         IScreenSectionsFilterTask<TRequest> screenSectionsFilterTask,
         ILoadScreenBuildingBlocksTask<TRequest> loadScreenBuildingBlocksTask,
-        ILoadResponseFilterDataTask<TRequest> responseFilterDataLoaderTask)
+        ILoadResponseFilterDataTask<TRequest> responseFilterDataLoaderTask,
+        LoadScreenContextDataProviderTask loadScreenContextDataProviderTask)
     : IScreenComposer<TRequest>
 {
     private static readonly MaySucceed<Dictionary<string, ScreenLayout>> EmptyLayout =
@@ -63,9 +63,10 @@ internal sealed class ScreenComposer<TRequest>(
 
         return new Screen
         {
-            Layouts = layoutRspTask.Result.Value,
+            Layouts = layoutRspTask.Result.Value.Count == 0 ? null : layoutRspTask.Result.Value,
             Sections = response.Sections,
-            MetaData = response.MetaData
+            MetaData = response.MetaData.Any() ? response.MetaData : null,
+            ContextData = loadScreenContextDataProviderTask.Execute(context, response.Sections)
         };
     }
 

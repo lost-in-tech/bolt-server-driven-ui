@@ -43,28 +43,11 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             var rsp = task.Result;
 
             if (rsp.IsFailed) return rsp.Failure;
-
-            foreach (var section in rsp.Value.Sections)
-            {
-                sections.Add(section);
-                
-                if (section.IsLazy.HasValue && section.IsLazy.Value && isSectionOnlyRequest == false)
-                {
-                    lazySectionNames.Add(section.Name);
-                }
-            }
-
+            
+            sections.AddRange(rsp.Value.Sections);
             metaData.AddRange(rsp.Value.MetaData);
         }
-
-        if (lazySectionNames.Count > 0)
-        {
-            metaData.Add(new LazySections
-            {
-                SectionNames = lazySectionNames
-            });
-        }
-
+        
         return new ScreenBuildingBlocksResponseDto
         {
             Sections = sections,
