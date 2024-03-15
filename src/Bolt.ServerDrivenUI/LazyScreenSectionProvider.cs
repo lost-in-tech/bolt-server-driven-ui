@@ -15,7 +15,8 @@ public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvid
         CancellationToken ct)
     {
         var isLazy = IsLazy(context, request);
-        var isLazyRequest = context.RequestData().Mode == RequestMode.LazySections
+        var requestMode = context.RequestData().Mode;
+        var isLazyRequest = requestMode == RequestMode.LazySections
                             && isLazy; 
         
         var rsp = isLazyRequest
@@ -30,7 +31,7 @@ public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvid
                 new ScreenSection
                 {
                     Element = rsp.Value,
-                    IsLazy = isLazy ? true : null,
+                    IsLazy = isLazy && requestMode != RequestMode.LazySections ? true : null,
                     Name = ForSection
                 }
             },
