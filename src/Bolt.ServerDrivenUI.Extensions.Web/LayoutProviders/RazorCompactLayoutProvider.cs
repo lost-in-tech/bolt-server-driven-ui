@@ -21,7 +21,7 @@ internal class RazorCompactLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         {
             if (Response != null) return Response.Value;
 
-            Response = await ReadLayout(context, request, ct);
+            Response = await ReadLayout(request);
         }
         finally
         {
@@ -31,7 +31,7 @@ internal class RazorCompactLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         return Response.Value;
     }
     
-    private async Task<MaySucceed<LayoutResponse>> ReadLayout(IRequestContextReader context, TRequest request, CancellationToken ct)
+    private async Task<MaySucceed<LayoutResponse>> ReadLayout(TRequest request)
     {
         var settings = options.Value ?? new RazorLayoutProviderSettings();
         

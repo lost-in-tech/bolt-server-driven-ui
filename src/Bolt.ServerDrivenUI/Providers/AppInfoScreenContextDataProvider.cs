@@ -9,7 +9,7 @@ internal sealed class AppInfoScreenContextDataProvider(
     public IEnumerable<(string Key, object? Value)> Get(IRequestContextReader context)
     {
         var appInfo = appInfoProvider.Get();
-        yield return ("App", new
+        yield return ("app", new
         {
             Name = appInfo.Name,
             Version = appInfo.Version

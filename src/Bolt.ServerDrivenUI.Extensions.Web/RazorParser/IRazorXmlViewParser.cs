@@ -25,7 +25,7 @@ public record RazorViewParseRequest
     public object? ViewModel { get; init; }
 }
 
-internal sealed class RazorXmlViewParser(RazorViewRenderer viewRenderer, IXmlSerializer xmlSerializer)
+internal sealed class RazorXmlViewParser(IRazorViewReader viewReader, IXmlSerializer xmlSerializer)
     : IRazorXmlViewParser
 {
     public async Task<MaySucceed<IElement>> Read(RazorViewParseRequest parseRequest)
@@ -47,11 +47,11 @@ internal sealed class RazorXmlViewParser(RazorViewRenderer viewRenderer, IXmlSer
     private Task<string> RenderViewFromSource(RazorViewParseRequest parseRequest)
     {
         var path = parseRequest.ViewPath;
-        return viewRenderer.RenderAsync(path, parseRequest.ViewModel ?? new object());
+        return viewReader.Read(path, parseRequest.ViewModel ?? new object());
     }
 
     private const string DefaultViewName = "Index";
-    public Task<Bolt.Endeavor.MaySucceed<IElement>> Read<T>(RazorViewParseRequest<T> parseRequest)
+    public Task<MaySucceed<IElement>> Read<T>(RazorViewParseRequest<T> parseRequest)
     {
         var viewPath = TypeViewLocations.Get<T>(parseRequest.RootFolder, parseRequest.ViewFolder);
 

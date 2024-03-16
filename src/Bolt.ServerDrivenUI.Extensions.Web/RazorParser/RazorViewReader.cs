@@ -10,15 +10,24 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 
-internal sealed class RazorViewRenderer(IRazorViewEngine viewEngine,
+public interface IRazorViewReader
+{
+    Task<string> Read<T>(
+        string viewPath,
+        T? model,
+        CancellationToken cancellationToken = default
+    ) where T : class;
+}
+
+internal sealed class RazorViewReader(IRazorViewEngine viewEngine,
     ITempDataProvider tempDataProvider,
-    IServiceProvider serviceProvider)
+    IServiceProvider serviceProvider) : IRazorViewReader
 {
     private readonly IRazorViewEngine _viewEngine = viewEngine ?? throw new ArgumentNullException(nameof(viewEngine));
     private readonly ITempDataProvider _tempDataProvider = tempDataProvider ?? throw new ArgumentNullException(nameof(tempDataProvider));
     private readonly IServiceProvider _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
-    public async Task<string> RenderAsync<T>(
+    public async Task<string> Read<T>(
         string viewPath,
         T? model,
         CancellationToken cancellationToken = default

@@ -2,7 +2,7 @@
 
 namespace Bolt.ServerDrivenUI;
 
-public interface IScreenContextDataProvider
+internal interface IScreenContextDataProvider
 {
     IEnumerable<(string Key, object? Value)> Get(IRequestContextReader context);
 }

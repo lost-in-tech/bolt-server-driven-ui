@@ -10,7 +10,7 @@ internal sealed class RequestScreenContextDataProvider : IScreenContextDataProvi
     {
         var requestData = context.RequestData();
 
-        yield return ("Request", new
+        yield return ("request", new
         {
             Cid = requestData.CorrelationId,
             Tenant = requestData.Tenant,
