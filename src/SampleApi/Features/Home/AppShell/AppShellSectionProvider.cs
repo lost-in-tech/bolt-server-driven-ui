@@ -8,7 +8,7 @@ namespace SampleApi.Features.Home.AppShell;
 [AutoBind]
 internal class AppShellSectionProvider(IExternalScreenProvider externalScreenProvider) : ExternalSectionProvider<HomePageRequest>
 {
-    public override string[] ForSections => new[] { "top-nav" };
+    public override string[] ForSections => new[] { "top-nav", "footer", "member-status" };
     protected override Task<MaySucceed<Screen>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
         return externalScreenProvider.Get(context, new ExternalScreenRequest
