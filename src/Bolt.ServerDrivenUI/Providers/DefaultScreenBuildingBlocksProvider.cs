@@ -71,7 +71,7 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             if (rsp.IsSucceed)
             {
                 return (
-                    Sections: rsp.Value.Elements.Where(x => x.Element is not EmptyElement),
+                    Sections: rsp.Value.Sections.Where(x => x.Element is not EmptyElement),
                     MetaData: rsp.Value.MetaData
                 );
             }

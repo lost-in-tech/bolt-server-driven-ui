@@ -3,7 +3,7 @@ using Bolt.Endeavor;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
-using SampleApi.Elements;
+using Sample.Elements;
 
 namespace SampleApi.Features.Home;
 

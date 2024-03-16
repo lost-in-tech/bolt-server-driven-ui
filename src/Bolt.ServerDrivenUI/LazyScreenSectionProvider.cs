@@ -27,7 +27,7 @@ public abstract class LazyScreenSectionProvider<TRequest> : IScreenSectionProvid
 
         return new ScreenSectionResponse
         {
-            Elements = rsp.Value is EmptyElement ? Enumerable.Empty<ScreenSection>() : new [] { 
+            Sections = rsp.Value is EmptyElement ? Enumerable.Empty<ScreenSection>() : new [] { 
                 new ScreenSection
                 {
                     Element = rsp.Value,

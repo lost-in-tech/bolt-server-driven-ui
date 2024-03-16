@@ -1,7 +1,6 @@
-﻿using Bolt.Endeavor;
-using Bolt.ServerDrivenUI.Core;
+﻿using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI.External;
+namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
 internal sealed class HttpRequestHeadersProvider
     (IAppInfoProvider appInfoProvider, IRequestKeyNamesProvider requestKeyNamesProvider) : IHttpRequestHeadersProvider
@@ -36,18 +35,5 @@ internal sealed class HttpRequestHeadersProvider
 
         return result;
     }
-}
-
-public abstract class HttpRequestHeadersProvider<TRequest> : IScreenSectionProvider<TRequest>
-{
-    public abstract string[] ForSections { get; }
-    
-    public virtual bool IsLazy(IRequestContextReader context, TRequest request, CancellationToken ct) => false;
-    public Task<MaySucceed<ScreenSectionResponse>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
-    {
-        throw new NotImplementedException();
-    }
-
-    public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }
 

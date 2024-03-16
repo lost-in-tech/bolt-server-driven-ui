@@ -1,6 +1,6 @@
 using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI.External;
+namespace Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
 public interface IHttpRequestHeadersProvider
 {

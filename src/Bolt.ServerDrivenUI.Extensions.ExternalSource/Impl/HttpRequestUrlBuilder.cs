@@ -1,11 +1,6 @@
 ﻿using System.Text;
 
-namespace Bolt.ServerDrivenUI.External;
-
-public interface IHttpRequestUrlBuilder
-{
-    public string Build(string url,  IEnumerable<(string Key, string? Value)>? queryStrings = null);
-}
+namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
 internal sealed class HttpRequestUrlBuilder(
         IEnumerable<IHttpQueryStringProvider> queryStringProviders) 
@@ -21,7 +16,7 @@ internal sealed class HttpRequestUrlBuilder(
 
         var sb = new StringBuilder(urlParts[0]);
         
-        return AppendQueryString(sb, urlParts.Length > 0 ? urlParts[1] : string.Empty, queryStrings);
+        return AppendQueryString(sb, urlParts.Length > 1 ? urlParts[1] : string.Empty, queryStrings);
     }
     
     private string AppendQueryString(StringBuilder sb, string existing, IEnumerable<(string Key, string? Value)>? queryStrings)
@@ -70,12 +65,12 @@ internal sealed class HttpRequestUrlBuilder(
                     {
                         sb.Append(CharAmpersand);
                     }
-                    else if (hasExisting == false)
+                    else if (hasExisting)
                     {
                         sb.Append(CharAmpersand);
                     }
-                    
-                    sb.Append(item.Key).Append(CharEqual).Append(Uri.EscapeDataString(item.Value)).Append(CharAmpersand);
+
+                    sb.Append(item.Key).Append(CharEqual).Append(Uri.EscapeDataString(item.Value));
                     
                     total++;
                 }

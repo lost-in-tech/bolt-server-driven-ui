@@ -1,11 +1,6 @@
 ﻿using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI.External;
-
-public interface IHttpQueryStringProvider
-{
-    public IEnumerable<(string Key, string? Value)> Get();
-}
+namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
 internal sealed class HttpQueryStringProvider(
         IRequestContextReader context,
@@ -25,8 +20,8 @@ internal sealed class HttpQueryStringProvider(
         }
 
         var mode = requestData.Mode == RequestMode.Default 
-                        ? RequestMode.Sections 
-                        : requestData.Mode; 
+            ? RequestMode.Sections 
+            : requestData.Mode; 
 
         yield return (keyNames.Mode, 
             mode.ToString());

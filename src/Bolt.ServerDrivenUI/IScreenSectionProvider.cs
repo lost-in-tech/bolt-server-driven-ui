@@ -13,6 +13,6 @@ public interface IScreenSectionProvider<in TRequest>
 
 public record ScreenSectionResponse
 {
-    public required IEnumerable<ScreenSection> Elements { get; init; }
+    public required IEnumerable<ScreenSection> Sections { get; init; }
     public required IEnumerable<IMetaData> MetaData { get; init; }
 }

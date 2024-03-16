@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj" />
+      <ProjectReference Include="..\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj" />
       <ProjectReference Include="..\Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj" />
     </ItemGroup>
 

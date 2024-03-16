@@ -2,6 +2,7 @@ using System.Reflection;
 using Bolt.Polymorphic.Serializer;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Extensions.ExternalSource;
 using Bolt.ServerDrivenUI.Extensions.Web.LayoutProviders;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ public record EnsembleOptions
 
 public static class IocSetup
 {
-    public static IServiceCollection AddEnsemble(this IServiceCollection source, IConfiguration configuration, EnsembleOptions? options = null)
+    public static IServiceCollection AddServerDrivenUiForWeb(this IServiceCollection source, IConfiguration configuration, EnsembleOptions? options = null)
     {
         options ??= new EnsembleOptions();
 
@@ -31,6 +32,8 @@ public static class IocSetup
             source.TryAddTransient<ISectionFeatureFlag, SectionFeatureFlag>();
         }
 
+        source.AddServerDrivenUiExternalSource();
+        
         source.Configure<RazorLayoutProviderSettings>(settings =>
             configuration.GetSection(options.RazorLayoutSettingsSectionName).Bind(settings));
         
@@ -39,7 +42,7 @@ public static class IocSetup
         
         source.TryAddSingleton<IAppInfoProvider, AppInfoProvider>();
 
-        source.AddEnsemble();
+        source.AddServerDrivenUi();
         
         source.AddHttpContextAccessor();
         source.AddRazorPages();

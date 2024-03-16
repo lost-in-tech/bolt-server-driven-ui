@@ -25,7 +25,7 @@ public abstract class LazyScreenMetaDataProvider<TRequest> : IScreenSectionProvi
 
         return new ScreenSectionResponse
         {
-            Elements = Enumerable.Empty<ScreenSection>(),
+            Sections = Enumerable.Empty<ScreenSection>(),
             MetaData = rsp.Value
         };
     }

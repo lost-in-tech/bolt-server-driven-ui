@@ -9,18 +9,11 @@ public interface IScreenViewResultComposer
     public Task<IActionResult> Compose<TRequest>(TRequest request, CancellationToken ct);
 }
 
-internal sealed class ScreenViewResultComposer : IScreenViewResultComposer
+internal sealed class ScreenViewResultComposer(IServiceProvider serviceProvider) : IScreenViewResultComposer
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    public ScreenViewResultComposer(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-    
     public async Task<IActionResult> Compose<TRequest>(TRequest request, CancellationToken ct)
     {
-        var composer = _serviceProvider.GetRequiredService<IScreenComposer<TRequest>>();
+        var composer = serviceProvider.GetRequiredService<IScreenComposer<TRequest>>();
 
         var rsp = await composer.Compose(request, ct);
 

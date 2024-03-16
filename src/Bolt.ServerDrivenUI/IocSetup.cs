@@ -8,7 +8,7 @@ namespace Bolt.ServerDrivenUI;
 
 public static class IocSetup
 {
-    public static IServiceCollection AddEnsemble(this IServiceCollection source)
+    public static IServiceCollection AddServerDrivenUi(this IServiceCollection source)
     {
         source.TryAddTransient<LoadScreenContextDataProviderTask>();
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionsFilterTask<>), typeof(ScreenSectionsFilterTask<>)));

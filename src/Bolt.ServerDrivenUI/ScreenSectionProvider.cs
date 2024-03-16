@@ -18,7 +18,7 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
 
         return new ScreenSectionResponse
         {
-            Elements = rsp.Value is EmptyElement ? Enumerable.Empty<ScreenSection>() : new [] { 
+            Sections = rsp.Value is EmptyElement ? Enumerable.Empty<ScreenSection>() : new [] { 
                 new ScreenSection
                 {
                     Element = rsp.Value,

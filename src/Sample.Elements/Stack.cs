@@ -1,6 +1,6 @@
 ﻿using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace SampleApi.Elements;
+namespace Sample.Elements;
 
 public record Stack : IElement, IHaveElements
 {
