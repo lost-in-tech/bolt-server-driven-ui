@@ -12,12 +12,13 @@ internal sealed class HelloWorldProvider : ScreenSectionProvider<HomePageRequest
 {
     public override string ForSection => "hello-world";
 
-    public override Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override async Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
+        await Task.Delay(TimeSpan.FromMilliseconds(200), ct);
         return new Paragraph
         {
             Text = "Hello world"
-        }.ToMaySucceedTask();
+        }.ToMaySucceed();
     }
 }
 
@@ -25,11 +26,13 @@ internal sealed class HelloWorldProvider : ScreenSectionProvider<HomePageRequest
 internal sealed class HelloJupiterProvider : ScreenSectionProvider<HomePageRequest>
 {
     public override string ForSection =>  "hello-jupiter";
-    public override Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    public override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
+        await Task.Delay(TimeSpan.FromMilliseconds(200), ct);
+        
         return new Paragraph
         {
             Text = "Hello Jupiter"
-        }.ToMaySucceedTask();
+        }.ToMaySucceed();
     }
 }

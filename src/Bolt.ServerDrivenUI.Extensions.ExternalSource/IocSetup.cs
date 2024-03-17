@@ -12,7 +12,7 @@ public static class IocSetup
         source.AddHttpClient();
         source.TryAddEnumerable(ServiceDescriptor.Transient<IExternalScreenProvider, ExternalScreenProvider>());
         
-        source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpRequestUrlBuilder, HttpRequestUrlBuilder>());
+        source.TryAdd(ServiceDescriptor.Singleton<IHttpRequestUrlBuilder, HttpRequestUrlBuilder>());
         source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpRequestHeadersProvider, HttpRequestHeadersProvider>());
         source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpQueryStringProvider, HttpQueryStringProvider>());
         source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpRequestMessageBuilder, HttpRequestMessageBuilder>());

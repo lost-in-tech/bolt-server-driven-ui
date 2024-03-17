@@ -1,7 +1,17 @@
-﻿@model SampleApi.Features.Home.HomePageRequest
+﻿@using Sample.Elements
+@model SampleApi.Features.Home.HomePageRequest
 
-<Stack>
+<Stack Direction="@Direction.Vertical">
     <Elements>
+        <Stack>
+            <Elements>
+                <Placeholder>
+                    <Sections>
+                        <Value>top-nav</Value>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Stack>
         <Paragraph Text="Testing"></Paragraph>
         <Stack>
             <Elements>
@@ -9,6 +19,15 @@
                     <Sections>
                         <Value>hello-jupiter</Value>
                         <Value>hello-world</Value>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Stack>
+        <Stack>
+            <Elements>
+                <Placeholder>
+                    <Sections>
+                        <Value>footer</Value>
                     </Sections>
                 </Placeholder>
             </Elements>

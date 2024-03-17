@@ -5,7 +5,7 @@ using Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
 namespace SampleApi.Features.Home.AppShell;
 
-[AutoBind]
+//[AutoBind]
 internal class AppShellSectionProvider(IExternalScreenProvider externalScreenProvider) : ExternalSectionProvider<HomePageRequest>
 {
     public override string[] ForSections => new[] { "top-nav", "footer", "member-status" };

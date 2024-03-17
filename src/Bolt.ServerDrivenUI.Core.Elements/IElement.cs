@@ -5,5 +5,3 @@ public interface IElement
 }
 
 public abstract class Element : IElement { }
-
-public class EmptyElement : IElement{}

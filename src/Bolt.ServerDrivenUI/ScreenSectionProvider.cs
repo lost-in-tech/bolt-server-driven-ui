@@ -40,8 +40,7 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
 
 public static class Element
 {
-    private static EmptyElement _none = new EmptyElement();
-    public static EmptyElement None => _none;
+    public static IElement None { get; } = EmptyElement.Instance;
 
     public static Task<MaySucceed<IElement>> ToMaySucceedTask(this IElement element) =>
         Task.FromResult(MaySucceed<IElement>.Ok(element));
