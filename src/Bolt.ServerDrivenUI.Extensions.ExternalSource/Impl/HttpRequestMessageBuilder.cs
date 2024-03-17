@@ -1,6 +1,6 @@
 ﻿using Bolt.ServerDrivenUI.Core;
 
-namespace Bolt.ServerDrivenUI.Extensions.ExternalSource;
+namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
 internal sealed class HttpRequestMessageBuilder(
         IHttpRequestUrlBuilder requestUrlBuilder,
