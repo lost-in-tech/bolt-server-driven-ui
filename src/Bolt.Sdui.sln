@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Core.Elements", "Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj", "{404F30AE-F294-4823-8DEA-04EDE315DF6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Core.Elements", "src\Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj", "{404F30AE-F294-4823-8DEA-04EDE315DF6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE73B924-F518-48C3-8694-76958B56FEDB}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,21 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D4E83B51-4B7E-423F-8661-05C196D85ACE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.TestHelpers", "Bolt.ServerDrivenUI.TestHelpers\Bolt.ServerDrivenUI.TestHelpers.csproj", "{8363599D-89F7-476F-8FDB-218DCE716CBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.TestHelpers", "tests\Bolt.ServerDrivenUI.TestHelpers\Bolt.ServerDrivenUI.TestHelpers.csproj", "{8363599D-89F7-476F-8FDB-218DCE716CBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Core", "Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj", "{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Core", "src\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj", "{9F102910-B9B4-4381-AD1D-C7EDA4E035DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI", "Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj", "{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI", "src\Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj", "{8D20A4B0-7FCF-472F-A7B2-ECD11B8391AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.Web", "Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj", "{92915D53-3020-47D9-B082-0F7FB39F494F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.Web", "src\Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj", "{92915D53-3020-47D9-B082-0F7FB39F494F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "SampleApi\SampleApi.csproj", "{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "samples\SampleApi\SampleApi.csproj", "{B4F58E37-5B90-40D6-9223-1B8E1756E2B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.ExternalSource", "Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj", "{66F46B66-5997-4ECE-BCC5-27F22D433901}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.ExternalSource", "src\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj", "{66F46B66-5997-4ECE-BCC5-27F22D433901}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi2", "SampleApi2\SampleApi2.csproj", "{EE0E5784-3537-4903-8EA3-C756D792A8AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi2", "samples\SampleApi2\SampleApi2.csproj", "{EE0E5784-3537-4903-8EA3-C756D792A8AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Elements", "Sample.Elements\Sample.Elements.csproj", "{AB9AD8C5-A14D-47B2-B6BA-1AE4118686E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Elements", "samples\Sample.Elements\Sample.Elements.csproj", "{AB9AD8C5-A14D-47B2-B6BA-1AE4118686E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
