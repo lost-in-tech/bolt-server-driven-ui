@@ -13,6 +13,7 @@ public static class ServiceScopeExtensions
         var rsp = scope.ServiceProvider.GetRequiredService<T>();
 
         if (!clearReceivedCalls) return rsp;
+        
 
         rsp.ClearReceivedCalls();
         rsp.ClearSubstitute();
