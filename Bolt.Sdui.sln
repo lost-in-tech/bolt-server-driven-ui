@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{A039127C-513
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.ExternalSource.Tests", "tests\Bolt.ServerDrivenUI.Extensions.ExternalSource.Tests\Bolt.ServerDrivenUI.Extensions.ExternalSource.Tests.csproj", "{F35F0B8B-167E-4AB2-93F7-B64062E22E4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Tests", "tests\Bolt.ServerDrivenUI.Tests\Bolt.ServerDrivenUI.Tests.csproj", "{B7470F77-9055-40EB-9822-06D52380256D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{F35F0B8B-167E-4AB2-93F7-B64062E22E4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F35F0B8B-167E-4AB2-93F7-B64062E22E4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F35F0B8B-167E-4AB2-93F7-B64062E22E4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7470F77-9055-40EB-9822-06D52380256D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7470F77-9055-40EB-9822-06D52380256D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7470F77-9055-40EB-9822-06D52380256D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7470F77-9055-40EB-9822-06D52380256D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +101,7 @@ Global
 		{66F46B66-5997-4ECE-BCC5-27F22D433901} = {A039127C-5132-42CC-9DA0-24EC99370D25}
 		{92915D53-3020-47D9-B082-0F7FB39F494F} = {A039127C-5132-42CC-9DA0-24EC99370D25}
 		{F35F0B8B-167E-4AB2-93F7-B64062E22E4E} = {D4E83B51-4B7E-423F-8661-05C196D85ACE}
+		{B7470F77-9055-40EB-9822-06D52380256D} = {D4E83B51-4B7E-423F-8661-05C196D85ACE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E2CBC43-2680-410C-8B9E-C96D9E9D9BCC}

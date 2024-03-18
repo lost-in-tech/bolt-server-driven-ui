@@ -1,20 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Bolt.Common.Extensions" Version="5.0.1"/>
-    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.0"/>
