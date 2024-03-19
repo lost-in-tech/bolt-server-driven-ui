@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj" />
+      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj" />
+      <ProjectReference Include="..\Sample.Elements\Sample.Elements.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Bolt.Polymorphic.Serializer" Version="1.0.0-beta02" />
+    </ItemGroup>
+</Project>

@@ -7,7 +7,7 @@ using Sample.Elements;
 
 namespace SampleApi.Features.Home.Notifications;
 
-[AutoBind]
+//[AutoBind]
 internal class NotificationSectionProvider : LazyScreenSectionProvider<HomePageRequest>
 {
     protected override string ForSection => "Notifications";

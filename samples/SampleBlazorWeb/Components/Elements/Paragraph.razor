@@ -1,0 +1,10 @@
+﻿@using Bolt.ServerDrivenUI.Core.Elements
+@{
+    var element = Data as Sample.Elements.Paragraph; 
+}
+<p>@element?.Text</p>
+
+@code {
+    [Parameter]
+    public required IElement Data { get; set; }
+}

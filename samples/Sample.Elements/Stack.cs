@@ -4,7 +4,8 @@ namespace Sample.Elements;
 
 public record Stack : IElement, IHaveElements
 {
-    public Direction? Direction { get; set; }
+    public Responsive<Direction?>? Direction { get; set; }
+    public Responsive<Gap?>? Gap { get; set; }
     public IElement[]? Elements { get; set; }
 }
 

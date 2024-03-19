@@ -1,11 +1,14 @@
 ﻿@using Sample.Elements
 @model SampleApi.Features.Home.HomePageRequest
 
-<Stack Direction="@Direction.Vertical">
+<Stack>
+    <Direction 
+        Xs="@Direction.Vertical" 
+        Sm="@Direction.Horizontal"/>
     <Elements>
         <Stack>
             <Elements>
-                <Placeholder>
+                <Placeholder Name="top-nav">
                     <Sections>
                         <Value>top-nav</Value>
                     </Sections>
@@ -14,8 +17,11 @@
         </Stack>
         <Paragraph Text="Testing"></Paragraph>
         <Stack>
+            <Direction Xs="@Direction.Vertical"/>
+            <Gap Xs="@Gap.Sixteen"/>
             <Elements>
-                <Placeholder>
+                <Heading Text="Heading 1"></Heading>
+                <Placeholder Name="body">
                     <Sections>
                         <Value>hello-jupiter</Value>
                         <Value>hello-world</Value>
@@ -25,7 +31,7 @@
         </Stack>
         <Stack>
             <Elements>
-                <Placeholder>
+                <Placeholder Name="footer">
                     <Sections>
                         <Value>footer</Value>
                     </Sections>

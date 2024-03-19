@@ -1,0 +1,32 @@
+﻿@using Bolt.ServerDrivenUI.Core.Elements
+@using Sample.Elements
+
+@{
+    if (Data is not Sample.Elements.Stack elm)
+    {
+        return;
+    }
+
+    var css = $"stack {(elm.Direction?.Xs is Direction.Horizontal ?  "horizontal" : "vertical")}";
+}
+
+
+<div class=@css>
+    @if (elm.Elements != null)
+    {
+        foreach (var stackElement in elm.Elements)
+        {
+            <RenderElement Element=@stackElement Sections=@Sections/>
+        }
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public required IElement Data { get; set; }
+
+    [Parameter]
+    public required Dictionary<string, IElement> Sections { get; set; }
+
+}

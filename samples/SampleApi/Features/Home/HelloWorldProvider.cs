@@ -14,7 +14,6 @@ internal sealed class HelloWorldProvider : ScreenSectionProvider<HomePageRequest
 
     public override async Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
-        await Task.Delay(TimeSpan.FromMilliseconds(200), ct);
         return new Paragraph
         {
             Text = "Hello world"
@@ -28,8 +27,6 @@ internal sealed class HelloJupiterProvider : ScreenSectionProvider<HomePageReque
     public override string ForSection =>  "hello-jupiter";
     public override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
-        await Task.Delay(TimeSpan.FromMilliseconds(200), ct);
-        
         return new Paragraph
         {
             Text = "Hello Jupiter"
