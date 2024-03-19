@@ -25,6 +25,6 @@ jobs:
       - name: Test
         run: dotnet test ./Bolt.Sdui.sln --no-restore --verbosity normal
       - name: Pack
-        run: dotnet pack ./Bolt.Sdui.sln -c Release --no-build --output ../nupkgs
+        run: dotnet pack ./Bolt.Sdui.sln -c Release --no-build --output ./nupkgs
       - name: Publish
-        run: dotnet nuget push ../nupkgs/**.nupkg -s https://www.nuget.org/api/v2/package/ -k ${{ secrets.nugetkey }} --skip-duplicate
+        run: dotnet nuget push nupkgs/**.nupkg -s https://www.nuget.org/api/v2/package/ -k ${{ secrets.nugetkey }} --skip-duplicate
