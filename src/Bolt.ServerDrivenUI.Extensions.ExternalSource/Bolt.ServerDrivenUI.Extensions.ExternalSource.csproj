@@ -5,7 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Authors>Mohammad Ruhul Amin</Authors>
-        <Version>0.0.01-beta</Version>
+        <Version>0.0.02-beta</Version>
+        <PackageId>Bolt.ServerDrivenUI.Extensions.ExternalSource</PackageId>
         <PackageTags>Server Driven UI; SDUI</PackageTags>
     </PropertyGroup>
 

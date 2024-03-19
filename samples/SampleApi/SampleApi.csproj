@@ -10,17 +10,18 @@
 
     <ItemGroup>
         <PackageReference Include="Bolt.IocScanner" Version="3.0.1" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.Web" Version="0.0.1-beta" />
+        <PackageReference Include="Bolt.ServerDrivenUI" Version="0.0.1-beta" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Core" Version="0.0.1-beta" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Core.Elements" Version="0.0.1-beta" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.ExternalSource" Version="0.0.1-beta" />
+        
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj" />
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj" />
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj" />
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj" />
-    <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj" />
       <ProjectReference Include="..\Sample.Elements\Sample.Elements.csproj" />
     </ItemGroup>
 
