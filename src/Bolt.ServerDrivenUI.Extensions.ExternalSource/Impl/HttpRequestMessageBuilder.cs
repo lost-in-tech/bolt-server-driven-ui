@@ -8,18 +8,15 @@ internal sealed class HttpRequestMessageBuilder(
         IRequestContextReader requestContext) 
     : IHttpRequestMessageBuilder
 {
-    public HttpRequestMessage Build(HttpMethod httpMethod,
-        string url, 
-        IEnumerable<(string Key, string? Value)>? queryStrings,
-        IEnumerable<(string Key, string? Value)>? headers)
+    public HttpRequestMessage Build(RequestMessageBuilderInput input)
     {
-        var urlWithQuery = requestUrlBuilder.Build(url, queryStrings);
+        var urlWithQuery = requestUrlBuilder.Build(input.Path, input.QueryStrings);
         
-        var msg = AppendHeaders(new HttpRequestMessage(httpMethod, urlWithQuery));
+        var msg = AppendHeaders(new HttpRequestMessage(input.Method, urlWithQuery));
 
-        if (headers == null) return msg;
+        if (input.Headers == null) return msg;
         
-        foreach (var header in headers)
+        foreach (var header in input.Headers)
         {
             if(header.Value == null) continue;
                 

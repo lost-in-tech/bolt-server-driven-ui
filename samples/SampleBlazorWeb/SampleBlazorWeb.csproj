@@ -8,8 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj" />
-      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.Web" Version="0.0.2-beta" />
       <ProjectReference Include="..\Sample.Elements\Sample.Elements.csproj" />
     </ItemGroup>
 

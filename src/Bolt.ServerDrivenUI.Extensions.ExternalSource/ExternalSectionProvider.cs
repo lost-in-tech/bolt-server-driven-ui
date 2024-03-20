@@ -9,7 +9,10 @@ public abstract class ExternalSectionProvider<TRequest> : IScreenSectionProvider
 {
     public abstract string[] ForSections { get; }
     
-    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context, TRequest request, CancellationToken ct)
+    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(
+        IRequestContextReader context, 
+        TRequest request, 
+        CancellationToken ct)
     {
         var rsp = await Get(context, request, ct);
 

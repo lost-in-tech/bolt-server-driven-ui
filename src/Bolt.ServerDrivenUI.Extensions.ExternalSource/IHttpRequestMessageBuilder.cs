@@ -4,7 +4,14 @@ namespace Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
 public interface IHttpRequestMessageBuilder
 {
-    HttpRequestMessage Build(HttpMethod method, string url, 
-        IEnumerable<(string Key, string? Value)>? queryStrings = null,
-        IEnumerable<(string Key, string? Value)>? headers = null);
+    HttpRequestMessage Build(RequestMessageBuilderInput input);
+}
+
+
+public record RequestMessageBuilderInput
+{
+    public required HttpMethod Method { get; init; } = HttpMethod.Get;
+    public required string Path { get; init; }
+    public IEnumerable<(string Key, string? Value)>? QueryStrings { get; init; } 
+    public IEnumerable<(string Key, string? Value)>? Headers { get; init; }
 }

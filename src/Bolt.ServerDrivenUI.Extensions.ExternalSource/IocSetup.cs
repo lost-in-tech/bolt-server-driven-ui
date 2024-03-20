@@ -9,7 +9,9 @@ public static class IocSetup
 {
     public static IServiceCollection AddServerDrivenUiExternalSource(this IServiceCollection source)
     {
+        
         source.AddHttpClient();
+        source.TryAddSingleton<IHttpClientWrap, HttpClientWrap>();
         source.TryAddEnumerable(ServiceDescriptor.Transient<IExternalScreenProvider, ExternalScreenProvider>());
         
         source.TryAdd(ServiceDescriptor.Transient<IHttpRequestUrlBuilder, HttpRequestUrlBuilder>());

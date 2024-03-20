@@ -1,0 +1,38 @@
+﻿{
+  "method": {
+    "method": "GET"
+  },
+  "headers": [
+    {
+      "key": "header-provider-1.1",
+      "value": [
+        "1.1"
+      ]
+    },
+    {
+      "key": "header-provider-1.2",
+      "value": [
+        "1.2"
+      ]
+    },
+    {
+      "key": "header-provider-2.1",
+      "value": [
+        "2.1"
+      ]
+    },
+    {
+      "key": "header-provider-2.2",
+      "value": [
+        "2.2"
+      ]
+    },
+    {
+      "key": "one",
+      "value": [
+        "1"
+      ]
+    }
+  ],
+  "originalString": "/path?_qs=default"
+}

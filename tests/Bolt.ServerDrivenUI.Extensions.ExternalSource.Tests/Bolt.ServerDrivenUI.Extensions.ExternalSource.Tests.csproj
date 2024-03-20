@@ -10,6 +10,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj" />
+      <ProjectReference Include="..\Bolt.ServerDrivenUI.TestHelpers\Bolt.ServerDrivenUI.TestHelpers.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -12,13 +12,10 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.Web" Version="0.0.2-beta" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core.Elements\Bolt.ServerDrivenUI.Core.Elements.csproj" />
-        <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Core\Bolt.ServerDrivenUI.Core.csproj" />
-        <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj" />
-        <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj" />
         <ProjectReference Include="..\Sample.Elements\Sample.Elements.csproj" />
     </ItemGroup>
 

@@ -7,17 +7,19 @@ using Bolt.ServerDrivenUI.Core;
 
 namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
-internal sealed class ExternalScreenProvider(IHttpClientFactory httpClientFactory,
+internal sealed class ExternalScreenProvider(IHttpClientWrap httpClientWrap,
     IHttpRequestMessageBuilder messageBuilder,
     IJsonSerializer jsonSerializer) : IExternalScreenProvider
 {
     public async Task<MaySucceed<Screen>> Get(IRequestContextReader context, ExternalScreenRequest request, CancellationToken ct)
     {
-        var client = httpClientFactory.CreateClient(request.ServiceName);
-
-        using var msg = messageBuilder.Build(request.Method, request.Path, 
-            request.QueryStrings,
-            request.Headers);
+        using var msg = messageBuilder.Build(new()
+            {
+                Method = request.Method,
+                Path = request.Path,
+                QueryStrings = request.QueryStrings,
+                Headers = request.Headers
+            });
 
         if (request.Content != null)
         {
@@ -26,7 +28,7 @@ internal sealed class ExternalScreenProvider(IHttpClientFactory httpClientFactor
                 new MediaTypeHeaderValue("application/json"));
         }
         
-        using var rsp = await client.SendAsync(msg, HttpCompletionOption.ResponseHeadersRead, ct);
+        using var rsp = await httpClientWrap.SendAsync(request.ServiceName, msg,ct);
         
         if (rsp.IsSuccessStatusCode)
         {

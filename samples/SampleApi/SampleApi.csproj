@@ -10,11 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="Bolt.IocScanner" Version="3.0.1" />
-        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.Web" Version="0.0.1-beta" />
-        <PackageReference Include="Bolt.ServerDrivenUI" Version="0.0.1-beta" />
-        <PackageReference Include="Bolt.ServerDrivenUI.Core" Version="0.0.1-beta" />
-        <PackageReference Include="Bolt.ServerDrivenUI.Core.Elements" Version="0.0.1-beta" />
-        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.ExternalSource" Version="0.0.1-beta" />
+        <PackageReference Include="Bolt.ServerDrivenUI.Extensions.Web" Version="0.0.2-beta" />
         
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2"/>
         <PackageReference Include="Microsoft.FeatureManagement.AspNetCore" Version="3.2.0" />
