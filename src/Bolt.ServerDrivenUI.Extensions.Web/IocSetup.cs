@@ -15,9 +15,9 @@ public record EnsembleOptions
 {
     public (Assembly Assembly, Type[] Types)[] TypesToScan { get; init; } = Array.Empty<(Assembly, Type[])>();
     public bool EnableFeatureFlag { get; init; } = false;
-    public string FeatureFlagSectionName { get; init; } = "Bolt.ServerDrivenUI:FeatureFlags";
-    public string RazorLayoutSettingsSectionName { get; init; } = "Bolt.ServerDrivenUI:RazorLayoutSettings";
-    public string AppInfoSettingsSectionName { get; init; } = "Bolt.ServerDrivenUI:App";
+    public string FeatureFlagSectionName { get; init; } = "Bolt:ServerDrivenUI:FeatureFlags";
+    public string RazorLayoutSettingsSectionName { get; init; } = "Bolt:ServerDrivenUI:RazorLayoutSettings";
+    public string AppInfoSettingsSectionName { get; init; } = "Bolt:ServerDrivenUI:App";
 }
 
 public static class IocSetup
@@ -32,7 +32,7 @@ public static class IocSetup
             source.TryAddTransient<ISectionFeatureFlag, SectionFeatureFlag>();
         }
 
-        source.AddServerDrivenUiExternalSource();
+        source.AddServerDrivenUiExternalSource(configuration);
         
         source.Configure<RazorLayoutProviderSettings>(settings =>
             configuration.GetSection(options.RazorLayoutSettingsSectionName).Bind(settings));

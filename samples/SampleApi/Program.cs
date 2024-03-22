@@ -41,6 +41,12 @@ builder.Services.AddHttpClient("api-sample2", client =>
     client.Timeout = TimeSpan.FromMilliseconds(500);
 });
 
+builder.Services.AddHttpClient("api-sample2", client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5134");
+    client.Timeout = TimeSpan.FromMilliseconds(1000);
+});
+
 var app = builder.Build();
 app.MapControllers();
 // Configure the HTTP request pipeline.
