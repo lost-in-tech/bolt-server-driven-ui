@@ -6,7 +6,8 @@ namespace Bolt.ServerDrivenUI;
 
 public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
-    string[] IScreenSectionProvider<TRequest>.ForSections => new[]{ ForSection };
+    SectionInfo[] IScreenSectionProvider<TRequest>.ForSections(IRequestContextReader context, TRequest request) =>
+        [ForSection];
     
     async Task<Bolt.Endeavor.MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
         TRequest request,
@@ -22,16 +23,16 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
                 new ScreenSection
                 {
                     Element = rsp.Value,
-                    Name = ForSection
+                    Name = ForSection.Name
                 }
             },
             MetaData = Enumerable.Empty<IMetaData>()
         };
     }
     
-    public abstract string ForSection { get; }
+    protected abstract SectionInfo ForSection { get; }
     
-    public abstract Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
+    protected abstract Task<Bolt.Endeavor.MaySucceed<IElement>> Get(IRequestContextReader context, TRequest request,
         CancellationToken ct);
 
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;

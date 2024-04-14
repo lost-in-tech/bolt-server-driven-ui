@@ -22,30 +22,11 @@ public record RequestData
     /// with current version server has 
     /// </summary>
     public string? LayoutVersionId { get; init; }
-
-    public bool IsSectionOnlyRequest() => SectionNames.Length > 0;
-
-    public bool IsSectionRequested(string sectionName) => SectionNames.Any(section =>
-        string.Equals(section, sectionName, StringComparison.OrdinalIgnoreCase));
-
-    public bool IsSectionRequested(string[] sectionNames)
-    {
-        foreach (var requestedSectionName in SectionNames)
-        {
-            foreach (var sectionName in sectionNames)
-            {
-                if (sectionName.Equals(requestedSectionName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return true;
-                }
-            }
-        }
-        
-        return false;
-    }
     
     public string? UserId { get; init; }
     public bool IsAuthenticated { get; init; }
+    
+    public Uri? RootRequestUri { get; init; }
 }
 
 

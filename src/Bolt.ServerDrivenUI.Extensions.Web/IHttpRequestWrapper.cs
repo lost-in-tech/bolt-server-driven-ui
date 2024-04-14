@@ -4,6 +4,7 @@ namespace Bolt.ServerDrivenUI.Extensions.Web;
 
 public interface IHttpRequestWrapper
 {
+    Uri? RequestUri();
     string Header(string name);
     string Query(string name);
     string RootTraceId();
@@ -14,6 +15,15 @@ public interface IHttpRequestWrapper
 
 internal sealed class HttpRequestWrapper(IHttpContextAccessor httpContextAccessor) : IHttpRequestWrapper
 {
+    public Uri? RequestUri()
+    {
+        var request = httpContextAccessor.HttpContext?.Request;
+
+        if (request == null) return null;
+
+        return new Uri($"{request.Scheme}://{request.Host}/{request.Path}/{request.QueryString}");
+    }
+
     public string Header(string name)
     {
         if (httpContextAccessor.HttpContext == null) return string.Empty;

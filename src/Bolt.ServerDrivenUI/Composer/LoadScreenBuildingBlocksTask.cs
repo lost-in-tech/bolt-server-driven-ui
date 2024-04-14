@@ -15,6 +15,7 @@ internal sealed class LoadScreenBuildingBlocksTask<TRequest>(IEnumerable<IScreen
     {
         var sections = new List<ScreenSection>();
         var metaData = new List<IMetaData>();
+        var lazySectionNames = new List<string>();
 
         var tasks = new List<Task<MaySucceed<ScreenBuildingBlocksResponseDto>>>();
         
@@ -36,12 +37,14 @@ internal sealed class LoadScreenBuildingBlocksTask<TRequest>(IEnumerable<IScreen
 
             sections.AddRange(providerRsp.Value.Sections);
             metaData.AddRange(providerRsp.Value.MetaData);
+            lazySectionNames.AddRange(providerRsp.Value.LazySectionNames);
         }
         
         return new ScreenBuildingBlocksResponseDto
         {
             Sections = sections,
             MetaData = metaData,
+            LazySectionNames = lazySectionNames
         };
     }
 }

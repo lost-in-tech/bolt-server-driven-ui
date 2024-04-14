@@ -16,4 +16,5 @@ public record ExternalScreenRequest
     public IEnumerable<(string Key, string? Value)>? QueryStrings { get; init; }
     public IEnumerable<(string Key, string? Value)>? Headers { get; init; }
     public object? Content { get; init; }
+    public required SectionInfo[] ForSections { get; init; }
 }

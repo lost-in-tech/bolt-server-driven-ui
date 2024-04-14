@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Bolt.Endeavor;
+﻿using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 
@@ -7,7 +6,7 @@ namespace Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
 public abstract class ExternalSectionProvider<TRequest> : IScreenSectionProvider<TRequest>
 {
-    public abstract string[] ForSections { get; }
+    public abstract SectionInfo[] ForSections(IRequestContextReader context, TRequest request);
     
     async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(
         IRequestContextReader context, 

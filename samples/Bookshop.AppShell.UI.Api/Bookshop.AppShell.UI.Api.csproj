@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Bolt.IocScanner" Version="3.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.ExternalSource\Bolt.ServerDrivenUI.Extensions.ExternalSource.csproj" />
+      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI.Extensions.Web\Bolt.ServerDrivenUI.Extensions.Web.csproj" />
+      <ProjectReference Include="..\Bookshop.ServerDriveUI.Elements\Bookshop.ServerDriveUI.Elements.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\AppShell\Footer\" />
+      <Folder Include="Features\AppShell\TopNav\" />
+    </ItemGroup>
+
+</Project>

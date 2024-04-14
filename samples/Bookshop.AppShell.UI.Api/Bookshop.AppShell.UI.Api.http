@@ -1,0 +1,6 @@
+@Bookshop.AppShell.UI.Api_HostAddress = http://localhost:5081
+
+GET {{Bookshop.AppShell.UI.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

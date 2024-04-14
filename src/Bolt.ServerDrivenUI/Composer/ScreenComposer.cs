@@ -66,7 +66,7 @@ internal sealed class ScreenComposer<TRequest>(
             Layouts = layoutRspTask.Result.Value.Count == 0 ? null : layoutRspTask.Result.Value,
             Sections = response.Sections,
             MetaData = response.MetaData.Any() ? response.MetaData : null,
-            ContextData = loadScreenContextDataProviderTask.Execute(context, response.Sections)
+            ContextData = loadScreenContextDataProviderTask.Execute(context, response.LazySectionNames)
         };
     }
 

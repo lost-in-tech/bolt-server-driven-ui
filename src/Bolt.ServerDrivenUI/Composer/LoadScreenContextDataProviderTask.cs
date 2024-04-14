@@ -3,9 +3,10 @@ using Bolt.ServerDrivenUI.Core;
 namespace Bolt.ServerDrivenUI.Composer;
 
 internal sealed class LoadScreenContextDataProviderTask(
-    IEnumerable<IScreenContextDataProvider> screenContextDataProviders)
+    IEnumerable<IScreenContextDataProvider> screenContextDataProviders,
+    IRequestKeyNamesProvider keyNamesProvider)
 {
-    public Dictionary<string, object> Execute(IRequestContextReader context, IEnumerable<ScreenSection> sections)
+    public Dictionary<string, object> Execute(IRequestContextReader context, IEnumerable<string> lazySectionNames)
     {
         var result = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         
@@ -22,20 +23,31 @@ internal sealed class LoadScreenContextDataProviderTask(
             }
         }
 
-        if (context.RequestData().Mode != RequestMode.LazySections)
+        if (context.RequestData().Mode == RequestMode.Default)
         {
-            var lazySections = new List<string>();
-            foreach (var screenSection in sections)
+            var lazySectionsValue = string.Join(",", lazySectionNames);
+            
+            if (!string.IsNullOrWhiteSpace(lazySectionsValue))
             {
-                if (screenSection.IsLazy.HasValue && screenSection.IsLazy.Value)
-                {
-                    lazySections.Add(screenSection.Name);
-                }
+                result["lazySections"] = lazySectionsValue;
+                result["lazyRequestPathAndQuery"] = BuildLazyRequestPath(context.RequestData(), lazySectionsValue);
             }
-
-            result["lazySections"] = lazySections;
         }
 
         return result;
+    }
+
+    private string BuildLazyRequestPath(RequestData requestData, string lazySections)
+    {
+        var uri = requestData.RootRequestUri;
+
+        var keySections = keyNamesProvider.Get().SectionNames;
+        var encodedLazySectionsValue = Uri.EscapeDataString(lazySections);
+        
+        if (uri == null) return $"/?{keySections}={encodedLazySectionsValue}";
+        
+        if(string.IsNullOrWhiteSpace(uri.Query)) return $"/{uri.AbsolutePath.Trim('/')}/?{keySections}={encodedLazySectionsValue}";
+
+        return $"/{uri.PathAndQuery.TrimStart('/')}&{keySections}={encodedLazySectionsValue}";
     }
 }

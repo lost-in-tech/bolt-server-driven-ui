@@ -18,6 +18,8 @@ internal sealed class RequestDataProvider (
         var sectionNames = ReadQueryAsArray(keys.SectionNames);
         var mode = ReadQueryAsEnum<RequestMode>(keys.Mode);
         mode = mode ?? (sectionNames.Length > 0 ? RequestMode.LazySections : RequestMode.Default);
+
+        var requestUri = requestWrapper.Header(keys.RootRequestUri);
         
         return new RequestData
         {
@@ -32,7 +34,10 @@ internal sealed class RequestDataProvider (
             SectionNames = sectionNames,
             Tenant = requestWrapper.Header(keys.Tenant),
             UserId = requestWrapper.UserId(),
-            IsAuthenticated = requestWrapper.IsAuthenticated()
+            IsAuthenticated = requestWrapper.IsAuthenticated(),
+            RootRequestUri = string.IsNullOrWhiteSpace(requestUri) 
+                                ? requestWrapper.RequestUri() 
+                                : new Uri(Uri.UnescapeDataString(requestUri))
         };
     }
 

@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Authors>Mohammad Ruhul Amin</Authors>
-        <Version>0.0.03-beta</Version>
+        <Version>1.0.0-beta01</Version>
         <PackageId>Bolt.ServerDrivenUI</PackageId>
         <PackageTags>Server Driven UI; SDUI</PackageTags>
     </PropertyGroup>
@@ -20,4 +20,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+    </ItemGroup>
 </Project>

@@ -27,4 +27,5 @@ public record ScreenBuildingBlocksResponseDto
 {
     public required IEnumerable<ScreenSection> Sections { get; init; }
     public required IEnumerable<IMetaData> MetaData { get; init; }
+    public required IEnumerable<string> LazySectionNames { get; init; }
 }

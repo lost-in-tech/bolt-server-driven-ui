@@ -23,6 +23,11 @@ internal sealed class HttpRequestHeadersProvider
         result[keyNames.CorrelationId] = requestData.CorrelationId;
         result[keyNames.Tenant] = requestData.Tenant;
 
+        if (requestData.RootRequestUri != null)
+        {
+            result[keyNames.RootRequestUri] = Uri.EscapeDataString(requestData.RootRequestUri.ToString());
+        }
+
         if (requestData.Device.HasValue)
         {
             result[keyNames.Device] = requestData.Device.Value.ToString();

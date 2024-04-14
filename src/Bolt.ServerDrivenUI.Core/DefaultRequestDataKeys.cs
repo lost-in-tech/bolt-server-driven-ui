@@ -13,4 +13,5 @@ public static class DefaultRequestDataKeys
     public const string ScreenSize = "x-screen";
     public const string Tenant = "x-tenant";
     public const string Mode = "_mode";
+    public const string RootRequestUri = "x-request-uri";
 }

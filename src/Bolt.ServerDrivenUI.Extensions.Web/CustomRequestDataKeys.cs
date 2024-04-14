@@ -13,4 +13,5 @@ public class CustomRequestDataKeys
     public string? SectionNames { get; init; }
     public string? ScreenSize { get; init; }
     public string? Tenant { get; init; }
+    public string? RootRequestUri { get; init; }
 }

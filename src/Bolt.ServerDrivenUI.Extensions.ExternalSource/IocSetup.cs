@@ -32,7 +32,7 @@ public static class IocSetup
     {
         var settings = new Dictionary<string, ExternalServiceSettingDto>();
         configuration.GetSection(option.ExternalServiceSettingsConfigName).Bind(settings);
-
+        source.AddHttpClient();
         foreach (var item in settings)
         {
             source.AddHttpClient(item.Key, (sp, http) =>

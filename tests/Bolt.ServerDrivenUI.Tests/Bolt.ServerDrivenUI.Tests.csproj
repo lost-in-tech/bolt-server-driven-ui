@@ -22,4 +22,8 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Bolt.ServerDrivenUI\Bolt.ServerDrivenUI.csproj" />
+    </ItemGroup>
+
 </Project>

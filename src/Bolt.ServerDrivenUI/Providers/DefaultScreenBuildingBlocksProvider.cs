@@ -15,28 +15,31 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
     {
         var tasks = new List<Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>>>();
         var requestData = context.RequestData();
-        var isSectionOnlyRequest = requestData.IsSectionOnlyRequest();
+        var lazySectionNames = new List<string>();
         
         foreach (var provider in sectionProviders)
         {
-            if (isSectionOnlyRequest)
-            {
-                if (provider.ForSections.Length > 0)
-                {
-                    if (requestData.IsSectionRequested(provider.ForSections) == false) continue;
-                }
-            }
-
             if (provider.IsApplicable(context, request) == false) continue;
             
-            tasks.Add(Execute(provider, context, request, ct));
+            var forSections = provider.ForSections(context, request);
+
+            foreach (var section in forSections)
+            {
+                if (section.Scope == SectionScope.Lazy)
+                {
+                    lazySectionNames.Add(section.Name);
+                }
+            }
+            
+            if(forSections.IsApplicable(requestData) == false) continue;
+            
+            tasks.Add(Execute(provider, forSections, context, request, ct));
         }
 
         await Task.WhenAll(tasks);
 
         var sections = new List<ScreenSection>();
         var metaData = new List<IMetaData>();
-        var lazySectionNames = new List<string>();
 
         foreach (var task in tasks)
         {
@@ -51,17 +54,19 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         return new ScreenBuildingBlocksResponseDto
         {
             Sections = sections,
-            MetaData = metaData
+            MetaData = metaData,
+            LazySectionNames = lazySectionNames
         };
     }
     
     private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>> Execute(
         IScreenSectionProvider<TRequest> provider,
+        SectionInfo[] forSections, 
         IRequestContextReader context,
         TRequest request,
         CancellationToken ct)
     {
-        if (await IsDisabled(provider.ForSections)) 
+        if (await IsDisabled(forSections)) 
             return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
 
         try
@@ -101,16 +106,16 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             MetaData: Enumerable.Empty<IMetaData>());
     }
 
-    private async Task<bool> IsDisabled(string[] sectionNames)
+    private async Task<bool> IsDisabled(SectionInfo[] sections)
     {
-        if (sectionNames.Length == 0) return false;
-        if (sectionNames.Length == 1) return await sectionFeatureFlag.IsDisabled(sectionNames[0]);
+        if (sections.Length == 0) return false;
+        if (sections.Length == 1) return await sectionFeatureFlag.IsDisabled(sections[0].Name);
 
         var tasks = new List<Task<bool>>();
 
-        foreach (var section in sectionNames)
+        foreach (var section in sections)
         {
-            tasks.Add(sectionFeatureFlag.IsDisabled(section));
+            tasks.Add(sectionFeatureFlag.IsDisabled(section.Name));
         }
 
         await Task.WhenAll(tasks);

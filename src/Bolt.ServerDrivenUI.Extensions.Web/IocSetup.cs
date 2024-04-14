@@ -11,9 +11,13 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Bolt.ServerDrivenUI.Extensions.Web;
 
-public record EnsembleOptions
+public record ServerDrivenWebOptions
 {
-    public (Assembly Assembly, Type[] Types)[] TypesToScan { get; init; } = Array.Empty<(Assembly, Type[])>();
+    /// <summary>
+    /// Pass the assembly and types to scan for the support of polymorphic serialization. If you don't pass any type then
+    /// we only look for default types e.g. IElement, IUIAction, IMetadata
+    /// </summary>
+    public (Assembly Assembly, Type[] Types)[] TypesToScanForPolymorphicSerialization { get; init; } = Array.Empty<(Assembly, Type[])>();
     public bool EnableFeatureFlag { get; init; } = false;
     public string FeatureFlagSectionName { get; init; } = "Bolt:ServerDrivenUI:FeatureFlags";
     public string RazorLayoutSettingsSectionName { get; init; } = "Bolt:ServerDrivenUI:RazorLayoutSettings";
@@ -22,9 +26,9 @@ public record EnsembleOptions
 
 public static class IocSetup
 {
-    public static IServiceCollection AddServerDrivenUiForWeb(this IServiceCollection source, IConfiguration configuration, EnsembleOptions? options = null)
+    public static IServiceCollection AddServerDrivenUiForWeb(this IServiceCollection source, IConfiguration configuration, ServerDrivenWebOptions? options = null)
     {
-        options ??= new EnsembleOptions();
+        options ??= new ServerDrivenWebOptions();
 
         if (options.EnableFeatureFlag)
         {
@@ -63,13 +67,19 @@ public static class IocSetup
                 typeof(IUiAction), 
                 typeof(IMetaData));
 
-            foreach (var typesToScan in options.TypesToScan)
+            foreach (var typesToScan in options.TypesToScanForPolymorphicSerialization)
             {
-                opt.AddSupportedType(typesToScan.Assembly, typesToScan.Types);
+                opt.AddSupportedType(
+                    typesToScan.Assembly, 
+                    typesToScan.Types.Length > 0 
+                        ? typesToScan.Types : 
+                        [typeof(IElement), typeof(IUiAction), typeof(IMetaData)]
+                );
             }
         });
         
         source.TryAddTransient<IScreenViewResultComposer, ScreenViewResultComposer>();
+        source.TryAddTransient<IScreenEndpointResultComposer, ScreenViewResultComposer>();
         
         return source;
     }
