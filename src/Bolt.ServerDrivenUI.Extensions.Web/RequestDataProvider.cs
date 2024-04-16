@@ -34,7 +34,9 @@ internal sealed class RequestDataProvider (
             UserAgent = requestWrapper.Header(DefaultRequestDataKeys.UserAgent),
             LayoutVersionId = requestWrapper.Header(keys.LayoutVersionId),
             SectionNames = sectionNames,
-            Tenant = EmptyAlternative(requestWrapper.Header(keys.Tenant), requestWrapper.Query(keys.TenantQs)),
+            Tenant = EmptyAlternative(
+                        requestWrapper.Header(keys.Tenant), 
+                        requestWrapper.Query(keys.TenantQs)),
             UserId = requestWrapper.UserId(),
             IsAuthenticated = requestWrapper.IsAuthenticated(),
             RootRequestUri = string.IsNullOrWhiteSpace(requestUri) 
