@@ -17,7 +17,9 @@ internal sealed class RequestDataProvider (
 
         var sectionNames = ReadQueryAsArray(keys.SectionNames);
         var mode = ReadQueryAsEnum<RequestMode>(keys.Mode);
-        mode = mode ?? (sectionNames.Length > 0 ? RequestMode.LazySections : RequestMode.Default);
+        mode ??= sectionNames.Length > 0 
+                    ? RequestMode.LazySections 
+                    : RequestMode.Default;
 
         var requestUri = requestWrapper.Header(keys.RootRequestUri);
         
@@ -32,7 +34,7 @@ internal sealed class RequestDataProvider (
             UserAgent = requestWrapper.Header(DefaultRequestDataKeys.UserAgent),
             LayoutVersionId = requestWrapper.Header(keys.LayoutVersionId),
             SectionNames = sectionNames,
-            Tenant = requestWrapper.Header(keys.Tenant),
+            Tenant = EmptyAlternative(requestWrapper.Header(keys.Tenant), requestWrapper.Query(keys.TenantQs)),
             UserId = requestWrapper.UserId(),
             IsAuthenticated = requestWrapper.IsAuthenticated(),
             RootRequestUri = string.IsNullOrWhiteSpace(requestUri) 

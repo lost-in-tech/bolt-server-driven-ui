@@ -12,6 +12,7 @@ public static class DefaultRequestDataKeys
     public const string SectionNames = "_sections";
     public const string ScreenSize = "x-screen";
     public const string Tenant = "x-tenant";
+    public const string TenantQs = "_tenant";
     public const string Mode = "_mode";
     public const string RootRequestUri = "x-request-uri";
 }
