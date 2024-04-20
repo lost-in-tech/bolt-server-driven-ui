@@ -5,7 +5,7 @@ namespace Bolt.ServerDrivenUI.Core;
 
 public interface IScreenComposer<in TRequest>
 {
-    Task<Bolt.Endeavor.MaySucceed<Screen>> Compose(TRequest request, CancellationToken ct);
+    Task<MaySucceed<Screen>> Compose(TRequest request, CancellationToken ct);
 }
 
 public record Screen

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net;
+using System.Text;
 using Bolt.Endeavor;
 using Bolt.Polymorphic.Serializer.Json;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Bolt.ServerDrivenUI.Extensions.Web;
 
-public class ScreenViewResult(MaySucceed<Bolt.ServerDrivenUI.Core.Screen> viewModel) : ActionResult
+public class ScreenViewResult(WebScreen viewModel) : ActionResult
 {
     public override async Task ExecuteResultAsync(ActionContext context)
     {
@@ -16,13 +17,6 @@ public class ScreenViewResult(MaySucceed<Bolt.ServerDrivenUI.Core.Screen> viewMo
         
         response.ContentType = "application/json";
         
-        if(viewModel.IsSucceed)
-        {
-            await response.WriteAsync(serializer.Serialize(viewModel.Value), Encoding.UTF8);
-            return;
-        }
-
-        response.StatusCode = viewModel.Failure.StatusCode;
-        await response.WriteAsync(serializer.Serialize(viewModel.Failure), Encoding.UTF8);
+        await response.WriteAsync(serializer.Serialize(viewModel), Encoding.UTF8);
     }
 }

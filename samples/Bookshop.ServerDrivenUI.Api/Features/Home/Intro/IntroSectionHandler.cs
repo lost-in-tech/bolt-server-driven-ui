@@ -7,6 +7,7 @@ using Bookshop.ServerDriveUI.Elements;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.Intro;
 
+[MustSucceed]
 [AutoBind]
 public class IntroSectionHandler : ScreenSectionProvider<HomePageRequest>
 {
@@ -18,6 +19,9 @@ public class IntroSectionHandler : ScreenSectionProvider<HomePageRequest>
     
     protected override Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
+        //return HttpFailure.Redirect("/test", false).ToMaySucceedTask<IElement>();
+        //return HttpFailure.NotFound().ToMaySucceedTask<IElement>();
+        
         return new Text
         {
             Value = "intro"
