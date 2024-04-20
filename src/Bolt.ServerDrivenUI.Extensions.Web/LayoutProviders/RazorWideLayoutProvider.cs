@@ -6,32 +6,47 @@ using Microsoft.Extensions.Options;
 namespace Bolt.ServerDrivenUI.Extensions.Web.LayoutProviders;
 
 internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewParser,
-    IOptions<RazorLayoutProviderSettings> options) : ILayoutProvider<TRequest>
+    IOptions<RazorLayoutProviderSettings> options,
+    IEnumerable<ILayoutFileNameProvider<TRequest>> fileNameProviders) : ILayoutProvider<TRequest>
 {
     private static readonly SemaphoreSlim Lock = new(1, 1);
     private static MaySucceed<LayoutResponse>? Response;
     
     public async Task<MaySucceed<LayoutResponse>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
-        if (Response != null) return Response.Value;
+        var fileName = fileNameProviders.GetFileNameApplied(context, request);
+        var requestVersion = context.RequestData().LayoutVersionId ?? string.Empty;
+        
+        var existing = LayoutStore.TryGet<TRequest>(fileName, requestVersion);
 
+        if (existing != null) return existing;
+        
         await Lock.WaitAsync(ct);
 
         try
         {
-            if (Response != null) return Response.Value;
+            existing = LayoutStore.TryGet<TRequest>(fileName, requestVersion);
+            
+            if (existing != null) return existing;
 
-            Response = await ReadLayout(context, request, ct);
+            var rsp = await ReadLayout(context, request, fileName, ct);
+
+            if (rsp.IsSucceed)
+            {
+                LayoutStore.Set<TRequest>(fileName, rsp.Value.VersionId ?? Guid.NewGuid().ToString(), rsp.Value);
+
+                return rsp;
+            }
+
+            return rsp.Failure;
         }
         finally
         {
             Lock.Release();
         }
-
-        return Response.Value;
     }
     
-    private async Task<Bolt.Endeavor.MaySucceed<LayoutResponse>> ReadLayout(IRequestContextReader context, TRequest request, CancellationToken ct)
+    private async Task<MaySucceed<LayoutResponse>> ReadLayout(IRequestContextReader context, TRequest request, string fileName, CancellationToken ct)
     {
         var settings = options.Value ?? new RazorLayoutProviderSettings();
         
@@ -40,7 +55,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
             RootFolder = settings.RootFolder,
             ViewFolder = settings.ViewFolder,
             ViewModel = request,
-            ViewName = $"Layout.{RequestScreenSize.Wide}"
+            ViewName = $"Layout.{fileName}"
         });
 
         if (rsp.IsFailed) return rsp.Failure;

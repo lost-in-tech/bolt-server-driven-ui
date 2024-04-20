@@ -57,6 +57,8 @@ public static class IocSetup
         source.TryAddScoped<IRazorViewReader,RazorViewReader>();
         source.TryAddSingleton<IHttpRequestWrapper, HttpRequestWrapper>();
         
+        
+        source.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(ILayoutFileNameProvider<>), typeof(DefaultLayoutFileNameProvider<>)));
         source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorWideLayoutProvider<>)));
         source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorCompactLayoutProvider<>)));
 
