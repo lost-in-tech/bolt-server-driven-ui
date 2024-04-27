@@ -3,12 +3,12 @@ using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
-using Bookshop.ServerDriveUI.Elements;
+using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 
 namespace Bookshop.AppShell.UI.Api.Features.AppShell.Header;
 
 [AutoBind]
-internal sealed class HeaderProvider: ScreenSectionProvider<AppShellRequest>
+internal sealed class HeaderProvider(IRazorXmlViewParser parser): ScreenSectionProvider<AppShellRequest>
 {
     protected override SectionInfo ForSection => new()
     {
@@ -17,19 +17,8 @@ internal sealed class HeaderProvider: ScreenSectionProvider<AppShellRequest>
     
     protected override Task<MaySucceed<IElement>> Get(IRequestContextReader context, AppShellRequest request, CancellationToken ct)
     {
-        return new Stack
+        return parser.Read(new RazorViewParseRequest<HeaderProvider>
         {
-            Direction = new Responsive<Direction?>
-            {
-                Xs = Direction.Horizontal
-            },
-            Elements =
-            [
-                new Text
-                {
-                    Value = "Header..."
-                }
-            ]
-        }.ToMaySucceedTask();
+        });
     }
 }

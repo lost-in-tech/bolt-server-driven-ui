@@ -38,7 +38,8 @@ internal sealed class LoadLayoutsTask<TRequest>(IEnumerable<ILayoutProvider<TReq
             layouts[layoutRsp.Value.Name] = new ScreenLayout
             {
                 Element = layoutRsp.Value.Element,
-                VersionId = layoutRsp.Value.VersionId
+                VersionId = layoutRsp.Value.VersionId,
+                NotModified = layoutRsp.Value.NotModified
             };
         }
 

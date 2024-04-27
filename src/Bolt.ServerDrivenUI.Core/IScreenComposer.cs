@@ -19,6 +19,7 @@ public record Screen
 public record ScreenLayout
 {
     public string? VersionId { get; init; }
+    public bool? NotModified { get; init; }
     public required IElement Element { get; init; }
 }
 

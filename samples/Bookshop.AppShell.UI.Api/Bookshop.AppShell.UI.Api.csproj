@@ -20,7 +20,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Features\AppShell\Footer\" />
       <Folder Include="Features\AppShell\TopNav\" />
     </ItemGroup>
 

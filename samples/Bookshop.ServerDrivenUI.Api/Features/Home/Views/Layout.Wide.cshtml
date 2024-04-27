@@ -1,13 +1,63 @@
 @page
+@using Bookshop.ServerDriveUI.Elements
 @model Bookshop.ServerDrivenUI.Api.Features.Home.HomePageRequest
 
 @{
     Layout = null;
 }
-<Stack>
-    <Direction
-        Xs="Vertical"/>
+<Container>
+    <Padding Xs="@UiSpace.Md" Md="@UiSpace.TwoXl" Lg="@UiSpace.FiveXl"/>
     <Elements>
-        <Text Value="Hello world"/>
+        <Stack>
+            <Gap Xs="@UiSpace.Lg"/>
+            <Elements>
+                <Heading Text="Bookworm">
+                    <FontSize Xs="@FontSize.Lg" Sm="@FontSize.SixXl"/>
+                </Heading>
+                <Placeholder Name="body:1">
+                    <Sections>
+                        <Item>books-of-the-week</Item>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Stack>
+        <Stack>
+            <Elements>
+                <Stack>
+                    <Direction Xs="Vertical" Sm="Vertical" Md="Horizontal"/>
+                    <Elements>
+                        <Stack>
+                            <Width Sm="OneThird"/>
+                            <Elements>
+                                <Text Value="Left"/>
+                            </Elements>
+                        </Stack>
+                        <Stack>
+                            <Width Sm="OneFourth"/>
+                            <MaxWidth Sm="150" Md="250"/>
+                            <Elements>
+                                <Text Value="Right"/>
+                                <Heading Text="This is heading"/>
+                            </Elements>
+                        </Stack>
+                    </Elements>
+                </Stack>
+                <Placeholder Name="home:header">
+                    <Sections>
+                        <Item>app-shell:header</Item>
+                    </Sections>
+                </Placeholder>
+                <Placeholder Name="home:body">
+                    <Sections>
+                        <Item>home:intro</Item>
+                    </Sections>
+                </Placeholder>
+                <Placeholder Name="home:footer">
+                    <Sections>
+                        <Item>app-shell:footer</Item>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Stack>
     </Elements>
-</Stack>
+</Container>

@@ -1,5 +1,7 @@
-﻿using Bolt.Endeavor;
+﻿using System.Security.Cryptography;
+using Bolt.Endeavor;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Microsoft.Extensions.Options;
 
@@ -11,13 +13,36 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
 {
     private static readonly SemaphoreSlim Lock = new(1, 1);
     private static MaySucceed<LayoutResponse>? Response;
+
+    public async Task<MaySucceed<LayoutResponse>> Get(IRequestContextReader context, TRequest request,
+        CancellationToken ct)
+    {
+        var rsp = await GetInternal(context, request, ct);
+
+        if (rsp.IsFailed) return rsp;
+
+        var requestVersionId = context.RequestData().LayoutVersionId;
+
+        if (!string.IsNullOrWhiteSpace(requestVersionId)
+            && string.Equals(requestVersionId, rsp.Value.VersionId, StringComparison.OrdinalIgnoreCase))
+        {
+            return new LayoutResponse
+            {
+                Element = EmptyElement.Instance,
+                Name = rsp.Value.Name,
+                VersionId = rsp.Value.VersionId,
+                NotModified = true
+            };
+        }
+
+        return rsp;
+    }
     
-    public async Task<MaySucceed<LayoutResponse>> Get(IRequestContextReader context, TRequest request, CancellationToken ct)
+    private async Task<MaySucceed<LayoutResponse>> GetInternal(IRequestContextReader context, TRequest request, CancellationToken ct)
     {
         var fileName = fileNameProviders.GetFileNameApplied(context, request);
-        var requestVersion = context.RequestData().LayoutVersionId ?? string.Empty;
         
-        var existing = LayoutStore.TryGet<TRequest>(fileName, requestVersion);
+        var existing = LayoutStore.TryGet<TRequest>(fileName);
 
         if (existing != null) return existing;
         
@@ -25,7 +50,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
 
         try
         {
-            existing = LayoutStore.TryGet<TRequest>(fileName, requestVersion);
+            existing = LayoutStore.TryGet<TRequest>(fileName);
             
             if (existing != null) return existing;
 
@@ -33,7 +58,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
 
             if (rsp.IsSucceed)
             {
-                LayoutStore.Set<TRequest>(fileName, rsp.Value.VersionId ?? Guid.NewGuid().ToString(), rsp.Value);
+                LayoutStore.Set<TRequest>(fileName, rsp.Value);
 
                 return rsp;
             }
@@ -50,6 +75,18 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
     {
         var settings = options.Value ?? new RazorLayoutProviderSettings();
         
+        var viewPath = string.Format(TypeViewLocations.Get<TRequest>(settings.RootFolder, settings.ViewFolder), $"Layout.{fileName}");
+        viewPath = viewPath.Replace("~/", string.Empty);
+
+        string version;
+        using (var md5 = MD5.Create())
+        {
+            await using (var sr = File.OpenRead(viewPath))
+            {
+                version = Convert.ToBase64String(await md5.ComputeHashAsync(sr, ct));
+            }
+        }
+        
         var rsp = await xmlViewParser.Read<TRequest>(new()
         {
             RootFolder = settings.RootFolder,
@@ -64,7 +101,7 @@ internal sealed class RazorWideLayoutProvider<TRequest>(IRazorXmlViewParser xmlV
         {
             Element = rsp.Value,
             Name = RequestScreenSize.Wide.ToString().ToLowerInvariant(),
-            VersionId = settings.Version ?? Guid.NewGuid().ToString()
+            VersionId = version ?? settings.Version ?? Guid.NewGuid().ToString()
         };
     }
 

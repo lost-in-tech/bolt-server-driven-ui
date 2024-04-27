@@ -18,4 +18,8 @@
       <ProjectReference Include="..\Bookshop.ServerDriveUI.Elements\Bookshop.ServerDriveUI.Elements.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Features\Home\BooksOfTheWeek\Views\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

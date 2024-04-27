@@ -1,0 +1,28 @@
+@page
+@using Bookshop.ServerDriveUI.Elements
+@model Bookshop.ServerDrivenUI.Api.Features.Details.DetailsRequest
+
+@{
+    Layout = null;
+}
+
+
+<Container>
+    <Padding Xs="@UiSpace.Md" Md="@UiSpace.TwoXl" Lg="@UiSpace.FiveXl"/>
+    <Elements>
+        <Stack>
+            <Gap Xs="@UiSpace.Lg"/>
+            <Elements>
+                <Heading Text="Bookworm">
+                    <FontSize Xs="@FontSize.Lg" Sm="@FontSize.SixXl"/>
+                </Heading>
+                
+                <Placeholder Name="body:1">
+                    <Sections>
+                        <Item>book-details</Item>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Stack>
+    </Elements>
+</Container>

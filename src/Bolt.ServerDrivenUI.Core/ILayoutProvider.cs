@@ -17,6 +17,7 @@ public record LayoutResponse
 {
     public required string Name { get; init; }
     public string? VersionId { get; init; }
+    public bool? NotModified { get; init; }
     public required IElement Element { get; init; }
 }
 
