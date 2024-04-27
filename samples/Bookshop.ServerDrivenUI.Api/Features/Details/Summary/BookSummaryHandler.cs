@@ -3,6 +3,8 @@ using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
+using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
+using Bookshop.ServerDrivenUI.Api.Features.Shared;
 using Bookshop.ServerDrivenUI.Api.Features.Shared.Repositories;
 using Bookshop.ServerDriveUI.Elements;
 
@@ -10,7 +12,9 @@ namespace Bookshop.ServerDrivenUI.Api.Features.Details.Summary;
 
 [MustSucceed]
 [AutoBind]
-internal sealed class BookSummaryHandler(IBookRepository repository) : ScreenSectionProvider<DetailsRequest>
+internal sealed class BookSummaryHandler(IBookRepository repository,
+    IAppUrlBuilder appUrlBuilder,
+    IRazorXmlViewParser viewParser) : ScreenSectionProvider<DetailsRequest>
 {
     protected override SectionInfo ForSection => new()
     {
@@ -24,58 +28,19 @@ internal sealed class BookSummaryHandler(IBookRepository repository) : ScreenSec
 
         if (book == null) return HttpFailure.NotFound();
 
-        return new Stack
+        var vm = new BookSummaryViewModel
         {
-            Gap = new Responsive<UiSpace?>()
-            {
-                Xs = UiSpace.Md
-            },
-            Elements =
-            [
-                new Heading
-                {
-                    Text = book.Title,
-                    FontSize = new Responsive<FontSize?>
-                    {
-                        Xs = FontSize.Xl
-                    }
-                },
-                new Stack()
-                {
-                    MaxWidth = new Responsive<int?>
-                    {
-                        Xs = 250
-                    },
-                    Elements =
-                    [
-                        new Image()
-                        {
-                            Url = book.ImageUrl,
-                            Alt = book.Title
-                        }
-                    ]
-                },
-                new Stack()
-                {
-                    Elements = [
-                        new Paragraph
-                        {
-                            Text = book.Summary
-                        }
-                    ]
-                },
-                new NavigateLink()
-                {
-                    Url = "/",
-                    Elements = new []
-                    {
-                        new Text
-                        {
-                            Value = "Back"
-                        }
-                    }
-                }
-            ]
+            Summary = book.Summary,
+            Title = book.Title,
+            ImageUrl = book.ImageUrl,
+            BackUrl = appUrlBuilder.Home(),
+            BackText = "Back to home",
+            BackDescription = "Back to home page"
         };
+
+        return await viewParser.Read(new RazorViewParseRequest<BookSummaryViewModel>
+        {
+            ViewModel = vm
+        });
     }
 }

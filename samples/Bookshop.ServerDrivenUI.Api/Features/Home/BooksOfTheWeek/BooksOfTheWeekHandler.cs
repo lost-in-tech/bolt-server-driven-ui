@@ -4,13 +4,16 @@ using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
+using Bookshop.ServerDrivenUI.Api.Features.Shared;
 using Bookshop.ServerDrivenUI.Api.Features.Shared.Repositories;
 using Bookshop.ServerDriveUI.Elements;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.BooksOfTheWeek;
 
 [AutoBind]
-internal sealed class BooksOfTheWeekHandler(IRazorXmlViewParser parser, IBookRepository bookRepository) 
+internal sealed class BooksOfTheWeekHandler(IRazorXmlViewParser parser,
+    IAppUrlBuilder appUrlBuilder,
+    IBookRepository bookRepository) 
     : ScreenSectionProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
@@ -22,75 +25,18 @@ internal sealed class BooksOfTheWeekHandler(IRazorXmlViewParser parser, IBookRep
     {
         var books = await bookRepository.GetAll();
 
-        return new Stack()
+        return await parser.Read(new RazorViewParseRequest<BookOfTheWeekViewModel>
         {
-            Gap = new Responsive<UiSpace?>
+            ViewModel = new BookOfTheWeekViewModel
             {
-                Xs = UiSpace.Md
-            },
-            Elements =
-            [
-                new Heading
+                Heading = "Books of the week",
+                Items = books.Select(book => new BookOfTheWeekItemViewModel
                 {
-                    Text = "Books of the week",
-                    FontSize = new Responsive<FontSize?>
-                    {
-                        Xs = FontSize.Lg
-                    }
-                },
-                new Stack()
-                {
-                    Gap = new Responsive<UiSpace?>
-                    {
-                        Xs = UiSpace.Md
-                    },
-                    Direction = new Responsive<Direction?>
-                    {
-                        Xs = Direction.Horizontal
-                    },
-                    Elements = books.Select(BuildBookElement).ToArray()
-                }
-            ]
-        };
-    }
-
-    private IElement BuildBookElement(BookRecord book)
-    {
-        return new Stack
-        {
-            Width = new Responsive<StackWidth?>()
-            {
-                Xs = StackWidth.OneHalf
-            },
-            Gap = new Responsive<UiSpace?>
-            {
-                Xs = UiSpace.Sm
-            },
-            Elements =
-            [
-                new NavigateLink
-                {
-                    Url = $"/books/{book.Isbn}",
-                    Elements =
-                    [
-                        new Image
-                        {
-                            Url = book.ImageUrl,
-                            Alt = book.Title
-                        }
-                    ]
-                },
-                new NavigateLink
-                {
-                    Url = $"/books/{book.Isbn}",
-                    Elements = [
-                        new Text
-                        {
-                            Value = book.Title
-                        }
-                    ]
-                }
-            ]
-        };
+                    Title = book.Title,
+                    ImageUrl = book.ImageUrl,
+                    DetailsUrl = appUrlBuilder.Details(book.Isbn, book.Title)
+                }).ToArray()
+            }
+        });
     }
 }

@@ -1,0 +1,23 @@
+@using Bookshop.ServerDriveUI.Elements
+@model Bookshop.ServerDrivenUI.Api.Features.Details.Summary.BookSummaryViewModel
+<Stack>
+    <Gap Xs="@UiSpace.Md"/>
+    <Elements>
+        <Heading Text="@Model.Title"/>
+        <Stack>
+            <!--<Width Xs="@StackWidth.OneHalf"/>-->
+            <MaxWidth Xs="300"/>
+            <Elements>
+                <Image Url="@Model.ImageUrl" Alt="@Model.Title"/>
+            </Elements>
+        </Stack>
+        <Paragraph>
+            <Text>@Model.Summary</Text>
+        </Paragraph>
+        <NavigateLink Url="@Model.BackUrl">
+            <Elements>
+                <Text Value="@Model.BackText"/>
+            </Elements>
+        </NavigateLink>
+    </Elements>
+</Stack>

@@ -14,7 +14,7 @@ public class Endpoint : IEndpointMapper
             .WithName("pages")
             .WithTags("pages")
             .WithOpenApi()
-            .MapGet("books/{isbn}", GetBookById)
+            .MapGet("books/{slug}/{isbn}", GetBookById)
             .WithName("Details")
             .WithOpenApi();
     }

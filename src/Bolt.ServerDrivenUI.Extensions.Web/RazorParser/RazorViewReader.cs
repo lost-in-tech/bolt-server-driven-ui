@@ -46,13 +46,8 @@ internal sealed class RazorViewReader(IRazorViewEngine viewEngine,
         };
         ActionContext actionContext = new(defaultHttpContext, new RouteData(), new ActionDescriptor());
 
-        IView? view;
-        ViewEngineResult viewEngineResult = _viewEngine.GetView(null, viewPath, true);
-        if (viewEngineResult.Success)
-            view = viewEngineResult.View;
-        else
-            throw new InvalidOperationException($"Unable to find View {viewPath}.");
-
+        var view = FindView(actionContext, viewPath);
+        
         await using StringWriter stringWriter = new();
         ViewDataDictionary<T> viewDataDictionary = new(new EmptyModelMetadataProvider(), new ModelStateDictionary())
         {
@@ -70,5 +65,27 @@ internal sealed class RazorViewReader(IRazorViewEngine viewEngine,
         await view.RenderAsync(viewContext);
 
         return stringWriter.ToString();
+    }
+    
+    private IView FindView(ActionContext actionContext, string viewName)
+    {
+        var getViewResult = _viewEngine.GetView(executingFilePath: null, viewPath: viewName, isMainPage: true);
+        if (getViewResult.Success)
+        {
+            return getViewResult.View;
+        }
+
+        var findViewResult = _viewEngine.FindView(actionContext, viewName, isMainPage: true);
+        if (findViewResult.Success)
+        {
+            return findViewResult.View;
+        }
+
+        var searchedLocations = getViewResult.SearchedLocations.Concat(findViewResult.SearchedLocations);
+        var errorMessage = string.Join(
+            Environment.NewLine,
+            new[] { $"Unable to find view '{viewName}'. The following locations were searched:" }.Concat(searchedLocations)); ;
+
+        throw new InvalidOperationException(errorMessage);
     }
 };
