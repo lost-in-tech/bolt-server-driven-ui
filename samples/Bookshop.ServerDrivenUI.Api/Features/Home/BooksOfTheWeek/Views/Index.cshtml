@@ -8,19 +8,19 @@
             <Direction Xs="@Direction.Horizontal"/>
             <Gap Xs="@UiSpace.ThreeXs"/>
             <Elements>
-            @foreach (var book in Model.Items)
-            {
-                <Stack>
-                    <Width Xs="OneHalf"/>
-                    <Elements>
-                        <NavigateLink Url="@book.DetailsUrl">
-                            <Elements>
-                                <Image Url="@book.ImageUrl" Alt="@book.Title"/>
-                            </Elements>
-                        </NavigateLink>
-                    </Elements>
-                </Stack>
-            }
+                @foreach (var book in Model.Items)
+                {
+                    <Stack>
+                        <Width Xs="OneHalf"/>
+                        <Elements>
+                            <NavigateLink Url="@book.DetailsUrl">
+                                <Elements>
+                                    <Image Url="@book.ImageUrl" Alt="@book.Title"/>
+                                </Elements>
+                            </NavigateLink>
+                        </Elements>
+                    </Stack>
+                }
             </Elements>
         </Stack>
     </Elements>

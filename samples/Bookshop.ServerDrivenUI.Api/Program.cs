@@ -5,6 +5,7 @@ using Bolt.ServerDrivenUI.Extensions.ExternalSource;
 using Bolt.ServerDrivenUI.Extensions.Web;
 using Bolt.ServerDrivenUI.Extensions.Web.Endpoints;
 using Bookshop.ServerDrivenUI.Api.Features.NotFound;
+using Bookshop.ServerDrivenUI.Api.Features.Shared.AppShell;
 using Bookshop.ServerDriveUI.Elements;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -29,6 +30,7 @@ builder.Services.Scan<Program>(new IocScannerOptions
     SkipWhenAutoBindMissing = true
 });
 
+builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(AppShellProvider<>)));
 builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IFallbackScreenComposer<>), typeof(FallbackScreenComposer<>)));
 
 var app = builder.Build();

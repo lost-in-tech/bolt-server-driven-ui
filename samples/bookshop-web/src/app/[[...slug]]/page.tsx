@@ -1,6 +1,33 @@
+import { PageMetaData, PageMetaDataItem } from "@/components/PageMetaData";
 import RenderElement from "@/components/RenderElement";
 import fetchSdui from "@/fetch-sdui";
-import { notFound } from "next/navigation";
+
+// or Dynamic metadata
+export async function generateMetadata({ params }: any) {
+  const slug = params?.slug?.join("/") ?? "/";
+  const rsp = await fetchSdui(slug);
+
+  const data = rsp.metaData?.find(
+    (x) => x._type === "PageMetaData"
+  ) as PageMetaData;
+
+  if (!data) return;
+
+  // return {
+  //   title: data.title,
+  //   description: "testing",
+  // };
+
+  const obj: { [key: string]: string } = {};
+
+  data.metaData.forEach((item) => {
+    obj[item.name] = item.content;
+  });
+
+  obj["title"] = data.title;
+
+  return obj;
+}
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const slug = params?.slug?.join("/") ?? "/";
@@ -12,9 +39,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   if (rsp.layouts.wide?.element) {
     return (
-      <RenderElement
-        {...{ element: rsp.layouts.wide?.element, sections: rsp.sections }}
-      />
+      <>
+        <RenderElement
+          {...{ element: rsp.layouts.wide?.element, sections: rsp.sections }}
+        />
+      </>
     );
   }
 

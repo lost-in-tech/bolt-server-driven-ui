@@ -1,9 +1,21 @@
 @page
+@using Bookshop.ServerDriveUI.Elements
 @model object;
 
-<Stack>
-    <Direction Xs="Horizontal"/>
+<Container>
     <Elements>
-        <Text Value="Bookshop"/>
+        <Stack>
+            <Width Xs="@StackWidth.Full"/>
+            <Elements>
+                <Block>
+                    <PaddingTop Xs="@UiSpace.Md"/>
+                    <Elements>
+                        <Heading Text="Bookworm">
+                            <FontSize Xs="@FontSize.TwoXl" Sm="@FontSize.SixXl"/>
+                        </Heading>
+                    </Elements>
+                </Block>
+            </Elements>
+        </Stack>
     </Elements>
-</Stack>
+</Container>

@@ -9,6 +9,9 @@ interface ContainerElement extends IElement {
 }
 
 const style = (props: Responsive<UiSpace>) => {
+  props ??= {
+    xs: UiSpace.md,
+  } as Responsive<UiSpace>;
   return sprinkles({
     maxWidth: ["468px", "640px", "768px", "1024px"],
     paddingLeft: props
@@ -43,7 +46,10 @@ const style = (props: Responsive<UiSpace>) => {
 export const Container = (props: RenderElementProps<ContainerElement>) => {
   const childElements = props.element.elements;
   return (
-    <div className={style(props.element.padding)} style={{ margin: "0 auto" }}>
+    <div
+      className={style(props.element.padding)}
+      style={{ margin: "0 auto", width: "100%" }}
+    >
       {childElements?.map((e, index) => (
         <RenderElement
           key={index}

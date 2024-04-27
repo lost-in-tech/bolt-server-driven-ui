@@ -17,17 +17,23 @@ internal sealed class FooterProvider: ScreenSectionProvider<AppShellRequest>
     
     protected override Task<MaySucceed<IElement>> Get(IRequestContextReader context, AppShellRequest request, CancellationToken ct)
     {
-        return new Stack
+        return new Container
         {
-            Direction = new Responsive<Direction?>
-            {
-                Xs = Direction.Horizontal
-            },
             Elements =
             [
-                new Text
+                new Stack
                 {
-                    Value = "Footer..."
+                    Direction = new Responsive<Direction?>
+                    {
+                        Xs = Direction.Horizontal
+                    },
+                    Elements =
+                    [
+                        new Text
+                        {
+                            Value = "Footer..."
+                        }
+                    ]
                 }
             ]
         }.ToMaySucceedTask();

@@ -5,7 +5,7 @@ import { Container } from "../Container";
 import Placeholder from "../Placeholder";
 import EmptyElement from "../EmptyElement";
 import { IElement, RenderElementProps } from "@/types";
-import { Heading, Paragraph, Image, NavigateLink } from "..";
+import { Heading, Paragraph, Image, NavigateLink, Block } from "..";
 
 const ComponentRegistry: Record<
   string,
@@ -19,6 +19,7 @@ const ComponentRegistry: Record<
   Heading: (props: any) => <Heading {...props} />,
   Image: (props: any) => <Image {...props} />,
   NavigateLink: (props: any) => <NavigateLink {...props} />,
+  Block: (props: any) => <Block {...props} />,
   EmptyElement: (props: any) => <EmptyElement {...props} />,
 };
 

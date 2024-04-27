@@ -6,17 +6,16 @@
     Layout = null;
 }
 
-
-<Container>
-    <Padding Xs="@UiSpace.Md" Md="@UiSpace.TwoXl" Lg="@UiSpace.FiveXl"/>
+<Stack>
+    <Gap Xs="@UiSpace.Md"/>
     <Elements>
-        <Stack>
-            <Gap Xs="@UiSpace.Lg"/>
+        <Placeholder Name="home:header">
+            <Sections>
+                <Item>app-shell:header</Item>
+            </Sections>
+        </Placeholder>
+        <Container>
             <Elements>
-                <Heading Text="Bookworm">
-                    <FontSize Xs="@FontSize.Lg" Sm="@FontSize.SixXl"/>
-                </Heading>
-                
                 <Placeholder Name="body:1">
                     <Sections>
                         <Item>book-details</Item>
@@ -24,6 +23,6 @@
                     </Sections>
                 </Placeholder>
             </Elements>
-        </Stack>
+        </Container>
     </Elements>
-</Container>
+</Stack>

@@ -4,16 +4,16 @@ using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
-namespace Bookshop.ServerDrivenUI.Api.Features.Home.AppShell;
+namespace Bookshop.ServerDrivenUI.Api.Features.Shared.AppShell;
 
-[AutoBind]
-internal sealed class AppShellProvider(IExternalScreenProvider externalScreenProvider) 
-    : ExternalSectionProvider<HomePageRequest>
+//[AutoBind]
+internal sealed class AppShellProvider<T>(IExternalScreenProvider externalScreenProvider) 
+    : ExternalSectionProvider<T>
 {
-    public override SectionInfo[] ForSections(IRequestContextReader context, HomePageRequest request)
+    public override SectionInfo[] ForSections(IRequestContextReader context, T request)
         => [new() { Name = "app-shell:header" }, new(){ Name = "app-shell:footer"}];
 
-    protected override Task<MaySucceed<Screen>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
+    protected override Task<MaySucceed<Screen>> Get(IRequestContextReader context, T request, CancellationToken ct)
     {
         return externalScreenProvider.Get(context, new ExternalScreenRequest
         {
