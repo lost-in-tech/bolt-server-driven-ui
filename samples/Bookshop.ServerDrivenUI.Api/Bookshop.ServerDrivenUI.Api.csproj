@@ -21,6 +21,15 @@
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Features\Home\BooksOfTheWeek\Views\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Features\Home\LatestRelease\Views\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Features\List\SearchResult\Views\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Features\Home\BooksOfTheWeek\Views\Index.cshtml" />
     </ItemGroup>
 
 </Project>

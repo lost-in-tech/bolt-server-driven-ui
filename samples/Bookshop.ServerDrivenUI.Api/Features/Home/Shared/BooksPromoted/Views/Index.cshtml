@@ -1,9 +1,17 @@
 @using Bookshop.ServerDriveUI.Elements
-@model Bookshop.ServerDrivenUI.Api.Features.Home.BooksOfTheWeek.BookOfTheWeekViewModel
+@model Bookshop.ServerDrivenUI.Api.Features.Home.Shared.BooksPromoted.BookPromotedViewModel
 <Stack>
     <Gap Xs="@UiSpace.Md"/>
     <Elements>
-        <Heading Text="@Model.Heading"/>
+        @{
+            if (Model.IncludeSeparator)
+            {
+                <Divider/>        
+            } 
+        }
+        <Heading Text="@Model.Heading">
+            <FontSize Xs="@UiSpace.TwoXl"/>
+        </Heading>
         <Stack>
             <Direction Xs="@Direction.Horizontal"/>
             <Gap Xs="@UiSpace.ThreeXs"/>

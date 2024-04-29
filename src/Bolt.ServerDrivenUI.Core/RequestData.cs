@@ -21,7 +21,7 @@ public record RequestData
     /// Layout version client has in cache. Layout content will return only if LayoutVersion is empty or doesn't match
     /// with current version server has 
     /// </summary>
-    public string? LayoutVersionId { get; init; }
+    public Dictionary<string,string>? LayoutVersions { get; init; }
     
     public string? UserId { get; init; }
     public bool IsAuthenticated { get; init; }

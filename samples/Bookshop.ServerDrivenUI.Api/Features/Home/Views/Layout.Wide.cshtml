@@ -13,16 +13,23 @@
                 <Item>app-shell:header</Item>
             </Sections>
         </Placeholder>
+        <Divider/>
         <Container>
             <Elements>
-                <Placeholder Name="body:1">
-                    <Sections>
-                        <Item>books-of-the-week</Item>
-                    </Sections>
-                </Placeholder>
+                <Stack>
+                    <Gap Xs="@UiSpace.Md"/>
+                    <Elements>
+                        <Placeholder Name="body:1">
+                            <Sections>
+                                <Item>latest-release</Item>
+                                <Item>books-of-the-week</Item>
+                            </Sections>
+                        </Placeholder>
+                    </Elements>
+                </Stack>
             </Elements>
         </Container>
-        
+        <Divider/>
         <Placeholder Name="home:footer">
             <Sections>
                 <Item>app-shell:footer</Item>

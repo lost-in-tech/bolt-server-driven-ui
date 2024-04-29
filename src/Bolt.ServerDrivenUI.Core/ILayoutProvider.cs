@@ -5,7 +5,7 @@ namespace Bolt.ServerDrivenUI.Core;
 
 public interface ILayoutProvider<in TRequest>
 {
-    Task<MaySucceed<LayoutResponse>> Get(
+    Task<MaySucceed<IReadOnlyCollection<LayoutResponse>>> Get(
         IRequestContextReader context, 
         TRequest request, 
         CancellationToken ct);
@@ -23,7 +23,7 @@ public record LayoutResponse
 
 public abstract class LayoutProvider<TRequest> : ILayoutProvider<TRequest>
 {
-    public abstract Task<MaySucceed<LayoutResponse>> Get(
+    public abstract Task<MaySucceed<IReadOnlyCollection<LayoutResponse>>> Get(
         IRequestContextReader context, 
         TRequest request,
         CancellationToken ct);

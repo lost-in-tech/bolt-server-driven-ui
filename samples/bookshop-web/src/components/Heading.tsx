@@ -11,6 +11,7 @@ export const Heading = (props: RenderElementProps<HeadingElement>) => {
   return (
     <h1
       className={sprinkles({
+        color: "base-content",
         fontSize: [
           responsiveFontSize[props.element.fontSize?.xs ?? FontSize.md],
           responsiveFontSize[props.element.fontSize?.xs ?? FontSize.md],

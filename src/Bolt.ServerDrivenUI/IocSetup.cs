@@ -10,6 +10,8 @@ public static class IocSetup
 {
     public static IServiceCollection AddServerDrivenUi(this IServiceCollection source)
     {
+        source.TryAdd(ServiceDescriptor.Scoped(typeof(IFetchOncePerScope<>), typeof(FetchOncePerScope<>)));
+        
         source.TryAddTransient<LoadScreenContextDataProviderTask>();
         source.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionsFilterTask<>), typeof(ScreenSectionsFilterTask<>)));
         source.TryAdd(ServiceDescriptor.Transient(typeof(ILoadResponseFilterDataTask<>), typeof(LoadResponseFilterDataTask<>)));

@@ -3,23 +3,19 @@ using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
-using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Bookshop.ServerDrivenUI.Api.Features.Home.Shared.BooksPromoted;
-using Bookshop.ServerDrivenUI.Api.Features.Shared;
 using Bookshop.ServerDrivenUI.Api.Features.Shared.Repositories;
-using Bookshop.ServerDriveUI.Elements;
 
-namespace Bookshop.ServerDrivenUI.Api.Features.Home.BooksOfTheWeek;
+namespace Bookshop.ServerDrivenUI.Api.Features.Home.LatestRelease;
 
 [AutoBind]
-internal sealed class BooksOfTheWeekHandler(
-    IBookRepository bookRepository,
+internal sealed class LatestReleaseHandler(IBookRepository bookRepository,
     BooksPromotedBuilder booksPromotedBuilder) 
     : ScreenSectionProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {
-        Name = "books-of-the-week"
+        Name = "latest-release"
     };
     
     protected override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
@@ -28,9 +24,8 @@ internal sealed class BooksOfTheWeekHandler(
 
         return await booksPromotedBuilder.Build(new BookPromotedInput
         {
-            IncludeSeparator = true,
-            Books = books.Take(2).ToArray(),
-            Heading = "Books of the week"
+            Books = books.Skip(2).Take(2).ToArray(),
+            Heading = "Latest Releases"
         });
     }
 }

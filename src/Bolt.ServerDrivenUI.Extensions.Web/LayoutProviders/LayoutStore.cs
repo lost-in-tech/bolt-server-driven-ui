@@ -9,7 +9,7 @@ public static class LayoutStore
     
     public static LayoutResponse? TryGet<T>(string fileName)
     {
-        return _store.TryGetValue(Key<T>(fileName), out var value) ? value : null;
+        return _store.GetValueOrDefault(Key<T>(fileName));
     }
 
     public static LayoutResponse Set<T>(string fileName, LayoutResponse value)

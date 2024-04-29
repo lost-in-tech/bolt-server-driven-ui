@@ -17,7 +17,7 @@ internal sealed class LoadLayoutsTask<TRequest>(IEnumerable<ILayoutProvider<TReq
     {
         var layouts = new Dictionary<string,ScreenLayout>();
 
-        var tasks = new List<Task<MaySucceed<LayoutResponse>>>();
+        var tasks = new List<Task<MaySucceed<IReadOnlyCollection<LayoutResponse>>>>();
         
         foreach (var layoutProvider in layoutProviders)
         {
@@ -34,13 +34,16 @@ internal sealed class LoadLayoutsTask<TRequest>(IEnumerable<ILayoutProvider<TReq
             var layoutRsp = task.Result;
             
             if (layoutRsp.IsFailed) return layoutRsp.Failure;
-            
-            layouts[layoutRsp.Value.Name] = new ScreenLayout
+
+            foreach (var item in layoutRsp.Value)
             {
-                Element = layoutRsp.Value.Element,
-                VersionId = layoutRsp.Value.VersionId,
-                NotModified = layoutRsp.Value.NotModified
-            };
+                layouts[item.Name] = new ScreenLayout
+                {
+                    Element = item.Element,
+                    VersionId = item.VersionId,
+                    NotModified = item.NotModified
+                };
+            }
         }
 
         return layouts;

@@ -1,11 +1,12 @@
+using System.Net;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Extensions.Web;
 using Bolt.ServerDrivenUI.Extensions.Web.Endpoints;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bookshop.ServerDrivenUI.Api.Features.Details;
+namespace Bookshop.ServerDrivenUI.Api.Features.List;
 
-public class Endpoint : IEndpointMapper
+public sealed class Endpoint : IEndpointMapper
 {
     public void Map(WebApplication app)
     {
@@ -13,18 +14,17 @@ public class Endpoint : IEndpointMapper
             .WithName("pages")
             .WithTags("pages")
             .WithOpenApi()
-            .MapGet("books/{slug}/isbn-{isbn}", GetBookById)
-            .WithName("Details")
+            .MapGet("books/{category?}", List)
+            .WithName("List")
             .WithOpenApi();
     }
 
     [ProducesResponseType<Screen>(statusCode: 200)]
     [ProducesResponseType<string>(statusCode: 500)]
-    private Task<IResult> GetBookById(IScreenEndpointResultComposer composer, [AsParameters] DetailsRequest request,
+    private Task<IResult> List(IScreenEndpointResultComposer composer, [AsParameters] ListPageRequest request,
         [FromServices]ILogger<Endpoint> logger,
         CancellationToken ct)
     {
-        logger.LogError($"Start request... {DateTime.Now:HH:mm:ss}");
         return composer.Compose(request, ct);
     }
 }

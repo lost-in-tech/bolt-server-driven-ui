@@ -6,3 +6,4 @@ export * from "@/components/Heading";
 export * from "@/components/Image";
 export * from "@/components/NavigateLink";
 export * from "@/components/Block";
+export * from "@/components/Divider";

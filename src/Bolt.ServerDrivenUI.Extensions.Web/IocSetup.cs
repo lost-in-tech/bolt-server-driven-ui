@@ -59,8 +59,7 @@ public static class IocSetup
         
         
         source.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(ILayoutFileNameProvider<>), typeof(DefaultLayoutFileNameProvider<>)));
-        source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorWideLayoutProvider<>)));
-        source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorCompactLayoutProvider<>)));
+        source.TryAddEnumerable(ServiceDescriptor.Scoped(typeof(ILayoutProvider<>), typeof(RazorLayoutProvider<>)));
 
         source.AddPolymorphicSerializer((opt) =>
         {

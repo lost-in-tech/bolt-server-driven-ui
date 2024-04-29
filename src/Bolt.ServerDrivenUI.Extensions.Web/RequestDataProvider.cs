@@ -32,7 +32,7 @@ internal sealed class RequestDataProvider (
             Device = ReadHeaderAsEnum<Device>(keys.Device), 
             Platform = ReadHeaderAsEnum<Platform>(keys.Platform),
             UserAgent = requestWrapper.Header(DefaultRequestDataKeys.UserAgent),
-            LayoutVersionId = requestWrapper.Header(keys.LayoutVersionId),
+            LayoutVersions = LayoutVersions(keys),
             SectionNames = sectionNames,
             Tenant = EmptyAlternative(
                         requestWrapper.Header(keys.Tenant), 
@@ -45,6 +45,29 @@ internal sealed class RequestDataProvider (
         };
     }
 
+    private Dictionary<string, string>? LayoutVersions(RequestKeyNames keys)
+    {
+        var headerValue = requestWrapper.Header(keys.LayoutVersionId);
+
+        if (string.IsNullOrWhiteSpace(headerValue)) return null;
+
+        var pairs = headerValue.Split('|');
+
+        var result = new Dictionary<string, string>();
+        
+        foreach (var pair in pairs)
+        {
+            var parts = pair.Split("=");
+
+            if (parts.Length == 2)
+            {
+                result[parts[0]] = parts[1];
+            }
+        }
+
+        return result;
+    }
+    
     private string EmptyAlternative(string value, string alt)
         => string.IsNullOrWhiteSpace(value) ? alt : value; 
 

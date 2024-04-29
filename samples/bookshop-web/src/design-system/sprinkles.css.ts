@@ -115,19 +115,19 @@ const responsiveProperties = defineProperties({
 });
 
 const colors = {
-  "bg-primary": "oklch(0.3745 0.189 325.02)",
-  bgPrimaryContent: "oklch(0.8749 0.0378 325.02)",
-  bgSecondary: "oklch(0.5392 0.162 241.36)",
-  bgSecondaryContent: "oklch(0.90784 0.0324 241.36)",
-  bgAccent: "oklch(0.7598 0.204 56.72)",
-  bgAccentContent: "oklch(0.15196 0.0408 56.72)",
-  bgNeutral: "oklch(0.278078 0.029596 256.848)",
-  bgNeutralContent: "oklch(0.855616 0.005919 256.848)",
+  primary: "oklch(0.3745 0.189 325.02)",
+  "primary-content": "oklch(0.8749 0.0378 325.02)",
+  secondary: "oklch(0.5392 0.162 241.36)",
+  "secondary-content": "oklch(0.90784 0.0324 241.36)",
+  accent: "oklch(0.7598 0.204 56.72)",
+  "accent-content": "oklch(0.15196 0.0408 56.72)",
+  neutral: "oklch(0.278078 0.029596 256.848)",
+  "neutral-content": "oklch(0.855616 0.005919 256.848)",
 
-  base100: "oklch(1 0 0)",
-  base200: "oklch(0.93 0 0)",
-  base300: "oklch(0.86 0 0)",
-  baseContent: "oklch(0.278078 0.029596 256.848)",
+  "base-100": "oklch(1 0 0)",
+  "base-200": "oklch(0.93 0 0)",
+  "base-300": "oklch(0.86 0 0)",
+  "base-content": "oklch(0.278078 0.029596 256.848)",
 
   info: "oklch(0.7206 0.191 231.6)",
   infoContent: "oklch(0 0 0)",
