@@ -42,14 +42,17 @@ public abstract class LayoutFileNameProvider<TRequest> : ILayoutFileNameProvider
 
 internal sealed class DefaultLayoutFileNameProvider<TRequest> : LayoutFileNameProvider<TRequest>
 {
+    private static readonly string Wide = RequestScreenSize.Wide.ToString().ToLowerInvariant();
+    private static readonly string Compact = RequestScreenSize.Compact.ToString().ToLowerInvariant();
+    
     public override IEnumerable<(string LayoutName, string FileName)> Get(IRequestContextReader context, TRequest request)
     {
         if (context.RequestData().ScreenSize != RequestScreenSize.Compact)
         {
-            yield return ("wide", "wide");
+            yield return (Wide, Wide);
         }
 
-        yield return ("compact", "compact");
+        yield return (Compact, Compact);
     }
 
     public override int Priority => 100;
