@@ -3,6 +3,7 @@ using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Bookshop.ServerDrivenUI.Api.Features.Shared;
+using Bookshop.ServerDriveUI.Elements;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.Shared.BooksPromoted;
 
@@ -11,6 +12,7 @@ internal sealed class BooksPromotedBuilder(IRazorXmlViewParser parser, IAppUrlBu
 {
     public Task<MaySucceed<IElement>> Build(BookPromotedInput input)
     {
+        var width = input.Books.Length > 2 ? StackWidth.OneFourth : StackWidth.OneHalf;
         return parser.Read(new RazorViewParseRequest<BookPromotedViewModel>
         {
             ViewModel = new BookPromotedViewModel
@@ -21,7 +23,8 @@ internal sealed class BooksPromotedBuilder(IRazorXmlViewParser parser, IAppUrlBu
                 {
                     Title = x.Title,
                     ImageUrl = x.ImageUrl,
-                    DetailsUrl = appUrlBuilder.Details(x.Isbn)
+                    DetailsUrl = appUrlBuilder.Details(x.Isbn, x.Title),
+                    Width = width
                 }).ToArray()
             }
         });

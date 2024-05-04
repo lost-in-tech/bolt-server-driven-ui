@@ -33,6 +33,17 @@ builder.Services.Scan<Program>(new IocScannerOptions
 builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(AppShellProvider<>)));
 builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IFallbackScreenComposer<>), typeof(FallbackScreenComposer<>)));
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:3000","*")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,6 +55,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors();
 
 app.MapEndpoints();
 

@@ -21,7 +21,7 @@ internal sealed class PageMetaDataHandler(IBookRepository bookRepository) : Scre
             new ServerDriveUI.Elements.PageMetaData
             {
                 Title = book.Title,
-                MetaData = new []
+                Items = new []
                 {
                     new PageMetaDataItem
                     {

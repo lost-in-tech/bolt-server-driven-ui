@@ -28,6 +28,7 @@ internal sealed class RequestDataProvider (
             Mode = mode.Value,
             App = app,
             CorrelationId = correlationId,
+            ScreenSize = ReadHeaderAsEnum<RequestScreenSize>(keys.ScreenSize) ?? RequestScreenSize.Wide,
             RootApp = EmptyAlternative(requestWrapper.Header(keys.RootApp), app),
             Device = ReadHeaderAsEnum<Device>(keys.Device), 
             Platform = ReadHeaderAsEnum<Platform>(keys.Platform),

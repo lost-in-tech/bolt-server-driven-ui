@@ -17,6 +17,9 @@
             <Text>@Model.Summary</Text>
         </Paragraph>
         <NavigateLink Url="@Model.BackUrl">
+            <OnClick _type="NavigateAction" Name="navigate">
+                <Data Url="/"/>
+            </OnClick>
             <Elements>
                 <Text Value="@Model.BackText"/>
             </Elements>

@@ -5,7 +5,7 @@ namespace Bookshop.ServerDriveUI.Elements;
 public class PageMetaData : IMetaData
 {
     public required string Title { get; init; }
-    public required IEnumerable<PageMetaDataItem> MetaData { get; init; }
+    public required IEnumerable<PageMetaDataItem> Items { get; init; }
 }
 
 public class PageMetaDataItem

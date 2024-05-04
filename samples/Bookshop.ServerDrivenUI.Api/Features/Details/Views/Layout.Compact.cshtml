@@ -1,4 +1,5 @@
 @page
+@using Bookshop.ServerDriveUI.Elements
 @model Bookshop.ServerDrivenUI.Api.Features.Details.DetailsRequest
 
 @{
@@ -6,7 +7,30 @@
 }
 
 <Stack>
+    <Gap Xs="@UiSpace.Md"/>
     <Elements>
-        <Text Value="Testing"/>
+        <Placeholder Name="home:header">
+            <Sections>
+                <Item>app-shell:header</Item>
+            </Sections>
+        </Placeholder>
+        <Divider/>
+        <Container>
+            <Elements>
+                <Placeholder Name="body:1">
+                    <Sections>
+                        <Item>book-details</Item>
+                        <Item>book-details-cta</Item>
+                    </Sections>
+                </Placeholder>
+            </Elements>
+        </Container>
+        <Divider/>
+        
+        <Placeholder Name="home:footer">
+            <Sections>
+                <Item>app-shell:footer</Item>
+            </Sections>
+        </Placeholder>
     </Elements>
 </Stack>

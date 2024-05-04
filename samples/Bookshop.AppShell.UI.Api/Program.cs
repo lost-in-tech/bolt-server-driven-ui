@@ -24,6 +24,17 @@ builder.Services.Scan<Program>(new IocScannerOptions
     SkipWhenAutoBindMissing = true
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "test",
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:3000/","*")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,7 +45,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("test");
 app.MapEndpoints();
 
 app.Run();

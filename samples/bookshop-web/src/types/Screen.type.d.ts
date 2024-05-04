@@ -17,6 +17,8 @@ export type Layouts = {
   compact?: Layout;
 };
 
+export type LayoutNames = keyof Layouts;
+
 export type ScreenSection = {
   name: string;
   element: IElement;

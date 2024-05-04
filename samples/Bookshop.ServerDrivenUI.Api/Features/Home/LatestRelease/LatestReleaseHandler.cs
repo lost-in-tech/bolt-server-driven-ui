@@ -20,11 +20,13 @@ internal sealed class LatestReleaseHandler(IBookRepository bookRepository,
     
     protected override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, HomePageRequest request, CancellationToken ct)
     {
+        var skip = context.RequestData().ScreenSize == RequestScreenSize.Wide ? 4 : 2;
+        var take = skip;
         var books = await bookRepository.GetAll();
 
         return await booksPromotedBuilder.Build(new BookPromotedInput
         {
-            Books = books.Skip(2).Take(2).ToArray(),
+            Books = books.Skip(skip).Take(take).ToArray(),
             Heading = "Latest Releases"
         });
     }

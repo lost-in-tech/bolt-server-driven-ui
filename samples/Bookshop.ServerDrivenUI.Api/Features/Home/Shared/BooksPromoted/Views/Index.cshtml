@@ -19,7 +19,7 @@
                 @foreach (var book in Model.Items)
                 {
                     <Stack>
-                        <Width Xs="OneHalf"/>
+                        <Width Xs="@book.Width"/>
                         <Elements>
                             <NavigateLink Url="@book.DetailsUrl">
                                 <Elements>

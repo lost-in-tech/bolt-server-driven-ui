@@ -29,7 +29,7 @@ internal sealed class BooksOfTheWeekHandler(
         return await booksPromotedBuilder.Build(new BookPromotedInput
         {
             IncludeSeparator = true,
-            Books = books.Take(2).ToArray(),
+            Books = books.Take(context.RequestData().ScreenSize == RequestScreenSize.Wide ? 4 : 2).ToArray(),
             Heading = "Books of the week"
         });
     }

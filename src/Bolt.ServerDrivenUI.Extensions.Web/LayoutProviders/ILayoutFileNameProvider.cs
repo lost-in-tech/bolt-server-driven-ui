@@ -51,8 +51,10 @@ internal sealed class DefaultLayoutFileNameProvider<TRequest> : LayoutFileNamePr
         {
             yield return (Wide, Wide);
         }
-
-        yield return (Compact, Compact);
+        else
+        {
+            yield return (Compact, Compact);
+        }
     }
 
     public override int Priority => 100;

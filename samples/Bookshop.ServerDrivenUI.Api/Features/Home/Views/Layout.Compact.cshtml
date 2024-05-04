@@ -1,11 +1,39 @@
 @page
+@using Bookshop.ServerDriveUI.Elements
 @model Bookshop.ServerDrivenUI.Api.Features.Home.HomePageRequest
 
 @{
     Layout = null;
 }
 <Stack>
+    <Gap Xs="@UiSpace.Md"/>
     <Elements>
-        <Text Value="Hello world compact"/>
+        <Placeholder Name="home:header">
+            <Sections>
+                <Item>app-shell:header</Item>
+            </Sections>
+        </Placeholder>
+        <Divider/>
+        <Container>
+            <Elements>
+                <Stack>
+                    <Gap Xs="@UiSpace.Md"/>
+                    <Elements>
+                        <Placeholder Name="body:1">
+                            <Sections>
+                                <Item>latest-release</Item>
+                                <Item>books-of-the-week</Item>
+                            </Sections>
+                        </Placeholder>
+                    </Elements>
+                </Stack>
+            </Elements>
+        </Container>
+        <Divider/>
+        <Placeholder Name="home:footer">
+            <Sections>
+                <Item>app-shell:footer</Item>
+            </Sections>
+        </Placeholder>
     </Elements>
 </Stack>

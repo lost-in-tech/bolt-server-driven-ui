@@ -1,11 +1,27 @@
-import { Screen } from "./types";
+import { LayoutNames, Screen } from "./types";
 
-const fetchSdui = async (path: string): Promise<Screen> => {
-  const hasSlash = path?.indexOf("/") === 0;
-  const url = `${process.env.API_URL}${hasSlash ? "" : "/"}${path}`;
+export type FetchSduiProps = {
+  url: string;
+  screenSize: LayoutNames;
+  app: string;
+  tenant: string;
+  requestUri: string;
+  device: string;
+  platform: string;
+};
 
-  var rsp = await fetch(url, { cache: "no-cache" });
-
+const fetchSdui = async (props: FetchSduiProps): Promise<Screen> => {
+  var rsp = await fetch(props.url, {
+    headers: {
+      "x-screen": props.screenSize,
+      "x-tenant": props.tenant,
+      "x-request-uri": props.requestUri,
+      "x-device": props.device,
+      "x-platform": props.platform,
+      "x-app": props.app,
+    },
+    cache: "no-cache",
+  });
   return await rsp.json();
 };
 

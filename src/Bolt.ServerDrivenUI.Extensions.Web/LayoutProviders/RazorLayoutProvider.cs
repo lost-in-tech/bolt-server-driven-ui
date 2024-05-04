@@ -155,10 +155,5 @@ internal sealed class RazorLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         };
     }
 
-    public bool IsApplicable(IRequestContextReader context, TRequest request)
-    {
-        var requestData = context.RequestData();
-
-        return requestData.ScreenSize is not RequestScreenSize.Compact;
-    }
+    public bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }

@@ -7,5 +7,5 @@ export type PageMetaDataItem = {
 
 export interface PageMetaData extends IMetaData {
   title: string;
-  metaData: PageMetaDataItem[];
+  items: PageMetaDataItem[];
 }
