@@ -12,6 +12,7 @@ internal sealed class AppInfoScreenContextDataProvider(
         yield return ("app", new
         {
             Name = appInfo.Name,
+            BaseUrl = appInfo.BaseUrl,
             Version = appInfo.Version
         });
     }

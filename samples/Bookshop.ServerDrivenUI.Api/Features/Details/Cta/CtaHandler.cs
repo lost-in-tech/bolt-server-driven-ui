@@ -8,7 +8,7 @@ using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 namespace Bookshop.ServerDrivenUI.Api.Features.Details.Cta;
 
 [AutoBind]
-public class CtaHandler(IRazorXmlViewParser parser) : ScreenSectionProvider<DetailsRequest>
+public class CtaHandler(IRazorXmlViewParser parser) : ScreenElementProvider<DetailsRequest>
 {
     protected override SectionInfo ForSection => new SectionInfo
     {

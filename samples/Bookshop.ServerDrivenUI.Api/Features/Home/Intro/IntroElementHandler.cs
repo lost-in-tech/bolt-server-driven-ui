@@ -9,7 +9,7 @@ namespace Bookshop.ServerDrivenUI.Api.Features.Home.Intro;
 
 [MustSucceed]
 [AutoBind]
-public class IntroSectionHandler : ScreenSectionProvider<HomePageRequest>
+public class IntroElementHandler : ScreenElementProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {
@@ -30,7 +30,7 @@ public class IntroSectionHandler : ScreenSectionProvider<HomePageRequest>
 }
 
 [AutoBind]
-public class TestLazy : ScreenSectionProvider<HomePageRequest>
+public class TestLazy : ScreenElementProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {

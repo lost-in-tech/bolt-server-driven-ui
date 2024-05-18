@@ -21,7 +21,7 @@ internal sealed class HttpRequestWrapper(IHttpContextAccessor httpContextAccesso
 
         if (request == null) return null;
 
-        return new Uri($"{request.Scheme}://{request.Host}/{request.Path}/{request.QueryString}");
+        return new Uri($"{request.Scheme}://{request.Host}{request.Path}{request.QueryString}");
     }
 
     public string Header(string name)

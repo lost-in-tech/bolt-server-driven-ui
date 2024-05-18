@@ -4,17 +4,23 @@ namespace Bookshop.ServerDriveUI.Elements;
 
 public class Divider : IElement
 {
-    public DividerVariation? Variation { get; set; }
+    public Direction? Direction { get; set; }
+    public DividerVariant? Variant { get; set; }
+    public Responsive<DividerWeight?>? Weight { get; set; }
+    public Color? Color { get; set; }
 }
 
-public enum DividerVariation
+public enum DividerVariant
 {
-    Neutral,
-    Primary,
-    Secondary,
-    Accent,
-    Info,
-    Success,
-    Warning,
-    Error
+    Solid,
+    Dotted,
+    Dashed
 }
+
+public enum DividerWeight
+{
+    Regular,
+    Medium,
+    Thick,
+    ExtraThick
+} 

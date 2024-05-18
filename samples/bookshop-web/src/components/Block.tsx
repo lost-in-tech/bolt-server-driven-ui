@@ -1,158 +1,59 @@
-import { IElement, RenderElementProps, Responsive } from "@/types";
-import RenderElement from "./RenderElement";
-import { UiSpace } from "@/types/UiSpace.type";
-import { responsiveSpacing, sprinkles } from "@/design-system/sprinkles.css";
+import { RenderElement, RenderChildElements } from "./sdui/RenderElement";
+import { Padding } from "@/design-system/Padding";
+import { Element, RenderElementProps } from "./sdui/Element";
+import { Margin } from "@/design-system/Margin";
+import { Responsive } from "@/design-system/Responsive";
+import { FontSize, FontWeight } from "@/design-system/Font";
+import { buildPaddingClassNames } from "@/design-system/PaddingStyle";
+import { buildMarginClassNames } from "@/design-system/MarginStyle";
+import { Width } from "@/design-system/Width";
+import {
+  buildMinMaxWidthStyle,
+  buildWidthClassNames,
+} from "@/design-system/WidthStyle";
+import {
+  buildFontSizeClassNames,
+  buildFontWeightClassNames,
+} from "@/design-system/FontStyle";
+import {
+  buildBgColorClassNames,
+  buildTextColorClassNames,
+} from "@/design-system/ColorStyle";
+import { Color } from "@/design-system/Color";
 
-interface BlockElement extends IElement {
-  minWidth: number;
-  maxWidth: number;
-
-  paddingLeft?: Responsive<UiSpace>;
-  paddingRight?: Responsive<UiSpace>;
-  paddingTop?: Responsive<UiSpace>;
-  paddingBottom?: Responsive<UiSpace>;
-
-  elements: IElement[];
-}
+type BlockElement = Element &
+  Padding &
+  Margin & {
+    minWidth?: number;
+    maxWidth?: number;
+    fontSize?: Responsive<FontSize>;
+    fontWeight?: Responsive<FontWeight>;
+    textColor?: Responsive<Color>;
+    width?: Responsive<Width>;
+    bgColor?: Responsive<Color>;
+  };
 
 export const Block = (props: RenderElementProps<BlockElement>) => {
   const childElements = props.element.elements;
-  const needClass =
-    props.element.paddingLeft ||
-    props.element.paddingRight ||
-    props.element.paddingTop ||
-    props.element.paddingBottom ||
-    props.element.minWidth ||
-    props.element.maxWidth;
+
+  const classNames: string[] = [];
+  classNames.push("inline-block w-full");
+  classNames.push(buildPaddingClassNames(props.element));
+  classNames.push(buildMarginClassNames(props.element));
+  classNames.push(buildWidthClassNames(props.element.width));
+  classNames.push(buildFontSizeClassNames(props.element.fontSize));
+  classNames.push(buildFontWeightClassNames(props.element.fontWeight));
+  classNames.push(buildBgColorClassNames(props.element.bgColor));
+  classNames.push(buildTextColorClassNames(props.element.textColor));
+
+  const style = buildMinMaxWidthStyle(
+    props.element.minWidth,
+    props.element.maxWidth
+  );
 
   return (
-    <div
-      className={
-        needClass
-          ? sprinkles({
-              paddingTop: [
-                responsiveSpacing[props.element.paddingTop?.xs ?? UiSpace.none],
-                responsiveSpacing[props.element.paddingTop?.xs ?? UiSpace.none],
-                responsiveSpacing[
-                  props.element.paddingTop?.sm ??
-                    props.element.paddingTop?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingTop?.md ??
-                    props.element.paddingTop?.sm ??
-                    props.element.paddingTop?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingTop?.lg ??
-                    props.element.paddingTop?.md ??
-                    props.element.paddingTop?.sm ??
-                    props.element.paddingTop?.xs ??
-                    UiSpace.none
-                ],
-              ],
-
-              paddingBottom: [
-                responsiveSpacing[
-                  props.element.paddingBottom?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingBottom?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingBottom?.sm ??
-                    props.element.paddingBottom?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingBottom?.md ??
-                    props.element.paddingBottom?.sm ??
-                    props.element.paddingBottom?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingBottom?.lg ??
-                    props.element.paddingBottom?.md ??
-                    props.element.paddingBottom?.sm ??
-                    props.element.paddingBottom?.xs ??
-                    UiSpace.none
-                ],
-              ],
-
-              paddingLeft: [
-                responsiveSpacing[
-                  props.element.paddingLeft?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingLeft?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingLeft?.sm ??
-                    props.element.paddingLeft?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingLeft?.md ??
-                    props.element.paddingLeft?.sm ??
-                    props.element.paddingLeft?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingLeft?.lg ??
-                    props.element.paddingLeft?.md ??
-                    props.element.paddingLeft?.sm ??
-                    props.element.paddingLeft?.xs ??
-                    UiSpace.none
-                ],
-              ],
-
-              paddingRight: [
-                responsiveSpacing[
-                  props.element.paddingRight?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingRight?.xs ?? UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingRight?.sm ??
-                    props.element.paddingRight?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingRight?.md ??
-                    props.element.paddingRight?.sm ??
-                    props.element.paddingRight?.xs ??
-                    UiSpace.none
-                ],
-                responsiveSpacing[
-                  props.element.paddingRight?.lg ??
-                    props.element.paddingRight?.md ??
-                    props.element.paddingRight?.sm ??
-                    props.element.paddingRight?.xs ??
-                    UiSpace.none
-                ],
-              ],
-            })
-          : undefined
-      }
-      style={{
-        display: "flex",
-        width: "100%",
-        minWidth: props.element.minWidth
-          ? `${props.element.minWidth}px`
-          : undefined,
-        maxWidth: props.element.maxWidth
-          ? `${props.element.maxWidth}px`
-          : undefined,
-      }}
-    >
-      {childElements?.map((e, index) => (
-        <RenderElement
-          key={index}
-          {...{ element: e, sections: props.sections }}
-        />
-      ))}
+    <div style={style} className={classNames.join(" ")}>
+      <RenderChildElements {...props} />
     </div>
   );
 };

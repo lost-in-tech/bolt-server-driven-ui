@@ -1,8 +1,8 @@
-import { IElement, RenderElementProps } from "@/types";
+import { Element, RenderElementProps } from "./sdui/Element";
 
-interface IEmptyElement extends IElement {}
+type EmptyElement = Element & {};
 
-const EmptyElement = (props: RenderElementProps<IEmptyElement>) => {
+const EmptyElement = (props: RenderElementProps<EmptyElement>) => {
   return null;
 };
 

@@ -8,7 +8,7 @@ using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 namespace Bookshop.AppShell.UI.Api.Features.AppShell.Header;
 
 [AutoBind]
-internal sealed class HeaderProvider(IRazorXmlViewParser parser): ScreenSectionProvider<AppShellRequest>
+internal sealed class HeaderProvider(IRazorXmlViewParser parser): ScreenElementProvider<AppShellRequest>
 {
     protected override SectionInfo ForSection => new()
     {

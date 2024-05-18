@@ -23,7 +23,7 @@ const buildFetchProps = ({ params, searchParams }: Props): FetchSduiProps => {
     device: "Desktop",
     platform: "Windows",
     requestUri: apiRequestUrl,
-    screenSize: layout,
+    screenSize: "wide",
     tenant: "bookworm-au",
     url: apiRequestUrl,
   };

@@ -9,12 +9,13 @@
                 <Divider/>        
             } 
         }
-        <Heading Text="@Model.Heading">
-            <FontSize Xs="@UiSpace.TwoXl"/>
-        </Heading>
+        <Text As="@TextAs.H1" Value="@Model.Heading">
+            <FontSize Xs="@FontSize.TwoXl"/>
+            <FontWeight Xs="@FontWeight.Medium"/>
+        </Text>
         <Stack>
             <Direction Xs="@Direction.Horizontal"/>
-            <Gap Xs="@UiSpace.ThreeXs"/>
+            <Gap Xs="@UiSpace.Xs"/>
             <Elements>
                 @foreach (var book in Model.Items)
                 {

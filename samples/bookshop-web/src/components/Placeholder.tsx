@@ -1,10 +1,11 @@
-import { IElement, RenderElementProps } from "@/types";
-import RenderElement from "./RenderElement";
+import { RenderElementProps } from "./sdui/Element";
+import { RenderElement, RenderChildElements } from "./sdui/RenderElement";
+import { Element } from "./sdui/Element";
 
-interface PlaceholderElement extends IElement {
+type PlaceholderElement = Element & {
   name: string;
   sections: string[];
-}
+};
 
 const Placeholder = (props: RenderElementProps<PlaceholderElement>) => {
   if (props.element.sections == null || props.element.sections.length == 0)

@@ -1,4 +1,4 @@
-import { Responsive } from "@/types";
+import { Responsive } from "@/design-system/Responsive";
 import { CSSProperties } from "react";
 
 export const buildMedia = (propName: string, propVarName: string) => {

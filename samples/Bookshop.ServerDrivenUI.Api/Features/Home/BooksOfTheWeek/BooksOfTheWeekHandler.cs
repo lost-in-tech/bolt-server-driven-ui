@@ -15,7 +15,7 @@ namespace Bookshop.ServerDrivenUI.Api.Features.Home.BooksOfTheWeek;
 internal sealed class BooksOfTheWeekHandler(
     IBookRepository bookRepository,
     BooksPromotedBuilder booksPromotedBuilder) 
-    : ScreenSectionProvider<HomePageRequest>
+    : ScreenElementProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {

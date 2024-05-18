@@ -14,7 +14,7 @@ namespace Bookshop.ServerDrivenUI.Api.Features.Details.Summary;
 [AutoBind]
 internal sealed class BookSummaryHandler(IBookRepository repository,
     IAppUrlBuilder appUrlBuilder,
-    IRazorXmlViewParser viewParser) : ScreenSectionProvider<DetailsRequest>
+    IRazorXmlViewParser viewParser) : ScreenElementProvider<DetailsRequest>
 {
     protected override SectionInfo ForSection => new()
     {

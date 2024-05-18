@@ -13,7 +13,7 @@ namespace Bookshop.ServerDrivenUI.Api.Features.List.SearchResult;
 internal sealed class SearchResultHandler(IRazorXmlViewParser parser,
     IAppUrlBuilder appUrlBuilder,
     IBookRepository bookRepository) 
-    : ScreenSectionProvider<ListPageRequest>
+    : ScreenElementProvider<ListPageRequest>
 {
     protected override SectionInfo ForSection => new()
     {

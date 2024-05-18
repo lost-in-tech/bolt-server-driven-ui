@@ -1,15 +1,13 @@
 "use client";
-import { IElement, RenderElementProps } from "@/types";
-import RenderElement from "./RenderElement";
+import { RenderChildElements } from "./sdui/RenderElement";
 import Link from "next/link";
-import { sprinkles } from "@/design-system/sprinkles.css";
 import { publish, PublishEventProps } from "@/utils/csutom-events";
+import { Element, RenderElementProps } from "./sdui/Element";
 
-interface LinkElement extends IElement {
+type LinkElement = Element & {
   url: string;
-  elements: IElement[];
   onClick?: PublishEventProps;
-}
+};
 
 export const NavigateLink = (props: RenderElementProps<LinkElement>) => {
   const childElements = props.element.elements;
@@ -24,19 +22,8 @@ export const NavigateLink = (props: RenderElementProps<LinkElement>) => {
   };
 
   return (
-    <Link
-      className={sprinkles({
-        color: "base-content",
-      })}
-      href={props.element.url}
-      onClick={handleClick}
-    >
-      {childElements?.map((e, index) => (
-        <RenderElement
-          key={index}
-          {...{ element: e, sections: props.sections }}
-        />
-      ))}
+    <Link href={props.element.url} onClick={handleClick}>
+      <RenderChildElements {...props} />
     </Link>
   );
 };

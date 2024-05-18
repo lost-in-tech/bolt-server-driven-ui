@@ -3,6 +3,7 @@ using Bolt.ServerDrivenUI.Core;
 namespace Bolt.ServerDrivenUI.Composer;
 
 internal sealed class LoadScreenContextDataProviderTask(
+    IAppInfoProvider appInfoProvider,
     IEnumerable<IScreenContextDataProvider> screenContextDataProviders,
     IRequestKeyNamesProvider keyNamesProvider)
 {
@@ -44,10 +45,10 @@ internal sealed class LoadScreenContextDataProviderTask(
         var keySections = keyNamesProvider.Get().SectionNames;
         var encodedLazySectionsValue = Uri.EscapeDataString(lazySections);
         
-        if (uri == null) return $"/?{keySections}={encodedLazySectionsValue}";
+        if (uri == null) return $"{appInfoProvider.Get().BaseUrl}/?{keySections}={encodedLazySectionsValue}";
         
-        if(string.IsNullOrWhiteSpace(uri.Query)) return $"/{uri.AbsolutePath.Trim('/')}/?{keySections}={encodedLazySectionsValue}";
+        if(string.IsNullOrWhiteSpace(uri.Query)) return $"{appInfoProvider.Get().BaseUrl}/{uri.AbsolutePath.Trim('/')}/?{keySections}={encodedLazySectionsValue}";
 
-        return $"/{uri.PathAndQuery.TrimStart('/')}&{keySections}={encodedLazySectionsValue}";
+        return $"{appInfoProvider.Get().BaseUrl}/{uri.PathAndQuery.Trim('/')}&{keySections}={encodedLazySectionsValue}";
     }
 }

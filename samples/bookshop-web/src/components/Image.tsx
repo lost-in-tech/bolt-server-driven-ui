@@ -1,9 +1,9 @@
-import { IElement, RenderElementProps } from "@/types";
+import { Element, RenderElementProps } from "./sdui/Element";
 
-interface ImageElement extends IElement {
+type ImageElement = Element & {
   url: string;
   alt: string;
-}
+};
 
 export const Image = (props: RenderElementProps<ImageElement>) => {
   return (

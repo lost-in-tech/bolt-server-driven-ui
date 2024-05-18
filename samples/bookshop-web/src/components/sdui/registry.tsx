@@ -4,12 +4,12 @@ import Text from "../Text";
 import { Container } from "../Container";
 import Placeholder from "../Placeholder";
 import EmptyElement from "../EmptyElement";
-import { IElement, RenderElementProps } from "@/types";
 import { Heading, Paragraph, Image, NavigateLink, Block, Divider } from "..";
+import { Element, RenderElementProps } from "./Element";
 
 const ComponentRegistry: Record<
   string,
-  (props: RenderElementProps<IElement>) => ReactNode
+  (props: RenderElementProps<Element>) => ReactNode
 > = {
   Stack: (props: any) => <Stack {...props} />,
   Text: (props: any) => <Text {...props} />,

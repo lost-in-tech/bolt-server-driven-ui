@@ -11,7 +11,7 @@ namespace Bookshop.ServerDrivenUI.Api.Features.Home.LatestRelease;
 [AutoBind]
 internal sealed class LatestReleaseHandler(IBookRepository bookRepository,
     BooksPromotedBuilder booksPromotedBuilder) 
-    : ScreenSectionProvider<HomePageRequest>
+    : ScreenElementProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {

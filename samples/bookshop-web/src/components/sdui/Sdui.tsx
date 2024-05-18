@@ -1,6 +1,6 @@
 import { LayoutNames, Layouts, Screen } from "@/types";
 import { GlobalEvents } from "@/utils/global-events";
-import RenderElement from "../RenderElement";
+import RenderElement from "./RenderElement";
 
 export type SduiProps = {
   appName: string;
@@ -20,18 +20,10 @@ export const Sdui = (props: SduiProps) => {
     console.log(props.screen.layouts);
     return <></>;
   }
-
-  console.log("sdui...");
-
   return (
     <>
       <GlobalEvents />
-      <RenderElement
-        {...{
-          element: element,
-          sections: props.screen.sections,
-        }}
-      />
+      <RenderElement element={element} sections={props.screen.sections} />
     </>
   );
 };
