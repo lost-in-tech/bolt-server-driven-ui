@@ -9,23 +9,25 @@ using Bookshop.ServerDriveUI.Elements;
 namespace Bookshop.ServerDrivenUI.Api.Features.Details.PageMetaData;
 
 [AutoBind]
-internal sealed class PageMetaDataHandler(IBookRepository bookRepository) : ScreenMetaDataProvider<DetailsRequest>
+internal sealed class PageMetaDataHandler(IBookRepository bookRepository) : ScreenSectionProvider<DetailsRequest>
 {
-    protected override async Task<MaySucceed<IEnumerable<IMetaData>>> Get(IRequestContextReader context, DetailsRequest request, CancellationToken ct)
+    protected override async Task<MaySucceed<ScreenElement>> Get(IRequestContextReader context, DetailsRequest request,
+        CancellationToken ct)
     {
         var book = await bookRepository.GetById(request.Isbn);
 
         if (book == null) return HttpFailure.NotFound();
 
-        return new IMetaData[] {
+        var metaData =
             new ServerDriveUI.Elements.PageMetaData
             {
                 Title = book.Title,
-                Items = new []
+                Items = new[]
                 {
                     new PageMetaDataItem
                     {
-                        Content = "Best books 2023, top books 2023, 2023 Goodreads Choice Awards, votes, ratings, book reviews",
+                        Content =
+                            "Best books 2023, top books 2023, 2023 Goodreads Choice Awards, votes, ratings, book reviews",
                         Name = "keywords"
                     },
                     new PageMetaDataItem
@@ -34,7 +36,10 @@ internal sealed class PageMetaDataHandler(IBookRepository bookRepository) : Scre
                         Name = "og:title"
                     }
                 }
-            }
-        }.AsEnumerable().ToMaySucceed();
+            };
+
+        return ScreenElement.New(metaData);
     }
+
+    protected override SectionInfo ForSection { get; }
 }

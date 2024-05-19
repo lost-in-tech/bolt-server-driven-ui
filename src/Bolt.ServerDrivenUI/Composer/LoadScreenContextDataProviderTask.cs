@@ -30,7 +30,7 @@ internal sealed class LoadScreenContextDataProviderTask(
             
             if (!string.IsNullOrWhiteSpace(lazySectionsValue))
             {
-                result["lazySections"] = lazySectionsValue;
+                result["lazySections"] = lazySectionNames;
                 result["lazyRequestPathAndQuery"] = BuildLazyRequestPath(context.RequestData(), lazySectionsValue);
             }
         }

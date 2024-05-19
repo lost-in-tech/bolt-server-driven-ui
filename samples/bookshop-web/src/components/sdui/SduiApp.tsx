@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Sdui, SduiProps } from "./Sdui";
 import { LayoutNames } from "@/types";
 import fetchSdui, { FetchSduiProps } from "@/fetch-sdui";
+import { LoadLazySections } from "./LoadLazySections";
 
 const setCookie = (cname: string, cvalue: string, exdays: number) => {
   const d = new Date();
@@ -63,5 +64,10 @@ export const SduiApp = (props: SduiAppProps) => {
     };
   }, []);
 
-  return <Sdui {...vm} />;
+  return (
+    <>
+      <Sdui {...vm} />
+      {vm?.screen && <LoadLazySections {...props} layout={layoutName} />}
+    </>
+  );
 };

@@ -1,5 +1,4 @@
 using Bolt.Endeavor;
-using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Extensions.ExternalSource;
@@ -11,7 +10,7 @@ internal sealed class AppShellProvider<T>(IExternalScreenProvider externalScreen
     : ExternalSectionProvider<T>
 {
     public override SectionInfo[] ForSections(IRequestContextReader context, T request)
-        => [new() { Name = "app-shell:header" }, new(){ Name = "app-shell:footer"}];
+        => ["app-shell:header" , "app-shell:footer"];
 
     protected override Task<MaySucceed<Screen>> Get(IRequestContextReader context, T request, CancellationToken ct)
     {

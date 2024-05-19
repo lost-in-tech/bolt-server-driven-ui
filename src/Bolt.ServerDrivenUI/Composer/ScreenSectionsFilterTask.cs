@@ -40,7 +40,7 @@ internal sealed class ScreenSectionsFilterTask<TRequest>(
                         
                         logger.LogError("{provider} failed with {failure}", typeData.Name, mayBeRequest.Failure);
 
-                        if (typeData.HasMustSceeedAttribute)
+                        if (typeData.HasMustSucceedAttribute)
                         {
                             return mayBeRequest.Failure;
                         }
@@ -52,7 +52,7 @@ internal sealed class ScreenSectionsFilterTask<TRequest>(
                     
                     logger.LogError(e, "{requestFilter} failed with exception {errorMessage}", typeData.Name, e.Message);  
                     
-                    if (typeData.HasMustSceeedAttribute)
+                    if (typeData.HasMustSucceedAttribute)
                     {
                         return HttpFailure.InternalServerError();
                     }
@@ -87,7 +87,7 @@ internal sealed class ScreenSectionsFilterTask<TRequest>(
                         
                         logger.LogError("{provider} failed with {failure}", typeData.Name, filterRsp.Failure);
 
-                        if (typeData.HasMustSceeedAttribute)
+                        if (typeData.HasMustSucceedAttribute)
                         {
                             return filterRsp.Failure;
                         }
@@ -99,7 +99,7 @@ internal sealed class ScreenSectionsFilterTask<TRequest>(
                     
                     logger.LogError(e, "{requestFilter} failed with exception {errorMessage}", typeData.Name, e.Message);  
                     
-                    if (typeData.HasMustSceeedAttribute)
+                    if (typeData.HasMustSucceedAttribute)
                     {
                         return HttpFailure.InternalServerError();
                     }

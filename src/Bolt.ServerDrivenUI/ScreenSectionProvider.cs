@@ -9,41 +9,53 @@ public abstract class ScreenSectionProvider<TRequest> : IScreenSectionProvider<T
     SectionInfo[] IScreenSectionProvider<TRequest>.ForSections(IRequestContextReader context, TRequest request)
         => [ForSection];
 
-    public abstract Task<MaySucceed<ScreenSectionResponse>> Get(IRequestContextReader context, TRequest request, CancellationToken ct);
+    async Task<MaySucceed<ScreenSectionResponse>> IScreenSectionProvider<TRequest>.Get(IRequestContextReader context,
+        TRequest request, CancellationToken ct)
+    {
+        var rsp = await Get(context, request, ct);
+
+        if (rsp.IsFailed) return rsp.Failure;
+
+        return new ScreenSectionResponse()
+        {
+            Sections = rsp.Value.Element == null
+                ? []
+                :
+                [
+                    new ScreenSection
+                    {
+                        Element = rsp.Value.Element,
+                        Name = ForSection.Name
+                    }
+                ],
+            MetaData = rsp.Value.MetaData ?? Enumerable.Empty<IMetaData>()
+        };
+    }
+
+    protected abstract Task<MaySucceed<ScreenElement>> Get(IRequestContextReader context, TRequest request, CancellationToken ct);
     
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 
     protected abstract SectionInfo ForSection { get; }
+}
 
-    protected MaySucceed<ScreenSectionResponse> ScreenSection(IElement element) =>
-        new(new ScreenSectionResponse
-        {
-            Sections = [new ScreenSection
-            {
-                Element = element,
-                Name = ForSection.Name
-            }],
-            MetaData = Enumerable.Empty<IMetaData>()
-        });
+public record ScreenElement
+{
+    private ScreenElement(IElement? element, IEnumerable<IMetaData>? metaData)
+    {
+        Element = element;
+        MetaData = metaData;
+    }
     
-    protected MaySucceed<ScreenSectionResponse> ScreenSection(IMetaData metaData) =>
-        new(new ScreenSectionResponse
-        {
-            Sections = [],
-            MetaData = [metaData]
-        });
+    public IElement? Element { get; set; }
+    public IEnumerable<IMetaData>? MetaData { get; set; }
+
+
+    private static readonly ScreenElement Empty = new ScreenElement(null, null);
+    public static ScreenElement None => Empty;
+    public static ScreenElement New(IElement? element) => new(element, Enumerable.Empty<IMetaData>());
+    public static ScreenElement New(IMetaData? metaData) => new(null, [metaData]);
+    public static ScreenElement New(params IMetaData[] metaData) => new(null, metaData);
     
-    protected MaySucceed<ScreenSectionResponse> ScreenSection(IEnumerable<IMetaData> metaData) =>
-        new(new ScreenSectionResponse
-        {
-            Sections = [],
-            MetaData = metaData
-        });
-    
-    protected MaySucceed<ScreenSectionResponse> ScreenSection(params IMetaData[] metaData) =>
-        new(new ScreenSectionResponse
-        {
-            Sections = [],
-            MetaData = metaData
-        });
+    public static ScreenElement New(IElement? element, params IMetaData[] metaData) => new(element, metaData);
 }

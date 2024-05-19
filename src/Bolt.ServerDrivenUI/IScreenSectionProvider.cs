@@ -15,6 +15,12 @@ public struct SectionInfo
 {
     public string Name { get; init; }
     public SectionScope Scope { get; init; }
+
+    public static implicit operator SectionInfo(string source) => new()
+    {
+        Name = source,
+        Scope = SectionScope.Default
+    };
 }
 
 public enum SectionScope

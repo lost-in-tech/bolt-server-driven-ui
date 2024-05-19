@@ -55,7 +55,7 @@ internal sealed class LoadResponseFilterDataTask<TRequest>(
             
             logger.LogError("{filterDataLoader} failed with {failure}", typeData.Name, rsp.Failure);
 
-            if (typeData.HasMustSceeedAttribute) return rsp.Failure;
+            if (typeData.HasMustSucceedAttribute) return rsp.Failure;
         }
         catch (Exception e)
         {
@@ -63,7 +63,7 @@ internal sealed class LoadResponseFilterDataTask<TRequest>(
             
             logger.LogError(e, "{filterDataLoader} failed with exception {errorMessage}", typeData.Name, e.Message); 
 
-            if (typeData.HasMustSceeedAttribute)
+            if (typeData.HasMustSucceedAttribute)
             {
                 return HttpFailure.InternalServerError();
             }

@@ -8,15 +8,13 @@ using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 namespace Bookshop.ServerDrivenUI.Api.Features.Details.Cta;
 
 [AutoBind]
-public class CtaHandler(IRazorXmlViewParser parser) : ScreenElementProvider<DetailsRequest>
+public class CtaHandler(IRazorXmlViewParser parser) : ScreenSectionProvider<DetailsRequest>
 {
-    protected override SectionInfo ForSection => new SectionInfo
+    protected override SectionInfo ForSection => "book-details-cta";
+    
+    protected override async Task<MaySucceed<ScreenElement>> Get(IRequestContextReader context, DetailsRequest request, CancellationToken ct)
     {
-        Name = "book-details-cta"
-    };
-    protected override async Task<MaySucceed<IElement>> Get(IRequestContextReader context, DetailsRequest request, CancellationToken ct)
-    {
-        var elm = await parser.Read(new RazorViewParseRequest<CtaViewModel>
+        var parseRsp = await parser.Read(new RazorViewParseRequest<CtaViewModel>
         {
             ViewModel = new CtaViewModel
             {
@@ -24,6 +22,8 @@ public class CtaHandler(IRazorXmlViewParser parser) : ScreenElementProvider<Deta
             }
         });
 
-        return elm;
+        if (parseRsp.IsFailed) return parseRsp.Failure;
+
+        return ScreenElement.New(parseRsp.Value);
     }
 }

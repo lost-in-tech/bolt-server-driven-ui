@@ -6,6 +6,7 @@ import Placeholder from "../Placeholder";
 import EmptyElement from "../EmptyElement";
 import { Heading, Paragraph, Image, NavigateLink, Block, Divider } from "..";
 import { Element, RenderElementProps } from "./Element";
+import { LazyBlock } from "../LazyBlock";
 
 const ComponentRegistry: Record<
   string,
@@ -21,6 +22,7 @@ const ComponentRegistry: Record<
   NavigateLink: (props: any) => <NavigateLink {...props} />,
   Block: (props: any) => <Block {...props} />,
   Divider: (props: any) => <Divider {...props} />,
+  LazyBlock: (props: any) => <LazyBlock {...props} />,
   EmptyElement: (props: any) => <EmptyElement {...props} />,
 };
 
