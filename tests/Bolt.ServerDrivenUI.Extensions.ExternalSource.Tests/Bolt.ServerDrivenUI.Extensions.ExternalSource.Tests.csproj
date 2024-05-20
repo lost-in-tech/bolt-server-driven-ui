@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bolt.Common.Extensions" Version="5.0.1"/>
+        <PackageReference Include="Bolt.Common.Extensions" Version="5.0.7" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,10 +4,6 @@ namespace Bookshop.ServerDriveUI.Elements;
 
 public class LazyBlock : IElement
 {
-    public string? FetchUrl { get; set; }
-    public HttpMethod? FetchMethod { get; set; }
-    public object? FetchContent { get; set; }
-    
     /// <summary>
     /// Section name that this lazy block should render when loading of sections completed
     /// </summary>

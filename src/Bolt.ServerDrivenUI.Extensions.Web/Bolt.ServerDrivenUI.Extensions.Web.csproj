@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Bolt.Polymorphic.Serializer" Version="1.0.0-beta04" />
+        <PackageReference Include="Bolt.Polymorphic.Serializer" Version="1.0.0-beta05" />
     </ItemGroup>
 
 </Project>
