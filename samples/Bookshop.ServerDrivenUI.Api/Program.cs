@@ -7,6 +7,7 @@ using Bolt.ServerDrivenUI.Extensions.Web.Endpoints;
 using Bookshop.ServerDrivenUI.Api.Features.NotFound;
 using Bookshop.ServerDrivenUI.Api.Features.Shared.AppShell;
 using Bookshop.ServerDriveUI.Elements;
+using Bookshop.ServerDriveUI.Elements.Layouts;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

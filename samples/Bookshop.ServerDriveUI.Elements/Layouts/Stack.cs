@@ -1,6 +1,6 @@
 ﻿using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace Bookshop.ServerDriveUI.Elements;
+namespace Bookshop.ServerDriveUI.Elements.Layouts;
 
 public class Stack : IElement, IHaveElements
 {
@@ -8,8 +8,25 @@ public class Stack : IElement, IHaveElements
     public Responsive<StackWidth?>? Width { get; set; }
     public Responsive<int?>? MaxWidth { get; set; }
     public Responsive<int?>? MinWidth { get; set; }
+    public Responsive<Height?>? Height { get; set; }
     public Responsive<UiSpace?>? Gap { get; set; }
+    public Responsive<AlignX?>? ContentAlignX { get; set; }
+    public Responsive<AlignY?>? ContentAlignY { get; set; }
+    
+    
+    public Responsive<FontSize?>? FontSize { get; set; }
+    public Responsive<FontWeight?>? FontWeight { get; set; }
+    public Responsive<Color?>? TextColor { get; set; }
+    public Responsive<Color?>? BgColor { get; set; }
+    
     public IElement[]? Elements { get; set; }
+}
+
+public enum Height
+{
+    Full,
+    Screen,
+    Fit,
 }
 
 public enum StackWidth
@@ -48,15 +65,6 @@ public enum StackSpace
     NineXl, // 36,
     TenXl, // 38,
     ElevenXl, // 40,
-}
-
-public class Responsive<T>
-{
-    public T? Xs { get; set; }
-    public T? Sm { get; set; }
-    public T? Md { get; set; }
-    public T? Lg { get; set; }
-    public T? Xl { get; set; }
 }
 
 public enum Direction

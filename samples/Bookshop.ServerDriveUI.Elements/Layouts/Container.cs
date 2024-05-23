@@ -1,6 +1,6 @@
 using Bolt.ServerDrivenUI.Core.Elements;
 
-namespace Bookshop.ServerDriveUI.Elements;
+namespace Bookshop.ServerDriveUI.Elements.Layouts;
 
 public class Container : IElement, IHaveElements
 {

@@ -8,7 +8,7 @@ type ContainerElement = Element & Padding & {};
 export const Container = (props: RenderElementProps<ContainerElement>) => {
   const classNames: string[] = [];
 
-  classNames.push("px-4 md:px-5 max-w-5xl");
+  classNames.push("px-4 md:px-5 max-w-5xl h-full w-full");
   classNames.push(buildPaddingClassNames(props.element));
 
   return (

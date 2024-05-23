@@ -3,6 +3,7 @@ using Bolt.ServerDrivenUI.Extensions.ExternalSource;
 using Bolt.ServerDrivenUI.Extensions.Web;
 using Bolt.ServerDrivenUI.Extensions.Web.Endpoints;
 using Bookshop.ServerDriveUI.Elements;
+using Bookshop.ServerDriveUI.Elements.Layouts;
 
 var builder = WebApplication.CreateBuilder(args);
 

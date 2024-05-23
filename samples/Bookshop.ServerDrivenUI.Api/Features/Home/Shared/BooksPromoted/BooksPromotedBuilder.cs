@@ -4,6 +4,7 @@ using Bolt.ServerDrivenUI.Core.Elements;
 using Bolt.ServerDrivenUI.Extensions.Web.RazorParser;
 using Bookshop.ServerDrivenUI.Api.Features.Shared;
 using Bookshop.ServerDriveUI.Elements;
+using Bookshop.ServerDriveUI.Elements.Layouts;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.Shared.BooksPromoted;
 

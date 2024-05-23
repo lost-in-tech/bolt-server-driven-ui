@@ -20,36 +20,43 @@ import {
   buildTextColorClassNames,
 } from "@/design-system/ColorStyle";
 import { Color } from "@/design-system/Color";
+import { Height } from "@/design-system/Height";
+import {
+  buildHeightClassNames,
+  buildMinMaxHeightStyle,
+} from "@/design-system/HeightStyle";
 
 type BlockElement = Element &
   Padding &
   Margin & {
     minWidth?: number;
     maxWidth?: number;
+    minHeight?: number;
+    maxHeight?: number;
     fontSize?: Responsive<FontSize>;
     fontWeight?: Responsive<FontWeight>;
     textColor?: Responsive<Color>;
     width?: Responsive<Width>;
+    height?: Responsive<Height>;
     bgColor?: Responsive<Color>;
   };
 
 export const Block = (props: RenderElementProps<BlockElement>) => {
-  const childElements = props.element.elements;
-
   const classNames: string[] = [];
-  classNames.push("inline-block w-full");
+  classNames.push("inline-block w-full h-full");
   classNames.push(buildPaddingClassNames(props.element));
   classNames.push(buildMarginClassNames(props.element));
   classNames.push(buildWidthClassNames(props.element.width));
+  classNames.push(buildHeightClassNames(props.element.height));
   classNames.push(buildFontSizeClassNames(props.element.fontSize));
   classNames.push(buildFontWeightClassNames(props.element.fontWeight));
   classNames.push(buildBgColorClassNames(props.element.bgColor));
   classNames.push(buildTextColorClassNames(props.element.textColor));
 
-  const style = buildMinMaxWidthStyle(
-    props.element.minWidth,
-    props.element.maxWidth
-  );
+  const style = {
+    ...buildMinMaxWidthStyle(props.element.minWidth, props.element.maxWidth),
+    ...buildMinMaxHeightStyle(props.element.minHeight, props.element.maxHeight),
+  };
 
   return (
     <div style={style} className={classNames.join(" ")}>

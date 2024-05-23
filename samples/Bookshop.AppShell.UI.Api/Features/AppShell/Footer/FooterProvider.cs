@@ -5,6 +5,7 @@ using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bookshop.ServerDriveUI.Elements;
+using Bookshop.ServerDriveUI.Elements.Layouts;
 
 namespace Bookshop.AppShell.UI.Api.Features.AppShell.Footer;
 

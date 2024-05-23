@@ -4,6 +4,7 @@ using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
 using Bookshop.ServerDriveUI.Elements;
+using Bookshop.ServerDriveUI.Elements.Layouts;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.ExpensiveContent;

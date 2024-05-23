@@ -6,24 +6,24 @@ export const ContentAlignXCssMap: Record<
   Record<ContentAlignX, string>
 > = {
   xs: {
-    left: "justify-start",
-    right: "justify-end",
-    center: "justify-center",
+    left: "justify-start items-start",
+    right: "justify-end items-end",
+    center: "justify-center items-center",
   },
   sm: {
-    left: "sm:justify-start",
-    right: "sm:justify-end",
-    center: "sm:justify-center",
+    left: "sm:justify-start sm:items-left",
+    right: "sm:justify-end sm:items-end",
+    center: "sm:justify-center sm:items-center",
   },
   md: {
-    left: "md:justify-start",
-    right: "md:justify-end",
-    center: "md:justify-center",
+    left: "md:justify-start md:items-left",
+    right: "md:justify-end md:items-end",
+    center: "md:justify-center md:items-center",
   },
   lg: {
-    left: "lg:justify-start",
-    right: "lg:justify-end",
-    center: "lg:justify-center",
+    left: "lg:justify-start lg:items-left",
+    right: "lg:justify-end lg:items-end",
+    center: "lg:justify-center lg:items-center",
   },
 };
 
