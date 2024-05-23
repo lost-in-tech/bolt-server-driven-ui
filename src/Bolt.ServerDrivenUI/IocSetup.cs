@@ -30,6 +30,8 @@ public static class IocSetup
         source.TryAddEnumerable(ServiceDescriptor.Transient<IScreenContextDataProvider,AppInfoScreenContextDataProvider>());
         source.TryAddEnumerable(ServiceDescriptor.Transient<IScreenContextDataProvider,RequestScreenContextDataProvider>());
         
+        source.TryAdd(ServiceDescriptor.Singleton<IExternalScreenProvider, IExternalScreenProvider>());
+        
         return source;
     }
 }

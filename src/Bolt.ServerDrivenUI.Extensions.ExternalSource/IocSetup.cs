@@ -16,7 +16,9 @@ public static class IocSetup
         SetupHttpClient(source, configuration, option);
 
         source.TryAddSingleton<IHttpClientWrap, HttpClientWrap>();
-        source.TryAddEnumerable(ServiceDescriptor.Transient<IExternalScreenProvider, ExternalScreenProvider>());
+
+        source.RemoveAll<IExternalScreenProvider>();
+        source.TryAdd(ServiceDescriptor.Transient<IExternalScreenProvider, ExternalScreenProvider>());
 
         source.TryAdd(ServiceDescriptor.Transient<IHttpRequestUrlBuilder, HttpRequestUrlBuilder>());
         source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpRequestHeadersProvider, HttpRequestHeadersProvider>());

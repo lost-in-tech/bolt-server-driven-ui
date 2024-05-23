@@ -8,6 +8,8 @@ namespace Bolt.ServerDrivenUI.Providers;
 internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         IEnumerable<IScreenSectionProvider<TRequest>> sectionProviders,
         ISectionFeatureFlag sectionFeatureFlag,
+        IEnumerable<IExternalScreenRequestProvider<TRequest>> externalScreenRequestProviders,
+        IExternalScreenProvider externalScreenProvider,
         ILogger<DefaultScreenBuildingBlocksProvider<TRequest>> logger)
     : IScreenBuildingBlocksProvider<TRequest>
 {
@@ -36,6 +38,19 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             tasks.Add(Execute(provider, forSections, context, request, ct));
         }
 
+        foreach (var externalScreenRequestProvider in externalScreenRequestProviders)
+        {
+            if (externalScreenRequestProvider.IsApplicable(context, request))
+            {
+                var requests = externalScreenRequestProvider.Get(context, request);
+
+                foreach (var req in requests)
+                {
+                    tasks.Add(Execute(req, context, ct));
+                }
+            }
+        }
+
         await Task.WhenAll(tasks);
 
         var sections = new List<ScreenSection>();
@@ -57,6 +72,22 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
             MetaData = metaData,
             LazySectionNames = lazySectionNames
         };
+    }
+
+    private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>> Execute(
+        ExternalScreenRequest request, IRequestContextReader context, CancellationToken ct)
+    {
+        if (await IsDisabled(request.ForSections)) 
+            return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
+
+        var rsp = await externalScreenProvider.Get(context, request, ct);
+
+        if (rsp.IsFailed || rsp.Value == null) return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
+
+        return (
+            Sections: rsp.Value.Sections,
+            MetaData: rsp.Value.MetaData ?? Enumerable.Empty<IMetaData>()
+        );
     }
     
     private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>> Execute(

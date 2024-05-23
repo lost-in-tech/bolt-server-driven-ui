@@ -31,7 +31,7 @@ builder.Services.Scan<Program>(new IocScannerOptions
     SkipWhenAutoBindMissing = true
 });
 
-builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IScreenSectionProvider<>), typeof(AppShellProvider<>)));
+builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IExternalScreenRequestProvider<>), typeof(AppShellScreenRequestProvider<>)));
 builder.Services.TryAdd(ServiceDescriptor.Transient(typeof(IFallbackScreenComposer<>), typeof(FallbackScreenComposer<>)));
 
 builder.Services.AddCors(options =>
