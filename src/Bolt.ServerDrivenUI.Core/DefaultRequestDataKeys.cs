@@ -15,4 +15,5 @@ public static class DefaultRequestDataKeys
     public const string TenantQs = "_tenant";
     public const string Mode = "_mode";
     public const string RootRequestUri = "x-request-uri";
+    public const string AuthToken = "x-auth-token";
 }

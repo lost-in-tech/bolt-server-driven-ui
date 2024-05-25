@@ -2,15 +2,16 @@
 
 namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 
-internal sealed class HttpRequestHeadersProvider
-    (IAppInfoProvider appInfoProvider, IRequestKeyNamesProvider requestKeyNamesProvider) : IHttpRequestHeadersProvider
+internal sealed class HttpRequestHeadersProvider(
+    IAppInfoProvider appInfoProvider,
+    IRequestKeyNamesProvider requestKeyNamesProvider) : IHttpRequestHeadersProvider
 {
     public Dictionary<string, string> Get(IRequestContextReader context)
     {
         var app = appInfoProvider.Get();
         var keyNames = requestKeyNamesProvider.Get();
         var requestData = context.RequestData();
-        
+
         var result = new Dictionary<string, string>();
 
         if (requestData.ScreenSize.HasValue)
@@ -22,6 +23,11 @@ internal sealed class HttpRequestHeadersProvider
         result[keyNames.RootApp] = requestData.RootApp;
         result[keyNames.CorrelationId] = requestData.CorrelationId;
         result[keyNames.Tenant] = requestData.Tenant;
+
+        if (requestData.AuthToken != null)
+        {
+            result[keyNames.AuthToken] = requestData.AuthToken;
+        }
 
         if (requestData.RootRequestUri != null)
         {
@@ -41,4 +47,3 @@ internal sealed class HttpRequestHeadersProvider
         return result;
     }
 }
-

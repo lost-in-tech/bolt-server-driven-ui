@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace Bolt.ServerDrivenUI.Core;
+﻿namespace Bolt.ServerDrivenUI.Core;
 
 public record RequestData
 {
@@ -27,6 +25,8 @@ public record RequestData
     public bool IsAuthenticated { get; init; }
     
     public Uri? RootRequestUri { get; init; }
+    
+    public string? AuthToken { get; init; }
 }
 
 

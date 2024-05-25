@@ -10,15 +10,21 @@ namespace Bolt.ServerDrivenUI.Extensions.ExternalSource.Impl;
 internal sealed class ExternalScreenProvider(IHttpClientWrap httpClientWrap,
     IHttpRequestMessageBuilder messageBuilder,
     IJsonSerializer jsonSerializer,
-    IRequestKeyNamesProvider keyNamesProvider) : IExternalScreenProvider
+    IRequestKeyNamesProvider keyNamesProvider) 
+    : IExternalScreenProvider
 {
-    public async Task<MaySucceed<Screen>> Get(IRequestContextReader context, ExternalScreenRequest request, CancellationToken ct)
+    public async Task<MaySucceed<Screen>> Get(
+        IRequestContextReader context, 
+        ExternalScreenRequest request, 
+        CancellationToken ct)
     {
         using var msg = messageBuilder.Build(new()
             {
                 Method = request.Method,
                 Path = request.Path,
-                QueryStrings = AppendSectionsQs(context, request.QueryStrings, request.ForSections),
+                QueryStrings = AppendSectionsQs(context, 
+                                    request.QueryStrings, 
+                                    request.ForSections),
                 Headers = request.Headers
             });
 

@@ -4,7 +4,7 @@ namespace Bolt.ServerDrivenUI;
 
 internal sealed class RequestContext : IRequestContext
 {
-    private readonly Dictionary<string, object> _store = new Dictionary<string, object>();
+    private readonly Dictionary<string, object> _store = new();
     
     public void Set<T>(string key, T value)
     {

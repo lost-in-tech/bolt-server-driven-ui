@@ -29,7 +29,8 @@ internal sealed class RequestKeyNamesProvider : IRequestKeyNamesProvider
             ScreenSize = _options.Value.ScreenSize ?? DefaultRequestDataKeys.ScreenSize,
             Tenant = _options.Value.Tenant ?? DefaultRequestDataKeys.Tenant,
             TenantQs = _options.Value.TenantQs ?? DefaultRequestDataKeys.TenantQs,
-            RootRequestUri = _options.Value.RootRequestUri ?? DefaultRequestDataKeys.RootRequestUri
+            RootRequestUri = _options.Value.RootRequestUri ?? DefaultRequestDataKeys.RootRequestUri,
+            AuthToken = _options.Value.AuthToken ?? DefaultRequestDataKeys.AuthToken
         };
     }
     
