@@ -1,8 +1,6 @@
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Extensions.ExternalSource;
-using Microsoft.AspNetCore.Http;
 
 namespace Bolt.ServerDrivenUI.Extensions.Web;
 
