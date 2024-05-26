@@ -105,11 +105,9 @@ internal sealed class ExternalScreenProvider(IHttpClientWrap httpClientWrap,
         {
             foreach (var requestedSectionName in requestedSectionNames)
             {
-                SectionInfo? section = sections.FirstOrDefault(x => string.Equals(x.Name,
-                    requestedSectionName,
-                    StringComparison.OrdinalIgnoreCase));
+                var section = Find(sections, requestedSectionName);
 
-                if (section.HasValue && !string.IsNullOrWhiteSpace(section.Value.Name)) yield return section.Value.Name;
+                if (section.HasValue) yield return section.Value.Name;
             }
         }
         else
@@ -119,5 +117,18 @@ internal sealed class ExternalScreenProvider(IHttpClientWrap httpClientWrap,
                 yield return sectionInfo.Name;
             }
         }
+    }
+
+    private SectionInfo? Find(SectionInfo[] sections, string name)
+    {
+        foreach (var section in sections)
+        {
+            if (string.Equals(section.Name, name, StringComparison.OrdinalIgnoreCase))
+            {
+                return section;
+            }
+        }
+
+        return null;
     }
 }
