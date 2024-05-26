@@ -4,5 +4,5 @@ namespace Bolt.ServerDrivenUI.Extensions.ExternalSource;
 
 public interface IHttpRequestHeadersProvider
 {
-    Dictionary<string, string> Get(IRequestContextReader context);
+    IEnumerable<(string Key, string Value)> Get(IRequestContextReader context);
 }

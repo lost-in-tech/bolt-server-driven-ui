@@ -80,14 +80,25 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
         if (await IsDisabled(request.ForSections)) 
             return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
 
-        var rsp = await externalScreenProvider.Get(context, request, ct);
+        try
+        {
+            var rsp = await externalScreenProvider.Get(context, request, ct);
 
-        if (rsp.IsFailed || rsp.Value == null) return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
+            if (rsp.IsFailed || rsp.Value == null)
+                return (Enumerable.Empty<ScreenSection>(), Enumerable.Empty<IMetaData>());
 
-        return (
-            Sections: rsp.Value.Sections,
-            MetaData: rsp.Value.MetaData ?? Enumerable.Empty<IMetaData>()
-        );
+            return (
+                Sections: rsp.Value.Sections,
+                MetaData: rsp.Value.MetaData ?? Enumerable.Empty<IMetaData>()
+            );
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "{provider} failed with exception {errorMessage}", externalScreenProvider.GetType().FullName, e.Message);
+        }
+        
+        return (Sections: Enumerable.Empty<ScreenSection>(),
+            MetaData: Enumerable.Empty<IMetaData>());
     }
     
     private async Task<MaySucceed<(IEnumerable<ScreenSection> Sections, IEnumerable<IMetaData> MetaData)>> Execute(

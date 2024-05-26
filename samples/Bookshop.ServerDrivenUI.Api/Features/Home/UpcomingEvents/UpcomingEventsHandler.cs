@@ -3,16 +3,19 @@ using Bolt.Endeavor;
 using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
+using Bolt.ServerDrivenUI.Extensions.Web;
 using Bookshop.ServerDriveUI.Elements;
 using Bookshop.ServerDriveUI.Elements.Layouts;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.UpcomingEvents;
 
 [AutoBind]
-public class UpcomingEventsHandler : LazyScreenSectionProvider<HomePageRequest>
+public class UpcomingEventsHandler(IHttpRequestWrapper requestWrapper) : LazyScreenSectionProvider<HomePageRequest>
 {
     protected override Task<MaySucceed<ScreenElement>> Default(IRequestContextReader context, HomePageRequest request)
     {
+        
+        
         var rsp = new LazyBlock
         {
             Section = ForSection,
@@ -52,6 +55,8 @@ public class UpcomingEventsHandler : LazyScreenSectionProvider<HomePageRequest>
     protected override async Task<MaySucceed<ScreenElement>> Lazy(IRequestContextReader context, HomePageRequest request)
     {
         await Task.Delay(TimeSpan.FromSeconds(2));
+
+        var d = requestWrapper.Cookie("test");
         
         var rsp = new Block
         {

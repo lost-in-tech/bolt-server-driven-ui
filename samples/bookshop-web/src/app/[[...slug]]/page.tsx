@@ -12,11 +12,6 @@ type Props = {
 
 const buildFetchProps = ({ params, searchParams }: Props): FetchSduiProps => {
   const apiRequestUrl = getApiRequestUrl(params?.slug, searchParams);
-  const isMobile = false; // TODO: figure out based on your logic
-  const activeLayout = cookies().get("sdui-active-layout")?.value;
-  console.log(activeLayout);
-  const layout = activeLayout ? activeLayout : isMobile ? "compact" : "wide";
-  console.log(apiRequestUrl);
 
   return {
     app: "web-bookworm",
@@ -26,6 +21,10 @@ const buildFetchProps = ({ params, searchParams }: Props): FetchSduiProps => {
     screenSize: "wide",
     tenant: "bookworm-au",
     url: apiRequestUrl,
+    cookies: cookies()
+      .getAll()
+      .map((x) => `${x.name}=${x.value}`)
+      .join("; "),
   };
 };
 

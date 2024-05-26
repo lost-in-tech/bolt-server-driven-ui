@@ -59,7 +59,7 @@ public class TestScenarioForHttpRequestUrlBuilder
         return this;
     }
     
-    public TestScenarioForHttpRequestUrlBuilder WithHeaderProvider(Dictionary<string,string> headers)
+    public TestScenarioForHttpRequestUrlBuilder WithHeaderProvider(IEnumerable<(string,string)> headers)
     {
         var headerProvider = Substitute.For<IHttpRequestHeadersProvider>();
         headerProvider.Get(Arg.Any<IRequestContextReader>()).Returns(headers);

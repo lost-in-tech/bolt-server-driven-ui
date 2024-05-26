@@ -21,16 +21,16 @@ public class HttpRequestMessageBuilder_Build_Tests
         
         var sut = new TestScenarioForHttpRequestUrlBuilder()
             .WithRequestUrlBuilder(givenInput.Path)
-            .WithHeaderProvider(new Dictionary<string, string>()
-            {
-                ["header-provider-1.1"] = "1.1",
-                ["header-provider-1.2"] = "1.2"
-            })
-            .WithHeaderProvider(new Dictionary<string, string>()
-            {
-                ["header-provider-2.1"] = "2.1",
-                ["header-provider-2.2"] = "2.2"
-            }).Build();
+            .WithHeaderProvider(
+            [
+                ("header-provider-1.1", "1.1"),
+                ("header-provider-1.2", "1.2")
+            ])
+            .WithHeaderProvider(
+            [
+                ("header-provider-2.1", "2.1"),
+                ("header-provider-2.2", "2.2")
+            ]).Build();
         
 
         var got = sut.Build(givenInput);

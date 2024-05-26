@@ -11,6 +11,9 @@ public interface IHttpRequestWrapper
     string TraceId();
     bool IsAuthenticated();
     string? UserId();
+    
+    string Cookie(string name);
+    IEnumerable<(string Key, string Value)> AllCookies();
 }
 
 internal sealed class HttpRequestWrapper(IHttpContextAccessor httpContextAccessor) : IHttpRequestWrapper
@@ -38,6 +41,23 @@ internal sealed class HttpRequestWrapper(IHttpContextAccessor httpContextAccesso
         if (httpContextAccessor.HttpContext == null) return string.Empty;
 
         return httpContextAccessor.HttpContext.Request.Query[name].ToString();
+    }
+
+    public string Cookie(string name)
+    {
+        if (httpContextAccessor.HttpContext == null) return string.Empty;
+
+        return httpContextAccessor.HttpContext.Request.Cookies[name] ?? string.Empty;
+    }
+
+    public IEnumerable<(string Key, string Value)> AllCookies()
+    {
+        if(httpContextAccessor.HttpContext == null) yield break;
+
+        foreach (var cookie in httpContextAccessor.HttpContext.Request.Cookies)
+        {
+            yield return (cookie.Key, cookie.Value);
+        }
     }
 
     public string RootTraceId() => System.Diagnostics.Activity.Current?.RootId ?? string.Empty;

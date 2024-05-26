@@ -3,13 +3,14 @@ using Bolt.IocScanner.Attributes;
 using Bolt.ServerDrivenUI;
 using Bolt.ServerDrivenUI.Core;
 using Bolt.ServerDrivenUI.Core.Elements;
+using Bolt.ServerDrivenUI.Extensions.Web;
 using Bookshop.ServerDriveUI.Elements;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Home.Intro;
 
 [MustSucceed]
 [AutoBind]
-public class IntroElementHandler : ScreenElementProvider<HomePageRequest>
+public class IntroElementHandler(IHttpRequestWrapper requestWrapper) : ScreenElementProvider<HomePageRequest>
 {
     protected override SectionInfo ForSection => new()
     {
@@ -24,7 +25,7 @@ public class IntroElementHandler : ScreenElementProvider<HomePageRequest>
         
         return new Text
         {
-            Value = "intro"
+            Value = $"intro:{requestWrapper.Cookie("test")}"
         }.ToMaySucceedTask();
     }
 }

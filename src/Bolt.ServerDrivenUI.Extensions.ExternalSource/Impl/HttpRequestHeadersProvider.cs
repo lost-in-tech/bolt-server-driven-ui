@@ -6,44 +6,40 @@ internal sealed class HttpRequestHeadersProvider(
     IAppInfoProvider appInfoProvider,
     IRequestKeyNamesProvider requestKeyNamesProvider) : IHttpRequestHeadersProvider
 {
-    public Dictionary<string, string> Get(IRequestContextReader context)
+    public IEnumerable<(string Key, string Value)> Get(IRequestContextReader context)
     {
         var app = appInfoProvider.Get();
         var keyNames = requestKeyNamesProvider.Get();
         var requestData = context.RequestData();
 
-        var result = new Dictionary<string, string>();
-
         if (requestData.ScreenSize.HasValue)
         {
-            result[keyNames.ScreenSize] = requestData.ScreenSize.Value.ToString();
+            yield return (keyNames.ScreenSize, requestData.ScreenSize.Value.ToString());
         }
 
-        result[keyNames.App] = app.Name;
-        result[keyNames.RootApp] = requestData.RootApp;
-        result[keyNames.CorrelationId] = requestData.CorrelationId;
-        result[keyNames.Tenant] = requestData.Tenant;
+        yield return (keyNames.App, app.Name);
+        yield return (keyNames.RootApp, requestData.RootApp);
+        yield return (keyNames.CorrelationId, requestData.CorrelationId);
+        yield return (keyNames.Tenant, requestData.Tenant);
 
         if (requestData.AuthToken != null)
         {
-            result[keyNames.AuthToken] = requestData.AuthToken;
+            yield return (keyNames.AuthToken, requestData.AuthToken);
         }
 
         if (requestData.RootRequestUri != null)
         {
-            result[keyNames.RootRequestUri] = Uri.EscapeDataString(requestData.RootRequestUri.ToString());
+            yield return (keyNames.RootRequestUri, Uri.EscapeDataString(requestData.RootRequestUri.ToString()));
         }
 
         if (requestData.Device.HasValue)
         {
-            result[keyNames.Device] = requestData.Device.Value.ToString();
+            yield return (keyNames.Device, requestData.Device.Value.ToString());
         }
 
         if (requestData.Platform.HasValue)
         {
-            result[keyNames.Platform] = requestData.Platform.Value.ToString();
+            yield return (keyNames.Platform, requestData.Platform.Value.ToString());
         }
-
-        return result;
     }
 }

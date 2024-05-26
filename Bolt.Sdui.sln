@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshop.ServerDriveUI.Elem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookshop.AppShell.UI.Api", "samples\Bookshop.AppShell.UI.Api\Bookshop.AppShell.UI.Api.csproj", "{644EA519-5ED7-4F45-94FA-FBADBE942239}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bolt.ServerDrivenUI.Extensions.Web.Tests", "tests\Bolt.ServerDrivenUI.Extensions.Web.Tests\Bolt.ServerDrivenUI.Extensions.Web.Tests.csproj", "{9C964F24-8199-4FD9-83C7-FCE70180F8EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,10 @@ Global
 		{644EA519-5ED7-4F45-94FA-FBADBE942239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{644EA519-5ED7-4F45-94FA-FBADBE942239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{644EA519-5ED7-4F45-94FA-FBADBE942239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C964F24-8199-4FD9-83C7-FCE70180F8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C964F24-8199-4FD9-83C7-FCE70180F8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C964F24-8199-4FD9-83C7-FCE70180F8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C964F24-8199-4FD9-83C7-FCE70180F8EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{8CC40EE6-3083-45C7-A671-CA8145DF53C4} = {93045341-E910-4AC9-A333-D068517B1225}
 		{B6EBB2C8-35F1-455B-91E3-C8A2FA77B627} = {93045341-E910-4AC9-A333-D068517B1225}
 		{644EA519-5ED7-4F45-94FA-FBADBE942239} = {93045341-E910-4AC9-A333-D068517B1225}
+		{9C964F24-8199-4FD9-83C7-FCE70180F8EB} = {D4E83B51-4B7E-423F-8661-05C196D85ACE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E2CBC43-2680-410C-8B9E-C96D9E9D9BCC}

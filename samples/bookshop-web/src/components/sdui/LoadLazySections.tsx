@@ -13,6 +13,7 @@ type LoadLazySectionsProps = SduiProps & {
 
 export const LoadLazySections = (props: LoadLazySectionsProps) => {
   const fetchUrl = props.screen.contextData.lazyRequestPathAndQuery;
+
   useEffect(() => {
     publish({
       name: SduiEvents.lazySectionsLoading,
@@ -23,6 +24,7 @@ export const LoadLazySections = (props: LoadLazySectionsProps) => {
     });
 
     if (fetchUrl) {
+      console.log(document.cookie);
       fetchSdui({
         app: props.appName,
         device: props.device,
@@ -31,6 +33,7 @@ export const LoadLazySections = (props: LoadLazySectionsProps) => {
         screenSize: props.layout,
         tenant: props.tenant,
         url: fetchUrl,
+        cookies: document.cookie,
       }).then((s) => {
         publish({
           name: SduiEvents.lazySectionsLoaded,

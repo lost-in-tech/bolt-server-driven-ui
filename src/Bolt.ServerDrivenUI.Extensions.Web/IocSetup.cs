@@ -82,6 +82,8 @@ public static class IocSetup
         source.TryAddTransient<IScreenViewResultComposer, ScreenViewResultComposer>();
         source.TryAddTransient<IScreenEndpointResultComposer, ScreenViewResultComposer>();
         
+        source.TryAddEnumerable(ServiceDescriptor.Transient<IHttpRequestHeadersProvider, CookieHeaderForExternalRequest>());
+        
         return source;
     }
 }
