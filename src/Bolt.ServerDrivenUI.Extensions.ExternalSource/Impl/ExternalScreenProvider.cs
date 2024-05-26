@@ -109,7 +109,7 @@ internal sealed class ExternalScreenProvider(IHttpClientWrap httpClientWrap,
                     requestedSectionName,
                     StringComparison.OrdinalIgnoreCase));
 
-                if (section.HasValue) yield return section.Value.Name;
+                if (section.HasValue && !string.IsNullOrWhiteSpace(section.Value.Name)) yield return section.Value.Name;
             }
         }
         else
