@@ -34,7 +34,7 @@ export async function generateMetadata(props: Props) {
 
   var rsp = await fetchSdui(fetchProps);
 
-  const data = rsp.metaData?.find(
+  const data = rsp.screen.metaData?.find(
     (x) => x._type === "PageMetaData"
   ) as PageMetaData;
 
@@ -66,7 +66,8 @@ export default async function Page(props: Props) {
     layout: fetchProps.screenSize,
     platform: fetchProps.platform,
     requestUrl: fetchProps.requestUri,
-    screen: rsp,
+    screen: rsp.screen,
+    sectionsMap: rsp.sectionsMap,
     tenant: fetchProps.tenant,
   };
 

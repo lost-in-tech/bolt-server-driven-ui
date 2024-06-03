@@ -24,7 +24,6 @@ export const LoadLazySections = (props: LoadLazySectionsProps) => {
     });
 
     if (fetchUrl) {
-      console.log(document.cookie);
       fetchSdui({
         app: props.appName,
         device: props.device,
@@ -39,7 +38,8 @@ export const LoadLazySections = (props: LoadLazySectionsProps) => {
           name: SduiEvents.lazySectionsLoaded,
           data: {
             sectionsRequested: props.screen.contextData.lazySections,
-            screen: s,
+            screen: s.screen,
+            sectionsMap: s.sectionsMap,
           },
           group: SduiEventGroups.sdui,
         });

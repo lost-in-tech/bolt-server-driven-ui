@@ -43,7 +43,7 @@ type BlockElement = Element &
 
 export const Block = (props: RenderElementProps<BlockElement>) => {
   const classNames: string[] = [];
-  classNames.push("inline-block w-full h-full");
+  classNames.push("inline-block w-full");
   classNames.push(buildPaddingClassNames(props.element));
   classNames.push(buildMarginClassNames(props.element));
   classNames.push(buildWidthClassNames(props.element.width));

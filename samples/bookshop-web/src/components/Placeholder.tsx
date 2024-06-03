@@ -11,10 +11,9 @@ const Placeholder = (props: RenderElementProps<PlaceholderElement>) => {
   if (props.element.sections == null || props.element.sections.length == 0)
     return null;
 
-  var elements = props.element.sections.map((sectionName) => {
-    const section = props.sections.find((s) => s.name == sectionName);
-    return section?.element;
-  });
+  var elements = props.element.sections.map((sectionName) =>
+    props.sectionsMap?.get(sectionName)
+  );
 
   return (
     <>
@@ -24,6 +23,7 @@ const Placeholder = (props: RenderElementProps<PlaceholderElement>) => {
         return (
           <RenderElement
             key={index}
+            sectionsMap={props.sectionsMap}
             {...{ element: elm, sections: props.sections }}
           />
         );

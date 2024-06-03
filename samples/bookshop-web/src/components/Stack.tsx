@@ -56,7 +56,7 @@ type StackElement = Element &
 
 const Stack = (props: RenderElementProps<StackElement>) => {
   const classNames: string[] = [];
-  classNames.push("flex w-full h-full");
+  classNames.push("flex w-full");
   classNames.push(buildPaddingClassNames(props.element));
   classNames.push(buildMarginClassNames(props.element));
   classNames.push(buildGapClassNames(props.element.gap));

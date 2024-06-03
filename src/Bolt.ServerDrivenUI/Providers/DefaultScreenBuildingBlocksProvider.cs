@@ -40,14 +40,11 @@ internal sealed class DefaultScreenBuildingBlocksProvider<TRequest>(
 
         foreach (var externalScreenRequestProvider in externalScreenRequestProviders)
         {
-            if (externalScreenRequestProvider.IsApplicable(context, request))
-            {
-                var requests = externalScreenRequestProvider.Get(context, request);
+            var requests = externalScreenRequestProvider.Get(context, request);
 
-                foreach (var req in requests)
-                {
-                    tasks.Add(Execute(req, context, ct));
-                }
+            foreach (var req in requests)
+            {
+                tasks.Add(Execute(req, context, ct));
             }
         }
 

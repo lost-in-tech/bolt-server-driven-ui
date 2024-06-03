@@ -7,5 +7,5 @@ export type Element = {
 
 export type RenderElementProps<T extends Element> = {
   element: T;
-  sections: ScreenSection[];
+  sectionsMap: Map<string, Element>;
 };

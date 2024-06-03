@@ -1,7 +1,7 @@
 import { LayoutNames, Layouts, Screen } from "@/types";
 import { GlobalEvents } from "@/utils/global-events";
 import RenderElement from "./RenderElement";
-import { LoadLazySections } from "./LoadLazySections";
+import { Element } from "./Element";
 
 export type SduiProps = {
   appName: string;
@@ -9,6 +9,7 @@ export type SduiProps = {
   platform: string;
   tenant: string;
   screen: Screen;
+  sectionsMap: Map<string, Element>;
   layout: LayoutNames;
   baseUrl: string;
   requestUrl: string;
@@ -19,10 +20,11 @@ export const Sdui = (props: SduiProps) => {
     console.warn("No layout found");
     return <></>;
   }
+
   return (
     <>
       <GlobalEvents />
-      <RenderElement element={element} sections={props.screen.sections} />
+      <RenderElement element={element} sectionsMap={props.sectionsMap} />
     </>
   );
 };

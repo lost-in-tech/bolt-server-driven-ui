@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { LayoutNames, Screen } from "./types";
+import { Element } from "./components/sdui/Element";
 
 export type FetchSduiProps = {
   url: string;
@@ -12,7 +13,12 @@ export type FetchSduiProps = {
   cookies?: string;
 };
 
-const fetchSdui = async (props: FetchSduiProps): Promise<Screen> => {
+export type FetchSduiRsp = {
+  screen: Screen;
+  sectionsMap: Map<string, Element>;
+};
+
+const fetchSdui = async (props: FetchSduiProps): Promise<FetchSduiRsp> => {
   const rsp = await fetch(props.url, {
     headers: {
       "x-screen": props.screenSize,
@@ -26,7 +32,14 @@ const fetchSdui = async (props: FetchSduiProps): Promise<Screen> => {
     cache: "no-cache",
     credentials: "include",
   });
-  return await rsp.json();
+  var screen = (await rsp.json()) as Screen;
+
+  return {
+    screen: screen,
+    sectionsMap: new Map<string, Element>(
+      screen.sections.map((s) => [s.name, s.element])
+    ),
+  } as FetchSduiRsp;
 };
 
 export default fetchSdui;

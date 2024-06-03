@@ -15,4 +15,6 @@ public class CustomRequestDataKeys
     public string? TenantQs { get; init; }
     public string? RootRequestUri { get; init; }
     public string? AuthToken { get; init; }
+    public string? Tags { get; init; }
+    public string? Lang { get; init; }
 }

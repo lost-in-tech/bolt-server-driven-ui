@@ -41,5 +41,15 @@ internal sealed class HttpRequestHeadersProvider(
         {
             yield return (keyNames.Platform, requestData.Platform.Value.ToString());
         }
+
+        if (requestData.Tags.Length > 0)
+        {
+            yield return (keyNames.Tags, string.Join(",", requestData.Tags));
+        }
+        
+        if (!string.IsNullOrWhiteSpace(requestData.Lang))
+        {
+            yield return (keyNames.Lang, requestData.Lang);
+        }
     }
 }

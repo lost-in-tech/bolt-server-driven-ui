@@ -17,22 +17,10 @@ internal sealed class LoadLayoutsTask<TRequest>(IEnumerable<ILayoutProvider<TReq
     {
         var layouts = new Dictionary<string,ScreenLayout>();
 
-        var tasks = new List<Task<MaySucceed<IReadOnlyCollection<LayoutResponse>>>>();
-        
-        foreach (var layoutProvider in layoutProviders)
+        foreach (var layoutProvider in layoutProviders.OrderBy(x => x.Priority))
         {
-            if (layoutProvider.IsApplicable(context, request))
-            {
-                tasks.Add(layoutProvider.Get(context, request, ct));
-            }
-        }
-
-        await Task.WhenAll(tasks);
-
-        foreach (var task in tasks)
-        {
-            var layoutRsp = task.Result;
-            
+            var layoutRsp = await layoutProvider.Get(context, request, ct);
+                
             if (layoutRsp.IsFailed) return layoutRsp.Failure;
 
             foreach (var item in layoutRsp.Value)

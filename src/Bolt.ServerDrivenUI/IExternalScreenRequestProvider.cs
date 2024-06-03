@@ -5,14 +5,6 @@ namespace Bolt.ServerDrivenUI;
 public interface IExternalScreenRequestProvider<in TRequest>
 {
     IEnumerable<ExternalScreenRequest> Get(IRequestContextReader context, TRequest request);
-    bool IsApplicable(IRequestContextReader context, TRequest request);
-}
-
-public abstract class ExternalScreenRequestProvider<TRequest> : IExternalScreenRequestProvider<TRequest>
-{
-    public abstract IEnumerable<ExternalScreenRequest> Get(IRequestContextReader context, TRequest request);
-
-    public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }
 
 public record ExternalScreenRequest

@@ -90,6 +90,11 @@ public class UpcomingEventsHandler(IHttpRequestWrapper requestWrapper) : LazyScr
                     {
                         As = TextAs.P,
                         Value = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis porta ante, id gravida odio. Quisque malesuada sit amet est nec tristique. Nulla urna velit, iaculis et urna id, pellentesque euismod risus. Duis sollicitudin nunc nec aliquet dapibus. Nam velit est, venenatis sit amet enim sed, sollicitudin auctor turpis. Praesent rutrum risus non urna iaculis condimentum. Vivamus pulvinar mauris et est aliquet, at vehicula risus semper. Donec id molestie sem, et tempor ante. Donec tincidunt augue at nunc mollis sollicitudin. Vestibulum a felis eget massa lobortis finibus id non nisi. Proin eu convallis felis."
+                    },
+                    new SimpleLink
+                    {
+                        Text = "Click here to view all books",
+                        Url = "/books",
                     }
                 ]
             }]

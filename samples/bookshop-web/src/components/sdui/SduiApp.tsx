@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Sdui, SduiProps } from "./Sdui";
 import { LayoutNames } from "@/types";
-import fetchSdui, { FetchSduiProps } from "@/fetch-sdui";
+import fetchSdui from "@/fetch-sdui";
 import { LoadLazySections } from "./LoadLazySections";
 
 const setCookie = (cname: string, cvalue: string, exdays: number) => {
@@ -49,7 +49,8 @@ export const SduiApp = (props: SduiAppProps) => {
       setVm((prev) => {
         return {
           ...prev,
-          screen: rsp,
+          screen: rsp.screen,
+          sectionsMap: rsp.sectionsMap,
           layout: layoutName,
         };
       });

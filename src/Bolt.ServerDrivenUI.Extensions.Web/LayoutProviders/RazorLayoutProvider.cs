@@ -155,5 +155,5 @@ internal sealed class RazorLayoutProvider<TRequest>(IRazorXmlViewParser xmlViewP
         };
     }
 
-    public bool IsApplicable(IRequestContextReader context, TRequest request) => true;
+    public int Priority => 100;
 }

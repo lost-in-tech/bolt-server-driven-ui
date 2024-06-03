@@ -30,7 +30,9 @@ internal sealed class RequestKeyNamesProvider : IRequestKeyNamesProvider
             Tenant = _options.Value.Tenant ?? DefaultRequestDataKeys.Tenant,
             TenantQs = _options.Value.TenantQs ?? DefaultRequestDataKeys.TenantQs,
             RootRequestUri = _options.Value.RootRequestUri ?? DefaultRequestDataKeys.RootRequestUri,
-            AuthToken = _options.Value.AuthToken ?? DefaultRequestDataKeys.AuthToken
+            AuthToken = _options.Value.AuthToken ?? DefaultRequestDataKeys.AuthToken,
+            Lang = _options.Value.Lang ?? DefaultRequestDataKeys.Lang,
+            Tags = _options.Value.Tags ?? DefaultRequestDataKeys.Tags
         };
     }
     

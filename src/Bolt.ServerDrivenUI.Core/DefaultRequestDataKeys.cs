@@ -16,4 +16,6 @@ public static class DefaultRequestDataKeys
     public const string Mode = "_mode";
     public const string RootRequestUri = "x-request-uri";
     public const string AuthToken = "x-auth-token";
+    public const string Tags = "x-request-tags";
+    public const string Lang = "x-lang";
 }

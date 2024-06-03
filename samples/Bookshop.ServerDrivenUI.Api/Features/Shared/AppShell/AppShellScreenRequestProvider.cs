@@ -3,9 +3,9 @@ using Bolt.ServerDrivenUI.Core;
 
 namespace Bookshop.ServerDrivenUI.Api.Features.Shared.AppShell;
 
-internal sealed class AppShellScreenRequestProvider<T> : ExternalScreenRequestProvider<T>
+internal sealed class AppShellScreenRequestProvider<T> : IExternalScreenRequestProvider<T>
 {
-    public override IEnumerable<ExternalScreenRequest> Get(IRequestContextReader context, T request)
+    public IEnumerable<ExternalScreenRequest> Get(IRequestContextReader context, T request)
     {
         yield return new ExternalScreenRequest
         {

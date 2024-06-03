@@ -21,4 +21,7 @@ public record RequestKeyNames
     public required string RootRequestUri { get; init; }
     
     public required string AuthToken { get; init; }
+    
+    public required string Lang { get; init; }
+    public required string Tags { get; init; }
 }

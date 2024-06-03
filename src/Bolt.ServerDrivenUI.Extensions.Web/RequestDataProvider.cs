@@ -22,6 +22,8 @@ internal sealed class RequestDataProvider (
                     : RequestMode.Default;
 
         var requestUri = requestWrapper.Header(keys.RootRequestUri);
+
+        var tags = requestWrapper.Header(keys.Tags);
         
         return new RequestData
         {
@@ -42,7 +44,9 @@ internal sealed class RequestDataProvider (
             IsAuthenticated = requestWrapper.IsAuthenticated(),
             RootRequestUri = string.IsNullOrWhiteSpace(requestUri) 
                                 ? requestWrapper.RequestUri() 
-                                : new Uri(Uri.UnescapeDataString(requestUri))
+                                : new Uri(Uri.UnescapeDataString(requestUri)),
+            Lang = requestWrapper.Header(keys.Lang),
+            Tags = string.IsNullOrWhiteSpace(tags) ? Array.Empty<string>() : tags.Split(',', StringSplitOptions.RemoveEmptyEntries)
         };
     }
 
@@ -58,7 +62,7 @@ internal sealed class RequestDataProvider (
         
         foreach (var pair in pairs)
         {
-            var parts = pair.Split("=");
+            var parts = pair.Split('=');
 
             if (parts.Length == 2)
             {
@@ -72,7 +76,7 @@ internal sealed class RequestDataProvider (
     private string EmptyAlternative(string value, string alt)
         => string.IsNullOrWhiteSpace(value) ? alt : value; 
 
-    private const string Separator = ",";
+    private const char Separator = ',';
     private string[] ReadQueryAsArray(string? key)
     {
         if (string.IsNullOrWhiteSpace(key)) return Array.Empty<string>();

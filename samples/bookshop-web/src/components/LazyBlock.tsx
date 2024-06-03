@@ -13,8 +13,8 @@ type LazyBlockProps = Element & {
 };
 
 type LazySection = {
-  section: ScreenSection;
-  allSections: ScreenSection[];
+  element: Element;
+  sectionsMap: Map<string, Element>;
 };
 
 export const LazyBlock = (props: RenderElementProps<LazyBlockProps>) => {
@@ -23,13 +23,12 @@ export const LazyBlock = (props: RenderElementProps<LazyBlockProps>) => {
 
   const handleSectionLoaded = (e: any) => {
     setIsLoading(false);
-    var section = e.detail.screen.sections.find(
-      (x: any) => x.name === props.element.section
-    );
-    if (section != null)
+
+    var element = e.detail.sectionsMap.get(props.element.section);
+    if (element != null)
       setLazySection({
-        allSections: e.detail.screen.sections as ScreenSection[],
-        section: section,
+        sectionsMap: e.detail.sectionsMap,
+        element: element,
       });
   };
 
@@ -40,13 +39,13 @@ export const LazyBlock = (props: RenderElementProps<LazyBlockProps>) => {
   };
 
   useEffect(() => {
-    if (props.sections) {
+    if (props.sectionsMap) {
       subscribe(SduiEvents.lazySectionsLoading, handlSectionLoading);
       subscribe(SduiEvents.lazySectionsLoaded, handleSectionLoaded);
     }
 
     return () => {
-      if (props.sections) {
+      if (props.sectionsMap) {
         unsubscribe(SduiEvents.lazySectionsLoading, handlSectionLoading);
         unsubscribe(SduiEvents.lazySectionsLoaded, handleSectionLoaded);
       }
@@ -56,15 +55,18 @@ export const LazyBlock = (props: RenderElementProps<LazyBlockProps>) => {
   return isLoading && props.element.loadingElement ? (
     <RenderElement
       element={props.element.loadingElement}
-      sections={props.sections}
+      sectionsMap={props.sectionsMap}
     />
   ) : lazySection ? (
     <RenderElement
-      element={lazySection.section.element}
-      sections={props.sections}
+      element={lazySection.element}
+      sectionsMap={lazySection.sectionsMap}
     />
   ) : props.element.element ? (
-    <RenderElement element={props.element.element} sections={props.sections} />
+    <RenderElement
+      element={props.element.element}
+      sectionsMap={props.sectionsMap}
+    />
   ) : (
     <div>Loading...</div>
   );

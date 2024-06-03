@@ -27,6 +27,13 @@ public record RequestData
     public Uri? RootRequestUri { get; init; }
     
     public string? AuthToken { get; init; }
+    
+    public string? Lang { get; init; }
+
+    /// <summary>
+    /// Request can provide some tags as comma seperated in header and use them to change the app behaviour
+    /// </summary>
+    public string[] Tags { get; init; } = Array.Empty<string>();
 }
 
 

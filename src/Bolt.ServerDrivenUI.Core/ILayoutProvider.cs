@@ -10,7 +10,7 @@ public interface ILayoutProvider<in TRequest>
         TRequest request, 
         CancellationToken ct);
     
-    bool IsApplicable(IRequestContextReader context, TRequest request);
+    int Priority { get; }
 }
 
 public record LayoutResponse
@@ -28,5 +28,6 @@ public abstract class LayoutProvider<TRequest> : ILayoutProvider<TRequest>
         TRequest request,
         CancellationToken ct);
 
+    public virtual int Priority  => 0;
     public virtual bool IsApplicable(IRequestContextReader context, TRequest request) => true;
 }
